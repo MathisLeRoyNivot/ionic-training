@@ -19,11 +19,8 @@ export class Tab3Page {
   currentImage: any;
 
   
+  brushSize: any;
 
-  brushOnBlur(brushSize: any) {
-    let newBrushSize = brushSize.value;
-    console.log("%cNew brush size : ", "color: green", + newBrushSize);
-  }
   currentColor: string = '#000';
 
 
@@ -39,7 +36,7 @@ export class Tab3Page {
     this.canvasElement = this.canvas.nativeElement;
 
     this.renderer.setElementAttribute(this.canvasElement, 'width', this.platform.width() + '');
-    this.renderer.setElementAttribute(this.canvasElement, 'height', this.platform.height() + '');
+    this.renderer.setElementAttribute(this.canvasElement, 'height', 0.70*this.platform.height() + '');
 
   }
 
@@ -71,6 +68,12 @@ export class Tab3Page {
         this.lastY = currentY;
 
   }
+
+  clearCanvas() {
+      // this.canvas.clearRect(0, 0, this.platform.width, this.platform.height);
+      this.ngAfterViewInit();
+      console.log("Canvas has been reset !")
+   }
 
   // takePicture() {
   //   const options: CameraOptions = {

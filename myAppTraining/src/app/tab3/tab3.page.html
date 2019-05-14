@@ -12,8 +12,17 @@
 </ion-header>
 
 <ion-content>      
-  <canvas #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>  
-  <ion-button color="success">Save</ion-button>
+  <canvas #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
+  
+  <ion-row text-center>
+    <ion-col>
+      <ion-button color="success">Save</ion-button>
+    </ion-col>
+    <ion-col>
+        <ion-button (click)="clearCanvas()" color="danger">Reset</ion-button>
+      </ion-col>
+  </ion-row>
+
   <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
       <ion-fab-button (click)="takePicture()">
         <ion-icon name="photos"></ion-icon>
