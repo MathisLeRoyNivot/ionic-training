@@ -1,5 +1,7 @@
 import { Component, ViewChild, Renderer } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, PopoverController } from '@ionic/angular';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -13,14 +15,24 @@ export class Tab3Page {
   canvasElement: any;
   lastX: number;
   lastY: number;
+  
+  currentImage: any;
 
-  currentColour: string = '#000';
-  brushSize: number = 10;
+  
 
-
-  constructor(public platform: Platform, public renderer: Renderer) {
-    console.log('CanvasDraw Component');
+  brushOnBlur(brushSize: any) {
+    let newBrushSize = brushSize.value;
+    console.log("%cNew brush size : ", "color: green", + newBrushSize);
   }
+  currentColor: string = '#000';
+
+
+  constructor(
+    public platform: Platform, 
+    public renderer: Renderer,
+    private actRoute: ActivatedRoute,
+    public popoverController: PopoverController,
+    private camera: Camera) {}
 
   ngAfterViewInit(){
 
@@ -51,7 +63,7 @@ export class Tab3Page {
         ctx.moveTo(this.lastX, this.lastY);
         ctx.lineTo(currentX, currentY);
         ctx.closePath();
-        ctx.strokeStyle = this.currentColour;
+        ctx.strokeStyle = this.currentColor;
         ctx.lineWidth = this.brushSize;
         ctx.stroke();       
 
@@ -59,5 +71,21 @@ export class Tab3Page {
         this.lastY = currentY;
 
   }
+
+  // takePicture() {
+  //   const options: CameraOptions = {
+  //     quality: 100,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE
+  //   }
+
+  //   this.camera.getPicture(options).then((imageData) => {
+  //     this.currentImage = 'data:image/jpeg;base64,' + imageData;
+  //   }, (err) => {
+  //    // Handle error
+  //    console.log("Camera issue:" + err);
+  //   });
+  // }
 
 }

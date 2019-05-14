@@ -2,14 +2,22 @@
   <ion-toolbar>
     <ion-title></ion-title>
     <ion-button color="primary">Settings</ion-button>
+    <ion-item>
+      <ion-range min="1" max="15" pin="true" [(ngModel)]="brushSize" color="secondary">
+        <ion-icon size="small" slot="start" name="brush"></ion-icon>
+        <ion-icon slot="end" name="brush"></ion-icon>
+      </ion-range>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-toolbar id="top-toolbar"></ion-toolbar>
-      
-    <canvas #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
-      
-    <ion-toolbar id="bottom-toolbar"></ion-toolbar>
+<ion-content>      
+  <canvas #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>  
   <ion-button color="success">Save</ion-button>
+  <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="takePicture()">
+        <ion-icon name="photos"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> -->
+    <!-- <img [src]="currentImage" *ngIf="currentImage"> -->
 </ion-content>
