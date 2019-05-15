@@ -1,26 +1,41 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title></ion-title>
-    <ion-button color="primary">Settings</ion-button>
-    <ion-item>
-      <ion-range min="1" max="15" pin="true" [(ngModel)]="brushSize" color="secondary">
-        <ion-icon size="small" slot="start" name="brush"></ion-icon>
-        <ion-icon slot="end" name="brush"></ion-icon>
-      </ion-range>
-    </ion-item>
+
+    <ion-button (click)="toggleMenu()">Settings</ion-button>
+    <ion-menu>
+        <ion-content>
+          <ion-list>
+            Settings
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+      
+
+    
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Draw</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false">Settings</ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>      
+  
   <canvas #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
   
   <ion-row text-center>
     <ion-col>
-      <ion-button color="success">Save</ion-button>
+      <ion-button style="width:100%" (click)="saveCanvas()" color="success">Save</ion-button>
     </ion-col>
     <ion-col>
-        <ion-button (click)="clearCanvas()" color="danger">Reset</ion-button>
-      </ion-col>
+      <ion-button style="width:100%" (click)="clearCanvas()" color="danger">Reset</ion-button>
+    </ion-col>
   </ion-row>
 
   <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">

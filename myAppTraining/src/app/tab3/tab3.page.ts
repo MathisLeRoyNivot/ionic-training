@@ -1,7 +1,9 @@
 import { Component, ViewChild, Renderer } from '@angular/core';
-import { Platform, PopoverController } from '@ionic/angular';
+import { Platform, MenuController  } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ChildActivationEnd } from '@angular/router';
+import { AppComponent } from '../app.component';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-tab3',
@@ -18,26 +20,35 @@ export class Tab3Page {
   
   currentImage: any;
 
-  
-  brushSize: any;
+  // Set a default value for the range slider
+  public brushSize;
+  // private brushSize = 5;
+  // brushSize: any;
 
   currentColor: string = '#000';
-
 
   constructor(
     public platform: Platform, 
     public renderer: Renderer,
     private actRoute: ActivatedRoute,
-    public popoverController: PopoverController,
-    private camera: Camera) {}
+    public menuCtrl: MenuController,
+    private camera: Camera,
+    dataService: DataService) {
+      // debugger;  
+      // this.brushSize = dataService.toggleBrushSize();
+      this.brushSize = dataService.getOption();
+      console.log("%cBrush size : ", "color: green", + this.brushSize);
+    }
 
+  // get brushSize() {
+  //   return this.dataService.brushSize;
+  // }
+
+  // --- Canvas part
   ngAfterViewInit(){
-
     this.canvasElement = this.canvas.nativeElement;
-
     this.renderer.setElementAttribute(this.canvasElement, 'width', this.platform.width() + '');
-    this.renderer.setElementAttribute(this.canvasElement, 'height', 0.70*this.platform.height() + '');
-
+    this.renderer.setElementAttribute(this.canvasElement, 'height', 0.80*this.platform.height() + '');
   }
 
   // First position of the line that the user draw
@@ -56,39 +67,43 @@ export class Tab3Page {
     let ctx = this.canvasElement.getContext('2d');
 
     ctx.beginPath();
-        ctx.lineJoin = "round";
-        ctx.moveTo(this.lastX, this.lastY);
-        ctx.lineTo(currentX, currentY);
-        ctx.closePath();
-        ctx.strokeStyle = this.currentColor;
-        ctx.lineWidth = this.brushSize;
-        ctx.stroke();       
+    ctx.lineJoin = "round";
+    ctx.moveTo(this.lastX, this.lastY);
+    ctx.lineTo(currentX, currentY);
+    ctx.closePath();
+    ctx.strokeStyle = this.currentColor;
+    ctx.lineWidth = this.brushSize;
+    ctx.stroke();       
 
-        this.lastX = currentX;
-        this.lastY = currentY;
-
+    this.lastX = currentX;
+    this.lastY = currentY;
   }
 
+  saveCanvas() {
+    // Here code to save the canvas to the phone gallery
+    console.log("Canvas has been saved !")
+  }
+
+  // Reset the canvas view for the user
   clearCanvas() {
-      // this.canvas.clearRect(0, 0, this.platform.width, this.platform.height);
-      this.ngAfterViewInit();
-      console.log("Canvas has been reset !")
-   }
+    this.ngAfterViewInit();
+    console.log("Canvas has been reset !")
+  }
 
-  // takePicture() {
-  //   const options: CameraOptions = {
-  //     quality: 100,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE
-  //   }
+  takePicture() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
 
-  //   this.camera.getPicture(options).then((imageData) => {
-  //     this.currentImage = 'data:image/jpeg;base64,' + imageData;
-  //   }, (err) => {
-  //    // Handle error
-  //    console.log("Camera issue:" + err);
-  //   });
-  // }
+      this.camera.getPicture(options).then((imageData) => {
+      this.currentImage = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+     // Handle error
+     console.log("Camera issue:" + err);
+    });
+  }
 
 }

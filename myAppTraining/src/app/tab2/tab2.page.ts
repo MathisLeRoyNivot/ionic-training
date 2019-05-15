@@ -38,24 +38,6 @@ export class Tab2Page {
     console.log(formData);
 
     this.router.navigateByUrl('/success', name);
-
-    // this.navCtrl.goForward(Tab3Page, {
-    //   name: formData.name
-    // });
-    
-    let isValid = new Boolean(true);
-    
-    if(isValid == true) {
-
-      console.log("%cSuccessful redirection", "color: green")
-      
-
-    } else {
-
-      console.log("%cCan't redirect", "color: red")
-
-    }
   }
-
 }
 	
