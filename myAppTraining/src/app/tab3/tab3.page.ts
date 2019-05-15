@@ -4,6 +4,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ActivatedRoute, ChildActivationEnd } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { DataService } from '../data.service';
+import { getName } from 'ionicons/dist/types/icon/utils';
 
 @Component({
   selector: 'app-tab3',
@@ -15,6 +16,7 @@ export class Tab3Page {
   @ViewChild('myCanvas') canvas: any;
 
   canvasElement: any;
+  name: string;
   lastX: number;
   lastY: number;
   
@@ -23,32 +25,31 @@ export class Tab3Page {
   // Set a default value for the range slider
   public brushSize;
   // private brushSize = 5;
-  // brushSize: any;
 
   currentColor: string = '#000';
 
   constructor(
+    // private actRoute: ActivatedRoute,
     public platform: Platform, 
     public renderer: Renderer,
-    private actRoute: ActivatedRoute,
     public menuCtrl: MenuController,
     private camera: Camera,
     dataService: DataService) {
       // debugger;  
       // this.brushSize = dataService.toggleBrushSize();
       this.brushSize = dataService.getOption();
-      console.log("%cBrush size : ", "color: green", + this.brushSize);
+      console.log("%cDraw Page - Brush size : ", "color: green", + this.brushSize);
     }
-
-  // get brushSize() {
-  //   return this.dataService.brushSize;
-  // }
 
   // --- Canvas part
   ngAfterViewInit(){
     this.canvasElement = this.canvas.nativeElement;
     this.renderer.setElementAttribute(this.canvasElement, 'width', this.platform.width() + '');
     this.renderer.setElementAttribute(this.canvasElement, 'height', 0.80*this.platform.height() + '');
+    
+    this.name = localStorage.getItem('name');
+    console.log("Name : " + this.name);
+    return this.name
   }
 
   // First position of the line that the user draw
@@ -87,7 +88,7 @@ export class Tab3Page {
   // Reset the canvas view for the user
   clearCanvas() {
     this.ngAfterViewInit();
-    console.log("Canvas has been reset !")
+    console.log("%cCanvas has been reset !", "color:red")
   }
 
   takePicture() {
