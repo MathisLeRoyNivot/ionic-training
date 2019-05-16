@@ -1,5 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Subject } from 'rxjs';
+import { AppComponent } from './app.component';
+import { SettingsComponent } from './components/settings/settings.component';
+
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [ CommonModule ],
+  exports: [],
+  providers: [],
+})
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +25,7 @@ export class DataService {
 
   setOption(value) {      
     this.brushSize = value;
+    console.log("Brush size SET : " + this.brushSize);
   }  
   
   getOption() {  

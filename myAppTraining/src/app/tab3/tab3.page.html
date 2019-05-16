@@ -1,32 +1,23 @@
 <!-- <ion-header>
   <ion-toolbar>
-    <ion-title></ion-title>
-
-    <ion-button (click)="toggleMenu()">Settings</ion-button>
-    <ion-menu>
-        <ion-content>
-          <ion-list>
-            Settings
-          </ion-list>
-        </ion-content>
-      </ion-menu>
-      
-
-    
-  </ion-toolbar>
+    <ion-title>Draw</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button autoHide="false">Settings</ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>    
 </ion-header> -->
 
 <ion-header>
   <ion-toolbar>
     <ion-title>Draw</ion-title>
-    <ion-buttons slot="end">
-      <ion-menu-button autoHide="false">Settings</ion-menu-button>
+    <ion-buttons slot="end" (click)="openPopover($event)">
+      <ion-icon style="font-size: 2em" name="settings"></ion-icon>
     </ion-buttons>
-  </ion-toolbar>
+  </ion-toolbar>    
 </ion-header>
 
-<ion-content>      
-  
+<ion-content>
+
   <canvas #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
   
   <ion-row text-center>
@@ -37,11 +28,4 @@
       <ion-button style="width:100%" (click)="clearCanvas()" color="danger">Reset</ion-button>
     </ion-col>
   </ion-row>
-
-  <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-      <ion-fab-button (click)="takePicture()">
-        <ion-icon name="photos"></ion-icon>
-      </ion-fab-button>
-    </ion-fab> -->
-    <!-- <img [src]="currentImage" *ngIf="currentImage"> -->
 </ion-content>

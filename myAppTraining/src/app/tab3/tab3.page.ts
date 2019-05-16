@@ -1,10 +1,8 @@
 import { Component, ViewChild, Renderer } from '@angular/core';
-import { Platform, MenuController  } from '@ionic/angular';
+import { Platform, MenuController, PopoverController  } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ActivatedRoute, ChildActivationEnd } from '@angular/router';
-import { AppComponent } from '../app.component';
 import { DataService } from '../data.service';
-import { getName } from 'ionicons/dist/types/icon/utils';
+import { SettingsComponent } from '../components/settings/settings.component';
 
 @Component({
   selector: 'app-tab3',
@@ -34,12 +32,30 @@ export class Tab3Page {
     public renderer: Renderer,
     public menuCtrl: MenuController,
     private camera: Camera,
-    dataService: DataService) {
+    dataService: DataService,
+    public popoverCtrl: PopoverController) {
       // debugger;  
       // this.brushSize = dataService.toggleBrushSize();
+      // this.brushSize = appComponent.newBrushValue(event);
       this.brushSize = dataService.getOption();
       console.log("%cDraw Page - Brush size : ", "color: green", + this.brushSize);
     }
+
+  // Open Settings Popover
+  async openPopover(event) {
+    const popover = await this.popoverCtrl.create({
+      component: SettingsComponent,
+      componentProps: {"brushSize" : this.brushSize},
+      event
+    });
+
+    popover.onDidDismiss().then((brushSize) => {
+      if(brushSize !== null) {
+        this.brushSize = brushSize.data;
+      }
+    })
+    return await popover.present();
+  }
 
   // --- Canvas part
   ngAfterViewInit(){
@@ -74,7 +90,9 @@ export class Tab3Page {
     ctx.closePath();
     ctx.strokeStyle = this.currentColor;
     ctx.lineWidth = this.brushSize;
-    ctx.stroke();       
+    ctx.stroke();      
+    
+    // ctx.save();
 
     this.lastX = currentX;
     this.lastY = currentY;
@@ -87,7 +105,8 @@ export class Tab3Page {
 
   // Reset the canvas view for the user
   clearCanvas() {
-    this.ngAfterViewInit();
+    let ctx = this.canvasElement.getContext('2d');
+    ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
     console.log("%cCanvas has been reset !", "color:red")
   }
 
@@ -106,5 +125,4 @@ export class Tab3Page {
      console.log("Camera issue:" + err);
     });
   }
-
 }

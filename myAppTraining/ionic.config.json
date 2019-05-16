@@ -1,5 +1,7 @@
 {
   "name": "myAppTraining",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
