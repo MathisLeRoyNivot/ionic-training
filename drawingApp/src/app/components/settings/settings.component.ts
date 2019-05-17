@@ -9,7 +9,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class SettingsComponent implements OnInit {
 
-  public brushSize = 5;
+  public brushSize: Number = 5;
+  public currentColor: string = '#1abc9c';
+  public availableColors: any;
 
   constructor(
     private platform: Platform,
@@ -19,15 +21,33 @@ export class SettingsComponent implements OnInit {
     
     this.initializeApp();
     this.brushSize = 5;
+    this.availableColors = [
+      '#1abc9c',
+      '#3498db',
+      '#9b59b6',
+      '#e67e22',
+      '#e74c3c'
+    ];
   
   }
 
   ngOnInit() {}
 
   async close() {
-    const brushData: Number = this.brushSize; 
+    const brushSizeData: Number = this.brushSize; 
+    const brushColorData: String = this.currentColor;
+    let brushData = {
+      "brushSize": brushSizeData,
+      "brushColor": brushColorData
+    }
     await this.popoverCtrl.dismiss(brushData);
-    console.log("Settings Component Closed - Brush size : " + brushData);
+    console.log("Settings Component Closed \n[*] Brush size : " + brushSizeData + "\n[*] Brush color : " + brushColorData);
+  }
+
+  changeColor(color) {
+    this.currentColor = color;
+    console.log(`%cNew brush color : ${this.currentColor}`, `color: ${this.currentColor}`);
+    return this.currentColor;
   }
   
   getBrushSize() {
@@ -35,7 +55,7 @@ export class SettingsComponent implements OnInit {
   }
  
   getBrushColor() {
-    return "Color here";
+    return this.currentColor;
   }
 
   newBrushValue(event) {

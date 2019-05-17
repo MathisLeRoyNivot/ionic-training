@@ -1,15 +1,23 @@
 <ion-list>
+
   <ion-item lines="none">
     <p>Brush size : {{ getBrushSize() }}</p>
   </ion-item>
+
   <ion-item>
     <ion-range min="1" max="30" pin="true" [(ngModel)]="brushSize" (ngModelChange)="newBrushValue($event)" color="pirmary">
       <ion-icon size="small" slot="start" name="brush"></ion-icon>
       <ion-icon slot="end" name="brush"></ion-icon>
     </ion-range>
   </ion-item>
+
+  <button *ngFor="let color of availableColours" icon-only ion-button (click)="changeColour(colour)">
+      <ion-icon [style.font-size]="2em" [style.color]="color" name="brush"></ion-icon>
+  </button>
+
   <ion-item style="text-align: center;" (click)="close()" lines="full"> 
     <ion-icon name="close"></ion-icon>
     Close
   </ion-item>
+
 </ion-list>

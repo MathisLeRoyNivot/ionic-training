@@ -13,8 +13,10 @@ export class FeatureModule {}
 })
 export class SettingsComponent implements OnInit {
 
-  public brushSize = 5;
+  public brushSize: Number = 5;
   // private brushSize;
+  public currentColour: String = '#000';
+  availableColours: any;
 
   constructor(
     private platform: Platform,
@@ -22,6 +24,14 @@ export class SettingsComponent implements OnInit {
     private statusBar: StatusBar,
     dataService: DataService,
     public popoverCtrl: PopoverController) {
+
+      this.availableColours = [
+        '#1abc9c',
+        '#3498db',
+        '#9b59b6',
+        '#e67e22',
+        '#e74c3c'
+    ];
       
       this.initializeApp();
       
@@ -32,11 +42,16 @@ export class SettingsComponent implements OnInit {
     
   ngOnInit() {}
 
+
   async close() {
     const brushData: Number = this.brushSize; 
     await this.popoverCtrl.dismiss(brushData);
     console.log("Settings Component Closed - Brush size : " + brushData);
   }
+
+  changeColour(color){
+    this.currentColour = color;
+}
   
   getBrushSize() {
     return this.brushSize;

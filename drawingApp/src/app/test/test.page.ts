@@ -30,7 +30,7 @@ export class TestPage implements OnInit {
   storedImages = [];
   
   // Set a default value for the range slider
-  public brushSize = 5;
+  public brushSize: Number = 5;
   // private brushSize = 5;
   
   currentColor: string = '#000';
@@ -42,8 +42,8 @@ export class TestPage implements OnInit {
     // private camera: Camera,
     public popoverCtrl: PopoverController,
     public location: Location,
-    private file: File,
-    private storage: Storage
+    // private file: File,
+    // private storage: Storage
   ) { }
 
   ngOnInit() {
@@ -52,15 +52,30 @@ export class TestPage implements OnInit {
   async openPopover(event) {
     const popover = await this.popoverCtrl.create({
       component: SettingsComponent,
-      componentProps: {"brushSize" : this.brushSize},
+      componentProps: {
+        brushSize : this.brushSize,
+        currentColor : this.currentColor 
+      },
       event
     });
 
-    popover.onDidDismiss().then((brushSize) => {
-      if(brushSize !== null) {
-        this.brushSize = brushSize.data;
+    popover.onDidDismiss().then((brushData) => {
+      if(brushData !== null) {
+        this.brushSize = brushData.data['brushSize'];
+        this.currentColor = brushData.data['brushColor'];
+        // this.brushSize = brushSize.data;
+        // this.currentColor = currentColor.data;
       }
-    })
+      // if(brushSize !== null) {
+      //   this.brushSize = brushSize.data;
+      // }
+    });
+    // popover.onDidDismiss().then((currentColor) => {
+    //   if(currentColor !== null) {
+    //     this.currentColor = currentColor.data;
+    //   }
+    // })
+
     return await popover.present();
   }
 
@@ -117,31 +132,31 @@ export class TestPage implements OnInit {
     // Here code to save the canvas to the phone gallery
     let dataUrl = this.canvasElement.toDataURL();
 
-    let ctx = this.canvasElement.getContext('2d');
-    ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    // let ctx = this.canvasElement.getContext('2d');
+    // ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
 
-    let fileName = new Date().getTime() + '.png';
-    let path = this.file.dataDirectory;
+    // let fileName = new Date().getTime() + '.png';
+    // let path = this.file.dataDirectory;
 
-    let data = dataUrl.split(',')[1];
-    let blob = this.b64toBlob(data, 'image/png');
-    this.file.writeFile(path, fileName, blob).then(res => {
-      this.storeImage(fileName);
-    }, err => {
-      console.log('err : ', err);
-    }); 
+    // let data = dataUrl.split(',')[1];
+    // let blob = this.b64toBlob(data, 'image/png');
+    // this.file.writeFile(path, fileName, blob).then(res => {
+    //   this.storeImage(fileName);
+    // }, err => {
+    //   console.log('err : ', err);
+    // }); 
   }
 
-  storeImage(imageName) {
-    let saveObj = { img : imageName};
-    this.storedImages.push(saveObj);
-    this.storage.set(STORAGE_KEY, this.storedImages).then(() => {
-      setTimeout(() => {
-        console.log("Test storeImage")
-        // this.content.scrollToBottom;
-      }, 500);
-    });
-  }
+  // storeImage(imageName) {
+  //   let saveObj = { img : imageName};
+  //   this.storedImages.push(saveObj);
+  //   this.storage.set(STORAGE_KEY, this.storedImages).then(() => {
+  //     setTimeout(() => {
+  //       console.log("Test storeImage")
+  //       // this.content.scrollToBottom;
+  //     }, 500);
+  //   });
+  // }
 
   // removeImageAtIndex(index) {
   //   let removed = this.storedImages.splice(index, 1);
