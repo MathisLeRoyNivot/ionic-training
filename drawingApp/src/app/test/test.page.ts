@@ -63,18 +63,8 @@ export class TestPage implements OnInit {
       if(brushData !== null) {
         this.brushSize = brushData.data['brushSize'];
         this.currentColor = brushData.data['brushColor'];
-        // this.brushSize = brushSize.data;
-        // this.currentColor = currentColor.data;
       }
-      // if(brushSize !== null) {
-      //   this.brushSize = brushSize.data;
-      // }
     });
-    // popover.onDidDismiss().then((currentColor) => {
-    //   if(currentColor !== null) {
-    //     this.currentColor = currentColor.data;
-    //   }
-    // })
 
     return await popover.present();
   }

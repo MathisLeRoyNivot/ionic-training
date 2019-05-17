@@ -10,7 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class SettingsComponent implements OnInit {
 
   public brushSize: Number = 5;
-  public currentColor: string = '#1abc9c';
+  public currentColor: string = '#000';
   public availableColors: any;
 
   constructor(
@@ -22,11 +22,17 @@ export class SettingsComponent implements OnInit {
     this.initializeApp();
     this.brushSize = 5;
     this.availableColors = [
-      '#1abc9c',
-      '#3498db',
-      '#9b59b6',
-      '#e67e22',
-      '#e74c3c'
+      '#000000', // Black
+      '#1e3799', // Blue 1
+      '#5f27cd', // Purple 1
+      '#009432', // Green 1
+      '#e74c3c', // Red
+      
+      '#576574', // Grey
+      '#54a0ff', // Blue 2
+      '#D980FA', // Pink
+      '#78e08f', // Green 2
+      '#ff9f43' // Orange
     ];
   
   }

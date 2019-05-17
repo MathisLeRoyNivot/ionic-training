@@ -12,10 +12,10 @@
   </ion-item>
 
   <ion-item lines="none">
-      <p>Brush color : {{ getBrushColor() }}</p>
-    </ion-item>
+    <p>Brush color : <ion-icon style="font-size:2em" [style.color]="getBrushColor()" style="font-size: 2em; line-height:-10px" name="square"></ion-icon></p>
+  </ion-item>
   <button *ngFor="let color of availableColors" icon-only ion-button (click)="changeColor(color)">
-      <ion-icon style="font-size:2em" [style.color]="color" name="square"></ion-icon>
+    <ion-icon style="font-size:2em" [style.color]="color" name="square"></ion-icon>
   </button>
 
   <ion-item style="text-align: center;" (click)="close()" lines="full"> 
