@@ -4,6 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
+  { path: 'draw', loadChildren: './draw/draw.module#DrawPageModule' },
+  { path: 'test', loadChildren: './test/test.module#TestPageModule' }
 ];
 
 @NgModule({

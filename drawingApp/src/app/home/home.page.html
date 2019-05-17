@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Form
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="logForm()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" [(ngModel)]="form.name" name="name"></ion-input>
+    </ion-item>
+    <ion-button type="submit" color="success">Start</ion-button>
+  </form>
+</ion-content>

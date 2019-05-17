@@ -13,14 +13,17 @@ import { FormsModule } from '@angular/forms';
 import { DataService } from './data.service';
 import { SettingsComponent } from './components/settings/settings.component';
 
+import { File } from '@ionic-native/file/ngx';
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule, 
-    IonicModule.forRoot(), 
+    IonicModule.forRoot(),
     AppRoutingModule, 
-    FormsModule
+    FormsModule,
   ],
   providers: [
     StatusBar,

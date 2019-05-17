@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-toolbar>
+      
+      <ion-buttons slot="start">
+        <ion-back-button [text]="buttonText" [icon]="buttonIcon"></ion-back-button>
+      </ion-buttons>
+      
+      <ion-title>Draw</ion-title>
+      
+      <ion-buttons slot="end" (click)="openPopover($event)">
+        <ion-icon style="font-size: 2em" name="settings"></ion-icon>
+      </ion-buttons>
+    
+    </ion-toolbar>    
+  </ion-header>
+  
+  <ion-content>
+  
+      <canvas #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
+      
+      <ion-row text-center>
+        <ion-col>
+          <ion-button style="width:100%" (click)="saveCanvas()" color="success">Save</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button style="width:100%" (click)="clearCanvas()" color="danger">Reset</ion-button>
+        </ion-col>
+      </ion-row>
+  
+  
+    <!-- <ion-list *ngIf="storedImages.lenght > 0">
+      <ion-list-header>Previous drawing</ion-list-header>
+      <ion-card *ngFor="let obj of storedImages">
+        <ion-card-content>
+          <img [src]="getImagePath(obj.img)">
+        </ion-card-content>
+        <ion-row>
+          <button ion-button icon-only full-color="danger" (click)="removeImageAtIndex(i)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-row>
+      </ion-card>
+    </ion-list> -->
+  </ion-content>
+  

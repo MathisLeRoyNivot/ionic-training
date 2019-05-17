@@ -1,22 +1,20 @@
-import { Component, ViewChild, Renderer } from '@angular/core';
-import { Platform, MenuController, PopoverController  } from '@ionic/angular';
-import { File  } from '@ionic-native/file/ngx';
+import { ViewChild, Component, OnInit, Renderer } from '@angular/core';
+import { File } from '@ionic-native/file/ngx';
 import { Storage } from '@ionic/storage';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-
-
-import { DataService } from '../data.service';
-import { SettingsComponent } from '../components/settings/settings.component';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { Platform, MenuController, PopoverController  } from '@ionic/angular';
+import { Location } from '@angular/common';
+import { SettingsComponent } from '../components/settings/settings.component';
+// import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 const STORAGE_KEY = 'IMAGE_LIST';
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-test',
+  templateUrl: './test.page.html',
+  styleUrls: ['./test.page.scss'],
 })
-export class Tab3Page {
+export class TestPage implements OnInit {
 
   @ViewChild('myCanvas') canvas: any;
   
@@ -25,42 +23,32 @@ export class Tab3Page {
   lastX: number;
   lastY: number;
   
-  @ViewChild(Content) content: Content;
-  @ViewChild('fixedContainer') fixedContainer: any; 
-
+  // @ViewChild(Content) content: Content;
+  // @ViewChild('fixedContainer') fixedContainer: any; 
+  
   currentImage: any;
   storedImages = [];
-
+  
   // Set a default value for the range slider
-  public brushSize;
+  public brushSize = 5;
   // private brushSize = 5;
-
+  
   currentColor: string = '#000';
 
   constructor(
     public platform: Platform, 
     public renderer: Renderer,
     public menuCtrl: MenuController,
-    private camera: Camera,
+    // private camera: Camera,
     public popoverCtrl: PopoverController,
+    public location: Location,
     private file: File,
-    private storage: Storage,
-    dataService: DataService) {
-      // this.storage.ready().then(() => {
-      //   this.storage.get(STORAGE_KEY).then(data => {
-      //     if(data !== undefined) {
-      //       this.storedImages = data;
-      //     }
-      //   })
-      // })
+    private storage: Storage
+  ) { }
 
-      // this.brushSize = dataService.toggleBrushSize();
-      // this.brushSize = appComponent.newBrushValue(event);
-      this.brushSize = dataService.getOption();
-      console.log("%cDraw Page - Brush size : ", "color: green", + this.brushSize);
-    }
+  ngOnInit() {
+  }
 
-  // Open Settings Popover
   async openPopover(event) {
     const popover = await this.popoverCtrl.create({
       component: SettingsComponent,
@@ -76,19 +64,16 @@ export class Tab3Page {
     return await popover.present();
   }
 
-  // ionViewDidEnter() {
-  //   let itemHeight = this.fixedContainer.nativeElement.offsetHeight;
-  //   let scroll = this.content.getScrollElement();
-
-  //   itemHeight = Number.parseFloat(scroll.style.margin.replace("px", "")) + itemHeight;
-  //   scroll.style.marginTop = itemHeight + "px";
-  // }
+  // Back button function
+  backClicked() {
+    this.location.back();
+  }
 
   // --- Canvas part
   ngAfterViewInit(){
     this.canvasElement = this.canvas.nativeElement;
     this.renderer.setElementAttribute(this.canvasElement, 'width', this.platform.width() + '');
-    this.renderer.setElementAttribute(this.canvasElement, 'height', 0.50*this.platform.height() + '');
+    this.renderer.setElementAttribute(this.canvasElement, 'height', 0.87*this.platform.height() + '');
     
     this.name = localStorage.getItem('name');
     console.log("Name : " + this.name);
@@ -130,34 +115,33 @@ export class Tab3Page {
   saveCanvas() {
     console.log("Canvas has been saved !")
     // Here code to save the canvas to the phone gallery
-    // let dataUrl = this.canvasElement.toDataURL();
+    let dataUrl = this.canvasElement.toDataURL();
 
-    // let ctx = this.canvasElement.getContext('2d');
-    // ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    let ctx = this.canvasElement.getContext('2d');
+    ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
 
-    // let fileName = new Date().getTime() + '.png';
-    // let path = this.file.dataDirectory;
+    let fileName = new Date().getTime() + '.png';
+    let path = this.file.dataDirectory;
 
-    // let data = dataUrl.split(',')[1];
-    // let blob = this.b64toBlob(data, 'image/png');
-    // this.file.writeFile(path, fileName, blob).then(res => {
-    //   this.storeImage(fileName);
-    // }, err => {
-    //   console.log('err : ', err);
-    // }); 
-
+    let data = dataUrl.split(',')[1];
+    let blob = this.b64toBlob(data, 'image/png');
+    this.file.writeFile(path, fileName, blob).then(res => {
+      this.storeImage(fileName);
+    }, err => {
+      console.log('err : ', err);
+    }); 
   }
 
-  // storeImage(imageName) {
-  //   let saveObj = { img : imageName};
-  //   this.storedImages.push(saveObj);
-  //   this.storage.set(STORAGE_KEY, this.storedImages).then(() => {
-  //     setTimeout(() => {
-  //       console.log("Test storeImage")
-  //       // this.content.scrollToBottom;
-  //     }, 500);
-  //   });
-  // }
+  storeImage(imageName) {
+    let saveObj = { img : imageName};
+    this.storedImages.push(saveObj);
+    this.storage.set(STORAGE_KEY, this.storedImages).then(() => {
+      setTimeout(() => {
+        console.log("Test storeImage")
+        // this.content.scrollToBottom;
+      }, 500);
+    });
+  }
 
   // removeImageAtIndex(index) {
   //   let removed = this.storedImages.splice(index, 1);
@@ -177,27 +161,27 @@ export class Tab3Page {
   // }
 
 
-  // b64toBlob(b64Data, contentType) {
-  //   contentType = contentType ||'';
-  //   let sliceSize = 512;
-  //   let byteCharacters = atob(b64Data);
-  //   let byteArrays = [];
+  b64toBlob(b64Data, contentType) {
+    contentType = contentType ||'';
+    let sliceSize = 512;
+    let byteCharacters = atob(b64Data);
+    let byteArrays = [];
 
-  //   for(let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-  //     let slice = byteCharacters.slice(offset, offset + sliceSize);
+    for(let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      let slice = byteCharacters.slice(offset, offset + sliceSize);
 
-  //     let byteNumbers = new Array(slice.length);
-  //     for(let i = 0; i < slice.length; i++) {
-  //       byteNumbers[i] = slice.charCodeAt(i);
-  //     }
+      let byteNumbers = new Array(slice.length);
+      for(let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
 
-  //     let byteArray = new Uint8Array(byteNumbers);
-  //     byteArrays.push(byteArray);
-  //   }
+      let byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
 
-  //   let blob = new Blob(byteArrays, { type: contentType});
-  //   return blob;
-  // }
+    let blob = new Blob(byteArrays, { type: contentType});
+    return blob;
+  }
 
   // Reset the canvas view for the user
   clearCanvas() {
@@ -221,4 +205,5 @@ export class Tab3Page {
   //    console.log("Camera issue:" + err);
   //   });
   // }
+
 }

@@ -1,18 +1,16 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Draw</ion-title>
-    <ion-buttons slot="end">
-      <ion-menu-button autoHide="false">Settings</ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>    
-</ion-header> -->
-
 <ion-header>
   <ion-toolbar>
+    
+    <ion-buttons slot="start" (click)="backClicked()">
+      <ion-back-button [text]="buttonText" [icon]="buttonIcon"></ion-back-button>
+    </ion-buttons>
+    
     <ion-title>Draw</ion-title>
+    
     <ion-buttons slot="end" (click)="openPopover($event)">
       <ion-icon style="font-size: 2em" name="settings"></ion-icon>
     </ion-buttons>
+  
   </ion-toolbar>    
 </ion-header>
 
