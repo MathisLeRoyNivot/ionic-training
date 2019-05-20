@@ -22,10 +22,11 @@ export class TestPage implements OnInit {
   
   offsetY: number;
   canvasElement: any;
-  name: string;
   lastX: number;
   lastY: number;
-
+  
+  displayName: boolean = false;
+  name: string;
 
   screen: any;
   state: boolean = false;
@@ -54,8 +55,7 @@ export class TestPage implements OnInit {
     // private storage: Storage
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   async openPopover(event) {
     const popover = await this.popoverCtrl.create({
@@ -82,15 +82,13 @@ export class TestPage implements OnInit {
     this.location.back();
   }
 
+  
+
   // --- Canvas part
   ngAfterViewInit(){
     this.canvasElement = this.canvas.nativeElement;
     this.renderer.setElementAttribute(this.canvasElement, 'width', this.platform.width() + '');
     this.renderer.setElementAttribute(this.canvasElement, 'height', 0.80*this.platform.height() + '');
-    
-    this.name = localStorage.getItem('name');
-    console.log("Name : " + this.name);
-    return this.name
   }
 
   // First position of the line that the user draw
@@ -125,7 +123,7 @@ export class TestPage implements OnInit {
     ctx.closePath();
     ctx.strokeStyle = this.currentColor;
     ctx.lineWidth = this.brushSize;
-    ctx.stroke();      
+    ctx.stroke();
     
     // ctx.save();
 
@@ -133,13 +131,21 @@ export class TestPage implements OnInit {
     this.lastY = currentY;
   }
 
+  showSaveHide() {
+    this.name = localStorage.getItem('name');
+    console.log("Name : " + this.name);
+    return this.name
+  }
+
   saveCanvas() {
-    this.screenshot.save('jpg', 100, 'screenshot.jpg').then(res => {
-      this.screen = res.filePath;
-      this.state = true;
-      this.clearCanvas();
-      console.log("Canvas has been saved into your gallery !");
-    }, err => console.log(err));
+    this.displayName = true
+    this.showSaveHide()
+    // this.screenshot.save('jpg', 100, 'screenshot.jpg').then(res => {
+    //   this.screen = res.filePath;
+    //   this.state = true;
+    //   this.clearCanvas();
+    //   console.log("Canvas has been saved into your gallery !");
+    // }, err => console.log(err));
 
     // console.log("Canvas has been saved !")
     // Here code to save the canvas to the phone gallery
@@ -189,30 +195,31 @@ export class TestPage implements OnInit {
   // }
 
 
-  b64toBlob(b64Data, contentType) {
-    contentType = contentType ||'';
-    let sliceSize = 512;
-    let byteCharacters = atob(b64Data);
-    let byteArrays = [];
+  // b64toBlob(b64Data, contentType) {
+  //   contentType = contentType ||'';
+  //   let sliceSize = 512;
+  //   let byteCharacters = atob(b64Data);
+  //   let byteArrays = [];
 
-    for(let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      let slice = byteCharacters.slice(offset, offset + sliceSize);
+  //   for(let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+  //     let slice = byteCharacters.slice(offset, offset + sliceSize);
 
-      let byteNumbers = new Array(slice.length);
-      for(let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
+  //     let byteNumbers = new Array(slice.length);
+  //     for(let i = 0; i < slice.length; i++) {
+  //       byteNumbers[i] = slice.charCodeAt(i);
+  //     }
 
-      let byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
+  //     let byteArray = new Uint8Array(byteNumbers);
+  //     byteArrays.push(byteArray);
+  //   }
 
-    let blob = new Blob(byteArrays, { type: contentType});
-    return blob;
-  }
+  //   let blob = new Blob(byteArrays, { type: contentType});
+  //   return blob;
+  // }
 
   // Reset the canvas view for the user
   clearCanvas() {
+    this.displayName = false
     let ctx = this.canvasElement.getContext('2d');
     ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
     console.log("%cCanvas has been reset !", "color:red")
