@@ -17,8 +17,10 @@
   <ion-content [scrollY]="false" [scrollX]="false">
 
     <div class="canvasContainer">
-      <canvas class="contextCanvas" #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
+      <canvas class="contextCanvas" #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)">
+      </canvas>
       <p class="name" [(ngModel)]="name" *ngIf="displayName" ngDefaultControl>{{ name }}</p>
+      
       
       <ion-row class="choice-btn">
         <ion-col>

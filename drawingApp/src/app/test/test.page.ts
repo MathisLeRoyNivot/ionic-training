@@ -1,5 +1,5 @@
 import { ViewChild, Component, OnInit, Renderer } from '@angular/core';
-import { Platform, MenuController, PopoverController  } from '@ionic/angular';
+import { Platform, MenuController, PopoverController, ToastController  } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { File } from '@ionic-native/file/ngx';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
@@ -7,6 +7,7 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { Storage } from '@ionic/storage';
 
 import { SettingsComponent } from '../components/settings/settings.component';
+import { async } from 'q';
 // import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 const STORAGE_KEY = 'IMAGE_LIST';
@@ -47,11 +48,12 @@ export class TestPage implements OnInit {
     public platform: Platform, 
     public renderer: Renderer,
     public menuCtrl: MenuController,
-    // private camera: Camera,
     public popoverCtrl: PopoverController,
     public location: Location,
-    private file: File,
     public screenshot: Screenshot,
+    public toastCtrl: ToastController
+    // private camera: Camera,
+    // private file: File,
     // private storage: Storage
   ) { }
 
@@ -82,8 +84,6 @@ export class TestPage implements OnInit {
     this.location.back();
   }
 
-  
-
   // --- Canvas part
   ngAfterViewInit(){
     this.canvasElement = this.canvas.nativeElement;
@@ -102,7 +102,9 @@ export class TestPage implements OnInit {
       ctx.arc(this.lastX, this.lastY, this.brushSize/2, 0, 2 * Math.PI);
       ctx.closePath();
       ctx.fill();
+      // Display starting point position
       console.log("%cStarting", "color:green");
+      console.log("X : " + this.lastX + "\nY : " + this.lastY);
 
     }
   
@@ -112,7 +114,8 @@ export class TestPage implements OnInit {
     let currentX = ev.touches[0].pageX;
     let currentY = ev.touches[0].pageY - this.canvasElement.getBoundingClientRect().top;
 
-    console.log('%cNew point added',"color: green", '\nX position : ' + currentX + '\n' + 'Y position : ' + currentY);
+    // Display new point added to the line
+    console.log("%cNew point added", "color: green", "\nX position : " + currentX + "\nY position : " + currentY);
 
     let ctx = this.canvasElement.getContext('2d');
 
@@ -138,15 +141,36 @@ export class TestPage implements OnInit {
   }
 
   saveCanvas() {
-    this.displayName = true
-    this.showSaveHide()
-    // this.screenshot.save('jpg', 100, 'screenshot.jpg').then(res => {
-    //   this.screen = res.filePath;
-    //   this.state = true;
-    //   this.clearCanvas();
-    //   console.log("Canvas has been saved into your gallery !");
-    // }, err => console.log(err));
 
+    this.displayName = true;
+    this.showSaveHide();
+
+    let date = new Date().toISOString();
+    let photoName = "draw-ismart-" + date + ".jpg";
+
+    if (this.platform.is("desktop")) {
+      console.log('Desktop Detected !');
+
+    } else if (this.platform.is("android")) {
+      console.log('Android Detected !');
+      this.screenshot.save('jpg', 100, photoName).then(res => {
+        this.screen = res.filePath;
+        this.state = true;
+        // this.clearCanvas();
+
+        const toast = this.toastCtrl.create({
+          message: 'Your drawing have been saved into your gallery.',
+          duration: 2000
+        });
+        return toast;
+        // console.log("Canvas have been saved into your gallery !");
+      }, err => console.log(err));
+
+    } else if (this.platform.is("ios")) {
+      console.log('iOS Detected ! Impossible to save the drawing into the gallery.');
+    
+    }
+  
     // console.log("Canvas has been saved !")
     // Here code to save the canvas to the phone gallery
     // let dataUrl = this.canvasElement.toDataURL();
@@ -193,7 +217,6 @@ export class TestPage implements OnInit {
 
   //   return path;
   // }
-
 
   // b64toBlob(b64Data, contentType) {
   //   contentType = contentType ||'';
