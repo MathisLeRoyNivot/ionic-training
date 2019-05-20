@@ -1,9 +1,11 @@
 import { ViewChild, Component, OnInit, Renderer } from '@angular/core';
-import { File } from '@ionic-native/file/ngx';
-import { Storage } from '@ionic/storage';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { Platform, MenuController, PopoverController  } from '@ionic/angular';
 import { Location } from '@angular/common';
+import { File } from '@ionic-native/file/ngx';
+import { Screenshot } from '@ionic-native/screenshot/ngx';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { Storage } from '@ionic/storage';
+
 import { SettingsComponent } from '../components/settings/settings.component';
 // import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
@@ -22,6 +24,8 @@ export class TestPage implements OnInit {
   name: string;
   lastX: number;
   lastY: number;
+
+  offsetY: number;
   
   // @ViewChild(Content) content: Content;
   // @ViewChild('fixedContainer') fixedContainer: any; 
@@ -30,7 +34,7 @@ export class TestPage implements OnInit {
   storedImages = [];
   
   // Set a default value for the range slider
-  public brushSize: Number = 5;
+  public brushSize: number = 5;
   // private brushSize = 5;
   
   currentColor: string = '#000';
@@ -42,7 +46,8 @@ export class TestPage implements OnInit {
     // private camera: Camera,
     public popoverCtrl: PopoverController,
     public location: Location,
-    // private file: File,
+    private file: File,
+    public screenshot: Screenshot,
     // private storage: Storage
   ) { }
 
@@ -78,7 +83,7 @@ export class TestPage implements OnInit {
   ngAfterViewInit(){
     this.canvasElement = this.canvas.nativeElement;
     this.renderer.setElementAttribute(this.canvasElement, 'width', this.platform.width() + '');
-    this.renderer.setElementAttribute(this.canvasElement, 'height', 0.87*this.platform.height() + '');
+    this.renderer.setElementAttribute(this.canvasElement, 'height', 0.80*this.platform.height() + '');
     
     this.name = localStorage.getItem('name');
     console.log("Name : " + this.name);
@@ -88,15 +93,23 @@ export class TestPage implements OnInit {
   // First position of the line that the user draw
     handleStart(ev) {
       this.lastX = ev.touches[0].pageX;
-      this.lastY = ev.touches[0].pageY;
+      this.lastY = ev.touches[0].pageY - this.canvasElement.getBoundingClientRect().top;
+
+      let ctx = this.canvasElement.getContext('2d');
+      ctx.fillStyle = this.currentColor;
+      ctx.beginPath();
+      ctx.arc(this.lastX, this.lastY, this.brushSize/2, 0, 2 * Math.PI);
+      ctx.closePath();
+      ctx.fill();
       console.log("%cStarting", "color:green");
+
     }
   
   // When the user hold and move his finger accross the screen
   handleMove(ev) {
     
     let currentX = ev.touches[0].pageX;
-    let currentY = ev.touches[0].pageY;
+    let currentY = ev.touches[0].pageY - this.canvasElement.getBoundingClientRect().top;
 
     console.log('%cNew point added',"color: green", '\nX position : ' + currentX + '\n' + 'Y position : ' + currentY);
 
@@ -118,9 +131,14 @@ export class TestPage implements OnInit {
   }
 
   saveCanvas() {
-    console.log("Canvas has been saved !")
+
+    this.screenshot.save('jpg', 100, 'screenshot.jpg').then(res => {
+      console.log("Canvas has been saved into your gallery !");
+    }, err => console.log(err));
+
+    // console.log("Canvas has been saved !")
     // Here code to save the canvas to the phone gallery
-    let dataUrl = this.canvasElement.toDataURL();
+    // let dataUrl = this.canvasElement.toDataURL();
 
     // let ctx = this.canvasElement.getContext('2d');
     // ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);

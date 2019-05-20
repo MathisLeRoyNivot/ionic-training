@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { File } from '@ionic-native/file/ngx';
 import { Storage } from '@ionic/storage';
+import { Screenshot } from '@ionic-native/screenshot/ngx';
 
 // import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DrawPage } from './draw/draw.page';
@@ -30,7 +31,8 @@ import { SettingsComponent } from './components/settings/settings.component';
     { provide: RouteReuseStrategy, 
       useClass: IonicRouteStrategy 
     },
-    File
+    File,
+    Screenshot
   ],
   bootstrap: [AppComponent]
 })

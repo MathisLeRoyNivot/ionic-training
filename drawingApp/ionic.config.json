@@ -1,5 +1,7 @@
 {
   "name": "drawingApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
