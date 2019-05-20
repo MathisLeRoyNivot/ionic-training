@@ -20,12 +20,15 @@ export class TestPage implements OnInit {
 
   @ViewChild('myCanvas') canvas: any;
   
+  offsetY: number;
   canvasElement: any;
   name: string;
   lastX: number;
   lastY: number;
 
-  offsetY: number;
+
+  screen: any;
+  state: boolean = false;
   
   // @ViewChild(Content) content: Content;
   // @ViewChild('fixedContainer') fixedContainer: any; 
@@ -131,8 +134,10 @@ export class TestPage implements OnInit {
   }
 
   saveCanvas() {
-
     this.screenshot.save('jpg', 100, 'screenshot.jpg').then(res => {
+      this.screen = res.filePath;
+      this.state = true;
+      this.clearCanvas();
       console.log("Canvas has been saved into your gallery !");
     }, err => console.log(err));
 
