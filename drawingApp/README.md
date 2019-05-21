@@ -32,7 +32,7 @@ ionic cordova build android
 ```
 Launch the ionic server to test the project on your browser
 ```bash
-ionic run android
+ionic cordova run android
 ```
 
 

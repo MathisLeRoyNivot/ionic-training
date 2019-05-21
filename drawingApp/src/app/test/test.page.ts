@@ -30,14 +30,7 @@ export class TestPage implements OnInit {
   name: string;
 
   screen: any;
-  state: boolean = false;
-  
-  // @ViewChild(Content) content: Content;
-  // @ViewChild('fixedContainer') fixedContainer: any; 
-  
-  currentImage: any;
-  storedImages = [];
-  
+      
   // Set a default value for the range slider
   public brushSize: number = 5;
   // private brushSize = 5;
@@ -130,25 +123,28 @@ export class TestPage implements OnInit {
     ctx.lineWidth = this.brushSize;
     ctx.stroke();
     
-    // ctx.save();
-
     this.lastX = currentX;
     this.lastY = currentY;
+    
+    ctx.getImageData(0, this.canvasElement.getBoundingClientRect().top, this.canvasElement.width, this.canvasElement.height-this.canvasElement.getBoundingClientRect().top);
+    ctx.save();
   }
 
   showSaveHide() {
     this.name = localStorage.getItem('name');
     console.log("Name : " + this.name);
+    this.displayName = true;
     return this.name
   }
 
   saveCanvas() {
 
-    this.displayName = true;
     this.showSaveHide();
 
     let date = new Date().toISOString();
     let photoName = "draw-ismart-" + date + ".jpg";
+    
+    // let canvasDrawingSrc = this.canvasElement.toDataURL("image/jpg");
 
     if (this.platform.is("desktop")) {
       console.log('Desktop Detected !');
@@ -156,27 +152,15 @@ export class TestPage implements OnInit {
     } else if (this.platform.is("android")) {
       console.log('Android Detected !');
 
-      this.screenshot.save(function(res, err) {
-        if(err){
-          console.error(err);
-        } else {
-          console.log("Saved !",res.filePath);  //should be path/to/myScreenshot.jpg
-          setTimeout(() => {
-            this.clearCanvas();
-          }, 3000);
-        }
-      }, 100, photoName);
-
-
-      // this.screenshot.save('jpg', 100, photoName).then(res => {
-      //   this.screen = res.filePath;
-      //   this.state = true;
+      this.screenshot.save('jpg', 100, photoName).then(res => {
+        this.screen = res.filePath;
         
-      //   setTimeout(() => {
-      //     this.clearCanvas();
-      //   }, 3000);
-      //   // console.log("Canvas have been saved into your gallery !");
-      // }, err => console.log(err));
+        setTimeout(() => {
+          this.displayName =false;
+          this.clearCanvas();
+        }, 3000);
+        // console.log("Canvas have been saved into your gallery !");
+      }, err => console.log(err));
 
     } else if (this.platform.is("ios")) {
       console.log('iOS Detected ! Impossible to save the drawing into the gallery.');
@@ -201,34 +185,6 @@ export class TestPage implements OnInit {
     //   console.log('err : ', err);
     // }); 
   }
-
-  // storeImage(imageName) {
-  //   let saveObj = { img : imageName};
-  //   this.storedImages.push(saveObj);
-  //   this.storage.set(STORAGE_KEY, this.storedImages).then(() => {
-  //     setTimeout(() => {
-  //       console.log("Test storeImage")
-  //       // this.content.scrollToBottom;
-  //     }, 500);
-  //   });
-  // }
-
-  // removeImageAtIndex(index) {
-  //   let removed = this.storedImages.splice(index, 1);
-  //   this.file.removeFile(this.file.dataDirectory, removed[0].img).then(res => {
-  //     console.log('Image removed')
-  //   }, err => {
-  //     console.log('Remove err : ' + err);
-  //   });
-  //   this.storage.set(STORAGE_KEY, this.storedImages)
-  // }
-
-  // getImagePath(imageName) {
-  //   let path = this.file.dataDirectory + imageName;
-  //   path = normalizeURL(path);
-
-  //   return path;
-  // }
 
   // b64toBlob(b64Data, contentType) {
   //   contentType = contentType ||'';
@@ -259,21 +215,5 @@ export class TestPage implements OnInit {
     ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
     console.log("%cCanvas has been reset !", "color:red")
   }
-
-  // takePicture() {
-  //   const options: CameraOptions = {
-  //     quality: 100,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE
-  //   }
-
-  //     this.camera.getPicture(options).then((imageData) => {
-  //     this.currentImage = 'data:image/jpeg;base64,' + imageData;
-  //   }, (err) => {
-  //    // Handle error
-  //    console.log("Camera issue:" + err);
-  //   });
-  // }
 
 }
