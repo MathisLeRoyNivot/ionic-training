@@ -1,6 +1,6 @@
 # Drawing Application - Documentation
 
-## Setting up the project &nbsp; :gear:
+## Setting up the project :gear:
 
 Clone the project by taping this command in your CLI :
 ```bash
