@@ -5,7 +5,10 @@
   </ion-item>
 
   <ion-item>
-    <ion-range min="1" max="30" pin="true" [(ngModel)]="brushSize" (ngModelChange)="newBrushValue($event)" color="pirmary">
+    <div class="range" *ngIf="isAndroid">
+      <input type="range" name="brushSize" [(ngModel)]="brushSize" (ngModelChange)="newBrushValue($event)" min="1" max="30">
+    </div>
+    <ion-range min="1" max="30" pin="true" [(ngModel)]="brushSize" (ngModelChange)="newBrushValue($event)" color="pirmary" *ngIf="isIosDesktop">
       <ion-icon size="small" slot="start" name="brush"></ion-icon>
       <ion-icon slot="end" name="brush"></ion-icon>
     </ion-range>

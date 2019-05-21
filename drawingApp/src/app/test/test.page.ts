@@ -28,7 +28,7 @@ export class TestPage implements OnInit {
   
   displayName: boolean = false;
   name: string;
-
+  
   screen: any;
   state: boolean = false;
   
@@ -59,6 +59,7 @@ export class TestPage implements OnInit {
 
   ngOnInit() {}
 
+  
   async openPopover(event) {
     const popover = await this.popoverCtrl.create({
       component: SettingsComponent,
@@ -68,17 +69,18 @@ export class TestPage implements OnInit {
       },
       event
     });
-
+    
     popover.onDidDismiss().then((brushData) => {
       if(brushData !== null) {
         this.brushSize = brushData.data['brushSize'];
         this.currentColor = brushData.data['brushColor'];
       }
     });
-
+    
     return await popover.present();
   }
-
+  
+  
   // Back button function
   backClicked() {
     this.location.back();

@@ -13,6 +13,9 @@ export class SettingsComponent implements OnInit {
   public currentColor: string = '#000';
   public availableColors: any;
 
+  isAndroid = false;
+  isIosDesktop = false;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -39,6 +42,14 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {}
 
+  checkDevice() {
+    if (this.platform.is('android')) {
+      this.isAndroid = true;
+    } else if (this.platform.is('ios') || this.platform.is('desktop')) {
+      this.isIosDesktop = true;
+    }
+  }
+    
   async close() {
     const brushSizeData: Number = this.brushSize; 
     const brushColorData: String = this.currentColor;
@@ -74,6 +85,7 @@ export class SettingsComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.checkDevice();
     });
   }
 
