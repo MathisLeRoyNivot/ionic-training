@@ -35,8 +35,8 @@ ionic cordova run android
 ```
 
 
-## Contributor
+## Contributor :computer:
 - [Mathis Le Roy-Nivot](https://github.com/MathisLeRoyNivot "Go to @MathisLeRoyNivot's Github")
 
-## License
+## License :white_check_mark:
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MathisLeRoyNivot/ionic-training/blob/master/LICENSE) Mathis LE ROY-NIVOT 2019 ©
