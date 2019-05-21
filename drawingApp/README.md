@@ -1,6 +1,6 @@
 # Drawing Application - Documentation
 
-## Setting up the project
+## Setting up the project &nbsp; :gear:
 
 Clone the project by taping this command in your CLI :
 ```bash
@@ -17,15 +17,14 @@ And Install the depedencies of this drawing application by taping the following 
 npm install
 ```
 
-## Try it on Browser
+## Try it on Browser &nbsp;<img src="https://cdn.pixabay.com/photo/2016/08/31/00/44/www-1632431_960_720.png" height="35px" alt="Browser Logo">
 
 Launch the ionic server to test the project on your browser
 ```bash
 ionic serve
 ```
 
-## Try it on Android
-
+## Try it on Android &nbsp;<img src="http://aux.iconspalace.com/uploads/google-android-icon-256.png" height="35px" alt="Android Logo">
 Launch the ionic server to test the project on your Android device / emulator
 ```bash
 ionic cordova build android

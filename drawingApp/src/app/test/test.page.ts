@@ -48,7 +48,9 @@ export class TestPage implements OnInit {
     // private camera: Camera,
     // private file: File,
     // private storage: Storage
-  ) { }
+  ) {
+    this.name = localStorage.getItem('name');
+  }
 
   ngOnInit() {}
 
@@ -72,7 +74,6 @@ export class TestPage implements OnInit {
     
     return await popover.present();
   }
-  
   
   // Back button function
   backClicked() {
@@ -131,16 +132,16 @@ export class TestPage implements OnInit {
   }
 
   showSaveHide() {
+    this.displayName = true;
     this.name = localStorage.getItem('name');
     console.log("Name : " + this.name);
-    this.displayName = true;
-    return this.name
+    return this.name;
   }
 
   saveCanvas() {
 
     this.showSaveHide();
-
+    
     let date = new Date().toISOString();
     let photoName = "draw-ismart-" + date + ".jpg";
     
@@ -153,12 +154,13 @@ export class TestPage implements OnInit {
       console.log('Android Detected !');
 
       this.screenshot.save('jpg', 100, photoName).then(res => {
+        this.displayName = true;
         this.screen = res.filePath;
         
         setTimeout(() => {
-          this.displayName =false;
+          this.displayName = false;
           this.clearCanvas();
-        }, 3000);
+        }, 1000);
         // console.log("Canvas have been saved into your gallery !");
       }, err => console.log(err));
 
@@ -185,28 +187,6 @@ export class TestPage implements OnInit {
     //   console.log('err : ', err);
     // }); 
   }
-
-  // b64toBlob(b64Data, contentType) {
-  //   contentType = contentType ||'';
-  //   let sliceSize = 512;
-  //   let byteCharacters = atob(b64Data);
-  //   let byteArrays = [];
-
-  //   for(let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-  //     let slice = byteCharacters.slice(offset, offset + sliceSize);
-
-  //     let byteNumbers = new Array(slice.length);
-  //     for(let i = 0; i < slice.length; i++) {
-  //       byteNumbers[i] = slice.charCodeAt(i);
-  //     }
-
-  //     let byteArray = new Uint8Array(byteNumbers);
-  //     byteArrays.push(byteArray);
-  //   }
-
-  //   let blob = new Blob(byteArrays, { type: contentType});
-  //   return blob;
-  // }
 
   // Reset the canvas view for the user
   clearCanvas() {

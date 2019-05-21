@@ -5,7 +5,7 @@
 
 <h1 style="text-align:center">IONIC Framework Training</h1>
 
-## Documentation
+## Documentation &nbsp; :book:
 
 - **App #1** : [Drawing Application](https://github.com/MathisLeRoyNivot/ionic-training/tree/master/drawingApp "Go to the Drawing Application Documentation")
 
