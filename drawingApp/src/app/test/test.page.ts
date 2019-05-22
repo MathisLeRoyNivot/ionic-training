@@ -49,9 +49,6 @@ export class TestPage implements OnInit {
     // private file: File,
     // private storage: Storage
   ) {
-    this.platform.ready().then((ready) => {
-      this.ngAfterViewInit();
-    });
     this.name = localStorage.getItem('name');
   }
 
@@ -136,7 +133,7 @@ export class TestPage implements OnInit {
 
   showSaveHide() {
     this.displayName = true;
-    this.name = localStorage.getItem('name');
+    // this.name = localStorage.getItem('name');
     console.log("Name : " + this.name);
     return this.name;
   }
@@ -150,27 +147,31 @@ export class TestPage implements OnInit {
     
     // let canvasDrawingSrc = this.canvasElement.toDataURL("image/jpg");
 
-    if (this.platform.is("desktop")) {
-      console.log('Desktop Detected !');
-      // Code to save into desktop files
-    } else if (this.platform.is("android")) {
-      console.log('Android Detected !');
-
-      this.screenshot.save('jpg', 100, photoName).then(res => {
-        this.displayName = true;
-        this.screen = res.filePath;
-        
-        setTimeout(() => {
-          this.displayName = false;
-          this.clearCanvas();
-        }, 1000);
-        // console.log("Canvas have been saved into your gallery !");
-      }, err => console.log(err));
-
-    } else if (this.platform.is("ios")) {
-      console.log('iOS Detected ! Impossible to save the drawing into the gallery.');
-      // Code to save into ios files      
-    }
+    setTimeout(() => {
+      if (this.platform.is("desktop")) {
+        console.log('Desktop Detected !');
+        // Code to save into desktop files
+  
+      } else if (this.platform.is("android")) {
+        console.log('Android Detected !');
+  
+        this.screenshot.save('jpg', 100, photoName).then(res => {
+          this.name;
+          this.screen = res.filePath;
+          
+          setTimeout(() => {
+            this.displayName = false;
+            this.clearCanvas();
+          }, 1000);
+          // console.log("Canvas have been saved into your gallery !");
+  
+        }, err => console.log(err));
+  
+      } else if (this.platform.is("ios")) {
+        console.log('iOS Detected ! Impossible to save the drawing into the gallery.');
+        // Code to save into ios files      
+      }
+    }, 2000)
   
     // console.log("Canvas has been saved !")
     // Here code to save the canvas to the phone gallery
