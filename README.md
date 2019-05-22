@@ -1,9 +1,9 @@
-<div style="text-align: center">
+<p align="center">
 <img src="https://d2eip9sf3oo6c2.cloudfront.net/tags/images/000/000/324/thumb/ioniclogo.png" width="150px" alt="Ionic Logo">
 <img src="https://cdn.worldvectorlogo.com/logos/angular-icon.svg" width="150px" alt="Angular Logo">
-</div>
+</p>
 
-<h1 style="text-align:center">IONIC Framework Training</h1>
+<h1 align="center">IONIC Framework Training</h1>
 
 ## Documentation :open_file_folder:
 
