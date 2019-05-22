@@ -30,14 +30,13 @@ export class SettingsComponent implements OnInit {
       '#5f27cd', // Purple 1
       '#009432', // Green 1
       '#e74c3c', // Red
-      
       '#576574', // Grey
       '#54a0ff', // Blue 2
       '#D980FA', // Pink
       '#78e08f', // Green 2
       '#ff9f43' // Orange
     ];
-  
+
   }
 
   ngOnInit() {}

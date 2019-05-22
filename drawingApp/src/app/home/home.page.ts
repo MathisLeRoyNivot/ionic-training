@@ -14,7 +14,7 @@ export class HomePage {
 
   constructor(public router: Router) {}
 
-  logForm(name) {
+  logForm() {
     let formData = this.form;
     console.log(formData);
 

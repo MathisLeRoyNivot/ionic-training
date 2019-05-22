@@ -1,5 +1,5 @@
 import { ViewChild, Component, OnInit, Renderer } from '@angular/core';
-import { Platform, MenuController, PopoverController, ToastController  } from '@ionic/angular';
+import { Platform, MenuController, PopoverController, ToastController, LoadingController  } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { File } from '@ionic-native/file/ngx';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
@@ -30,6 +30,7 @@ export class TestPage implements OnInit {
   name: string;
 
   screen: any;
+  loading: any;
       
   // Set a default value for the range slider
   public brushSize: number = 5;
@@ -44,16 +45,20 @@ export class TestPage implements OnInit {
     public popoverCtrl: PopoverController,
     public location: Location,
     public screenshot: Screenshot,
-    public toastCtrl: ToastController
-    // private camera: Camera,
-    // private file: File,
-    // private storage: Storage
-  ) {
-    this.name = localStorage.getItem('name');
+    public toastCtrl: ToastController,
+    public loadingCtrl:LoadingController) {
+      this.canvas;
+      this.name = localStorage.getItem('name');
   }
-
+  
   ngOnInit() {}
 
+  // --- Canvas part
+  ngAfterViewInit(){
+    this.canvasElement = this.canvas.nativeElement;
+    this.renderer.setElementAttribute(this.canvasElement, 'height', 0.8*this.platform.height() + '');
+    this.renderer.setElementAttribute(this.canvasElement, 'width', this.platform.width() + '');
+  }
   
   async openPopover(event) {
     const popover = await this.popoverCtrl.create({
@@ -80,12 +85,6 @@ export class TestPage implements OnInit {
     this.location.back();
   }
 
-  // --- Canvas part
-  ngAfterViewInit(){
-    this.canvasElement = this.canvas.nativeElement;
-    this.renderer.setElementAttribute(this.canvasElement, 'width', this.platform.width() + '');
-    this.renderer.setElementAttribute(this.canvasElement, 'height', 0.8*this.platform.height() + '');
-  }
 
   // First position of the line that the user draw
     handleStart(ev) {
@@ -140,56 +139,43 @@ export class TestPage implements OnInit {
 
   saveCanvas() {
 
-    this.showSaveHide();
-    
-    let date = new Date().toISOString();
-    let photoName = "draw-ismart-" + date + ".jpg";
-    
-    // let canvasDrawingSrc = this.canvasElement.toDataURL("image/jpg");
-
-    setTimeout(() => {
-      if (this.platform.is("desktop")) {
-        console.log('Desktop Detected !');
-        // Code to save into desktop files
+    this.loadingCtrl.create({ 
+      message: "Saving, please wait...",
+      duration: 1000
+    }).then(loading => {
+      loading.present();
+      
+      this.showSaveHide();
+      let date = new Date().toISOString();
+      let photoName = "draw-ismart-" + date + ".jpg";
   
-      } else if (this.platform.is("android")) {
-        console.log('Android Detected !');
-  
-        this.screenshot.save('jpg', 100, photoName).then(res => {
-          this.name;
-          this.screen = res.filePath;
-          
-          setTimeout(() => {
+      setTimeout(() => {
+        loading.dismiss();
+        if (this.platform.is("desktop")) {
+          console.log('Desktop Detected !');
+          // Code to save into desktop files
+    
+        } else if (this.platform.is("android")) {
+          console.log('Android Detected !');
+    
+          this.screenshot.save('jpg', 100, photoName).then(res => {
+            this.name;
+            this.screen = res.filePath;
             this.displayName = false;
             this.clearCanvas();
-          }, 1000);
-          // console.log("Canvas have been saved into your gallery !");
-  
-        }, err => console.log(err));
-  
-      } else if (this.platform.is("ios")) {
-        console.log('iOS Detected ! Impossible to save the drawing into the gallery.');
-        // Code to save into ios files      
-      }
-    }, 2000)
-  
-    // console.log("Canvas has been saved !")
-    // Here code to save the canvas to the phone gallery
-    // let dataUrl = this.canvasElement.toDataURL();
+            // console.log("Canvas have been saved into your gallery !");
+    
+          }, err => {
+            console.log(err)
+          });
+    
+        } else if (this.platform.is("ios")) {
+          console.log('iOS Detected ! Impossible to save the drawing into the gallery.');
+          // Code to save into ios files      
+        }
+      }, 2000)
 
-    // let ctx = this.canvasElement.getContext('2d');
-    // ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
-
-    // let fileName = new Date().getTime() + '.png';
-    // let path = this.file.dataDirectory;
-
-    // let data = dataUrl.split(',')[1];
-    // let blob = this.b64toBlob(data, 'image/png');
-    // this.file.writeFile(path, fileName, blob).then(res => {
-    //   this.storeImage(fileName);
-    // }, err => {
-    //   console.log('err : ', err);
-    // }); 
+    });
   }
 
   // Reset the canvas view for the user
