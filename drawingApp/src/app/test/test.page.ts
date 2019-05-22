@@ -49,6 +49,9 @@ export class TestPage implements OnInit {
     // private file: File,
     // private storage: Storage
   ) {
+    this.platform.ready().then((ready) => {
+      this.ngAfterViewInit();
+    });
     this.name = localStorage.getItem('name');
   }
 

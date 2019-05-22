@@ -1,18 +1,32 @@
 # Drawing Application - Documentation
 
+## Application overview
+
+<center>
+ 
+Form Page             |  Canvas Drawing Page
+:-------------------------:|:-------------------------:
+![Form](docs/img/form.PNG)  |  ![Provider List](docs/img/canvas.png)
+
+Settings Page             |  Save Page
+:-------------------------:|:-------------------------:
+![Settings](docs/img/settings.png)  |  ![Save](docs/img/save.PNG)
+
+</center>
+
 ## Setting up the project :gear:
 
 Clone the project by taping this command in your CLI :
 ```bash
 git clone https://github.com/MathisLeRoyNivot/ionic-training
 ```
-Or download the project. <br>
+Or download the project.<br>
 
 Then go to the drawingApp folder :
 ```bash
 cd /ionic-training/drawingApp
 ```
-And Install the depedencies of this drawing application by taping the following command :
+And install the depedencies of this drawing application by taping the following command :
 ```bash
 npm install
 ```
