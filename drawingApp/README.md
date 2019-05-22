@@ -1,6 +1,6 @@
 # Drawing Application - Documentation
 
-## Application overview
+## Application overview :iphone:
 
 <center>
  
@@ -8,7 +8,7 @@ Form Page             |  Canvas Drawing Page
 :-------------------------:|:-------------------------:
 ![Form](docs/img/form.png)  |  ![Canvas](docs/img/canvas.png)
 
-Settings Page             |  Save Page
+Settings popover             |  Save Page
 :-------------------------:|:-------------------------:
 ![Settings](docs/img/settings.png)  |  ![Save](docs/img/save.png)
 
@@ -48,6 +48,7 @@ Launch the ionic server to test the project on your browser
 ionic cordova run android
 ```
 
+> *Make sure your Android emulator is running to allow the launch of the application when you typed the commands above.*
 
 ## Contributor :computer:
 - [Mathis Le Roy-Nivot](https://github.com/MathisLeRoyNivot "Go to @MathisLeRoyNivot's Github")
