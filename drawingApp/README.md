@@ -6,11 +6,11 @@
  
 Form Page             |  Canvas Drawing Page
 :-------------------------:|:-------------------------:
-![Form](docs/img/form.PNG)  |  ![Provider List](docs/img/canvas.png)
+![Form](docs/img/form.png)  |  ![Provider List](docs/img/canvas.PNG)
 
 Settings Page             |  Save Page
 :-------------------------:|:-------------------------:
-![Settings](docs/img/settings.png)  |  ![Save](docs/img/save.PNG)
+![Settings](docs/img/settings.PNG)  |  ![Save](docs/img/save.png)
 
 </center>
 
