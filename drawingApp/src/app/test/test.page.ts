@@ -1,23 +1,17 @@
 import { ViewChild, Component, OnInit, Renderer } from '@angular/core';
 import { Platform, MenuController, PopoverController, ToastController, LoadingController  } from '@ionic/angular';
 import { Location } from '@angular/common';
-import { File } from '@ionic-native/file/ngx';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
-import { Storage } from '@ionic/storage';
 
 import { SettingsComponent } from '../components/settings/settings.component';
-import { async } from 'q';
-// import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-
-const STORAGE_KEY = 'IMAGE_LIST';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.page.html',
   styleUrls: ['./test.page.scss'],
 })
-export class TestPage implements OnInit {
+export class TestPage {
 
   @ViewChild('myCanvas') canvas: any;
   
@@ -46,13 +40,15 @@ export class TestPage implements OnInit {
     public location: Location,
     public screenshot: Screenshot,
     public toastCtrl: ToastController,
-    public loadingCtrl:LoadingController) {
+    public loadingCtrl:LoadingController,
+    private router: Router) {
       this.canvas;
       this.name = localStorage.getItem('name');
   }
   
-  ngOnInit() {}
-
+  ngOnInit() {
+  }
+  
   // --- Canvas part
   ngAfterViewInit(){
     this.canvasElement = this.canvas.nativeElement;
@@ -151,7 +147,7 @@ export class TestPage implements OnInit {
   
       setTimeout(() => {
         loading.dismiss();
-        if (this.platform.is("desktop")) {
+        if (this.platform.is("desktop") || this.platform.is("ios")) {
           console.log('Desktop Detected !');
           // Code to save into desktop files
     
@@ -164,14 +160,9 @@ export class TestPage implements OnInit {
             this.displayName = false;
             this.clearCanvas();
             // console.log("Canvas have been saved into your gallery !");
-    
           }, err => {
             console.log(err)
           });
-    
-        } else if (this.platform.is("ios")) {
-          console.log('iOS Detected ! Impossible to save the drawing into the gallery.');
-          // Code to save into ios files      
         }
       }, 2000)
 

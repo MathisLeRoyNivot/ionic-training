@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-home',
@@ -8,20 +9,26 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
+  @ViewChild("nameInput") nameInput;
+
   form = {
     name: ""
   }
 
-  constructor(public router: Router) {}
-
+  constructor(
+    public router: Router,
+    private keyboard: Keyboard) {}
+  
   logForm() {
+    this.keyboard.hide();
     let formData = this.form;
     console.log(formData);
-
+    
     localStorage.clear();
     localStorage.setItem('name', formData.name);
 
-    this.router.navigate(['/test']);
+    setTimeout(() => {
+      this.router.navigate(['/test']);
+    }, 50);
   }
-
 }

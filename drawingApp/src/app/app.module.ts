@@ -2,6 +2,8 @@ import { NgModule, Injectable, Type } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
+import { LocationStrategy, HashLocationStrategy } from  '@angular/common';
+
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -12,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { File } from '@ionic-native/file/ngx';
 import { Storage } from '@ionic/storage';
 import { Screenshot } from '@ionic-native/screenshot/ngx';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 // import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DrawPage } from './draw/draw.page';
@@ -28,11 +31,13 @@ import { SettingsComponent } from './components/settings/settings.component';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, 
+    { 
+      provide: RouteReuseStrategy, 
       useClass: IonicRouteStrategy 
     },
     File,
-    Screenshot
+    Screenshot,
+    Keyboard
   ],
   bootstrap: [AppComponent]
 })
