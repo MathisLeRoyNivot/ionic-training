@@ -17,7 +17,6 @@ import { Screenshot } from '@ionic-native/screenshot/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 // import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { DrawPage } from './draw/draw.page';
 import { SettingsComponent } from './components/settings/settings.component';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 
