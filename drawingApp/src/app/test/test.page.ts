@@ -61,6 +61,7 @@ export class TestPage {
     let ctx = this.canvasElement.getContext('2d');
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    ctx.save();
   }
   
   async openPopover(event) {
@@ -166,9 +167,6 @@ export class TestPage {
 
       // Photo file name
       let date = new Date().toISOString();
-      let photoName = "draw-ismart-" + date + ".jpg";
-      let filePath = this.file.dataDirectory;
-
       
       this.b64toGallery.base64ToGallery(dataUrl).then(
         res => {
@@ -252,6 +250,8 @@ export class TestPage {
     this.displayName = false
     let ctx = this.canvasElement.getContext('2d');
     ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, this.canvasElement.width, this.canvasElement.height);
     console.log("%cCanvas has been reset !", "color:red")
   }
 
