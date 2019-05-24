@@ -48,7 +48,7 @@ Launch the ionic server to test the project on your browser
 ionic cordova run android
 ```
 
-> *Make sure your Android emulator is running to allow the launch of the application when you typed the commands above.*
+> *Make sure your Android emulator / device is running to allow the launch of the application when you typed the commands above.*
 
 ## Contributor :computer:
 - [Mathis Le Roy-Nivot](https://github.com/MathisLeRoyNivot "Go to @MathisLeRoyNivot's Github")

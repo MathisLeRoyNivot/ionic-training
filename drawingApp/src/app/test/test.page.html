@@ -1,37 +1,34 @@
 <ion-header>
-    <ion-toolbar>
+  <ion-toolbar>
       
-      <ion-buttons slot="start">
-        <ion-back-button [text]="buttonText" [icon]="buttonIcon"></ion-back-button>
-      </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="buttonText" [icon]="buttonIcon"></ion-back-button>
+    </ion-buttons>
+     
+    <ion-title>Draw</ion-title>
       
-      <ion-title>Draw</ion-title>
-      
-      <ion-buttons slot="end" (click)="openPopover($event)">
-        <ion-icon style="font-size: 2em" name="settings"></ion-icon>
-      </ion-buttons>
+    <ion-buttons slot="end" (click)="openPopover($event)">
+      <ion-icon style="font-size: 2em" name="settings"></ion-icon>
+    </ion-buttons>
     
-    </ion-toolbar>    
-  </ion-header>
+  </ion-toolbar>    
+</ion-header>
 
   
-  <ion-content [scrollY]="false" [scrollX]="false">
-
-    <div class="canvasContainer">
+<ion-content [scrollY]="false" [scrollX]="false">
+  <div class="canvasContainer">
       
-      <canvas class="contextCanvas" #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
-      <p class="name" [(ngModel)]="name" *ngIf="displayName" ngDefaultControl>{{ name }}</p>
+    <canvas class="contextCanvas" #myCanvas (touchstart)="handleStart($event)" (touchmove)="handleMove($event)"></canvas>
+    <p class="name" [(ngModel)]="name" *ngIf="displayName" ngDefaultControl>{{ name }}</p>
       
-      <ion-row class="choice-btn">
-        <ion-col>
-          <ion-button style="width:100%" (click)="saveCanvas()" color="success">Save</ion-button>
-        </ion-col>
-        <ion-col>
-          <ion-button style="width:100%" (click)="clearCanvas()" color="danger">Reset</ion-button>
-        </ion-col>
-      </ion-row>
+    <ion-row class="choice-btn">
+      <ion-col>
+        <ion-button style="width:100%" (click)="saveCanvas()" color="success">Save</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button style="width:100%" (click)="clearCanvas()" color="danger">Reset</ion-button>
+      </ion-col>
+    </ion-row>
       
-    </div>
-  
-  </ion-content>
-  
+  </div>
+</ion-content>

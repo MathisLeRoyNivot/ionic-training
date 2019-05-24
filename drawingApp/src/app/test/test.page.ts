@@ -1,12 +1,8 @@
 import { ViewChild, Component, OnInit, Renderer } from '@angular/core';
 import { Platform, MenuController, PopoverController, ToastController, LoadingController  } from '@ionic/angular';
 import { Location } from '@angular/common';
-import { Screenshot } from '@ionic-native/screenshot/ngx';
-
-import { SettingsComponent } from '../components/settings/settings.component';
-import { Router } from '@angular/router';
-import { File } from '@ionic-native/file/ngx';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
+import { SettingsComponent } from '../components/settings/settings.component';
 
 @Component({
   selector: 'app-test',
@@ -40,18 +36,14 @@ export class TestPage {
     public menuCtrl: MenuController,
     public popoverCtrl: PopoverController,
     public location: Location,
-    public screenshot: Screenshot,
     public toastCtrl: ToastController,
     public loadingCtrl:LoadingController,
-    private router: Router,
-    private file: File,
     private b64toGallery: Base64ToGallery) {
       this.canvas;
       this.name = localStorage.getItem('name');
   }
   
-  ngOnInit() {
-  }
+  ngOnInit() {}
   
   // --- Canvas part
   ngAfterViewInit(){
@@ -91,25 +83,25 @@ export class TestPage {
 
 
   // First position of the line that the user draw
-    handleStart(ev) {
-      this.lastX = ev.touches[0].pageX;
-      this.lastY = ev.touches[0].pageY - this.canvasElement.getBoundingClientRect().top;
+  handleStart(ev) {
+    ev.preventDefault();
+    this.lastX = ev.touches[0].pageX;
+    this.lastY = ev.touches[0].pageY - this.canvasElement.getBoundingClientRect().top;
 
-      let ctx = this.canvasElement.getContext('2d');
-      ctx.fillStyle = this.currentColor;
-      ctx.beginPath();
-      ctx.arc(this.lastX, this.lastY, this.brushSize/2, 0, 2 * Math.PI);
-      ctx.closePath();
-      ctx.fill();
-      // Display starting point position
-      console.log("%cStarting", "color:green");
-      console.log("X : " + this.lastX + "\nY : " + this.lastY);
-
-    }
+    let ctx = this.canvasElement.getContext('2d');
+    ctx.fillStyle = this.currentColor;
+    ctx.beginPath();
+    ctx.arc(this.lastX, this.lastY, this.brushSize/2, 0, 2 * Math.PI);
+    ctx.closePath();
+    ctx.fill();
+    // Display starting point position
+    console.log("%cStarting", "color:green");
+    console.log("X : " + this.lastX + "\nY : " + this.lastY);
+  }
   
   // When the user hold and move his finger accross the screen
   handleMove(ev) {
-    
+    ev.preventDefault();
     let currentX = ev.touches[0].pageX;
     let currentY = ev.touches[0].pageY - this.canvasElement.getBoundingClientRect().top;
 
@@ -132,8 +124,6 @@ export class TestPage {
     
     ctx.getImageData(0, this.canvasElement.getBoundingClientRect().top, this.canvasElement.width, this.canvasElement.height-this.canvasElement.getBoundingClientRect().top);
     ctx.save();
-
-
   }
 
   showSaveHide() {
@@ -178,71 +168,7 @@ export class TestPage {
         },
         err => console.error("Error while saving image : ", err),
       )
-
-      // let path = this.file.dataDirectory;
-      // console.log(path);
-      // var data = dataUrl.split(',')[1];
-      // // console.log(data);
-      // let blob = this.b64toBlob(data, 'image/jpeg');
-      // this.file.writeFile(filePath, photoName, blob).then((res) => {  
-      //   console.log("File Writed Successfully", res);  
-      //   this.clearCanvas();
-      // }).catch((err) => {  
-      //     console.log("Error Occured While Writing File", err);  
-      // })  
-      // console.log(blob);
-
-      // this.file.writeFile(path, photoName, blob).then(res => {
-      //   console.log("image saved")
-      // }, err => {
-      //   console.log('error: ', err);
-      // });
-  
-      // setTimeout(() => {
-      //   loading.dismiss();
-      //   if (this.platform.is("desktop") || this.platform.is("ios")) {
-      //     console.log('Desktop Detected !');
-      //     // Code to save into desktop files
-    
-      //   } else if (this.platform.is("android")) {
-      //     console.log('Android Detected !');
-    
-      //     this.screenshot.save('jpg', 100, photoName).then(res => {
-      //       this.name;
-      //       this.screen = res.filePath;
-      //       this.displayName = false;
-      //       this.clearCanvas();
-      //       // console.log("Canvas have been saved into your gallery !");
-      //     }, err => {
-      //       console.log(err)
-      //     });
-      //   }
-      // }, 2000)
-
     });
-  }
-
-  b64toBlob(b64Data, contentType) {
-    contentType = contentType || '';
-    var sliceSize = 512;
-    var byteCharacters = atob(b64Data);
-    var byteArrays = [];
-   
-    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      var slice = byteCharacters.slice(offset, offset + sliceSize);
-   
-      var byteNumbers = new Array(slice.length);
-      for (var i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-   
-      var byteArray = new Uint8Array(byteNumbers);
-   
-      byteArrays.push(byteArray);
-    }
-   
-    var blob = new Blob(byteArrays, { type: contentType });
-    return blob;
   }
 
   // Reset the canvas view for the user
