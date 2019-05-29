@@ -69,7 +69,8 @@ export class TestPage {
     popover.onDidDismiss().then((brushData) => {
       if(brushData !== null) {
         this.brushSize = brushData.data['brushSize'];
-        this.currentColor = brushData.data['brushColor'];
+        // this.currentColor = brushData.data['brushColor'];
+        this.currentColor = brushData.data['brushColorHex'];
       }
     });
     

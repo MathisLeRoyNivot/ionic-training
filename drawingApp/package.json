@@ -35,6 +35,7 @@
     "cordova-base64-to-gallery": "4.1.3",
     "cordova-ios": "5.0.1",
     "core-js": "^2.6.7",
+    "ngx-color-picker": "^7.5.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.3",
     "zone.js": "~0.8.29"

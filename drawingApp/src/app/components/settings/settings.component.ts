@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Platform, PopoverController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { ColorPickerService, Cmyk } from 'ngx-color-picker';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -9,9 +11,16 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class SettingsComponent implements OnInit {
 
+  public cmykColor: Cmyk = new Cmyk(0, 0, 0, 0);
+
   public brushSize: Number = 5;
-  public currentColor: string = '#000';
+  public currentColor: string = "#000";
   public availableColors: any;
+
+  public redColor: Number = 0;
+  public greenColor: Number = 0;
+  public blueColor: Number = 0;
+  public colorHex: string = "#000000";
 
   isAndroid = false;
   isIosDesktop = false;
@@ -47,17 +56,60 @@ export class SettingsComponent implements OnInit {
       this.isIosDesktop = true;
     }
   }
-    
+
   async close() {
     const brushSizeData: Number = this.brushSize; 
     const brushColorData: String = this.currentColor;
+    const brushColorHex: String = this.colorHex;
     let brushData = {
       "brushSize": brushSizeData,
-      "brushColor": brushColorData
+      // "brushColor": brushColorData,
+      "brushColorHex": brushColorHex
     }
     await this.popoverCtrl.dismiss(brushData);
-    console.log("Settings Component Closed \n[*] Brush size : " + brushSizeData + "\n[*] Brush color : " + brushColorData);
+    console.log("Settings Component Closed \n[*] Brush size : " + brushSizeData + "\n[*] Brush color : " + brushColorData + "\n[*] Brush color hex : " + brushColorHex);
   }
+
+  // convert RGB value to hex 
+  newRedValue(event) {
+    this.redColor = event;
+    // console.log("%cRed amount :" + this.redColor, "color:red");
+    this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
+    return this.redColor;
+  }
+  newGreenValue(event) {
+    this.greenColor = event;
+    // console.log("%cGreen amount :" + this.greenColor, "color:green");
+    this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
+    return this.greenColor;
+  }
+  newBlueValue(event) {
+    this.blueColor = event;
+    // console.log("%cBlue amount :" + this.blueColor, "color:blue");
+    this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
+    return this.blueColor;
+  }
+
+  rgbToHex(colorValue) {
+    let hex = Number(colorValue).toString(16);
+    if (hex.length < 2) {
+      hex = "0" + hex;
+    }
+    return hex;
+  };
+
+  fullColorHex(redColor, greenColor, blueColor) {   
+    var red = this.rgbToHex(redColor)
+    var green = this.rgbToHex(greenColor);
+    var blue = this.rgbToHex(blueColor);
+    this.colorHex = "#"+red+green+blue;
+    return this.colorHex;
+  };
+
+  getBrushColorHex() {
+    return this.colorHex;
+  }
+  
 
   changeColor(color) {
     this.currentColor = color;
@@ -68,11 +120,11 @@ export class SettingsComponent implements OnInit {
   getBrushSize() {
     return this.brushSize;
   }
- 
+  
   getBrushColor() {
     return this.currentColor;
   }
-
+  
   newBrushValue(event) {
     this.brushSize = event
     console.log("%cNew brush size : ", "color: green", + this.brushSize);
