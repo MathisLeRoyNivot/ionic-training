@@ -59,7 +59,7 @@ export class SettingsComponent implements OnInit {
 
   async close() {
     const brushSizeData: Number = this.brushSize; 
-    const brushColorData: String = this.currentColor;
+    // const brushColorData: String = this.currentColor;
     const brushColorHex: String = this.colorHex;
     let brushData = {
       "brushSize": brushSizeData,
@@ -67,23 +67,44 @@ export class SettingsComponent implements OnInit {
       "brushColorHex": brushColorHex
     }
     await this.popoverCtrl.dismiss(brushData);
-    console.log("Settings Component Closed \n[*] Brush size : " + brushSizeData + "\n[*] Brush color : " + brushColorData + "\n[*] Brush color hex : " + brushColorHex);
+    console.log("Settings Component Closed" +
+              "\n[*] Brush size : " + brushSizeData + 
+              // "\n[*] Brush color : " + brushColorData + 
+              "\n[*] Brush color hex : " + brushColorHex);
   }
 
   // convert RGB value to hex 
   newRedValue(event) {
+    // Change range slider red color dynamically
+    var red = this.rgbToHex(event);
+    red = "#" + red + "0000";
+    document.getElementById("red-amount").style.backgroundImage = `-webkit-linear-gradient(0deg, ${red} ${(event/255)*100}%, #8395a7 ${100-(event/255)*100}%)`;
+    // document.getElementById("red-amount").style.background = red;
+    
     this.redColor = event;
     // console.log("%cRed amount :" + this.redColor, "color:red");
     this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
     return this.redColor;
   }
   newGreenValue(event) {
+    // Change range slider green color dynamically
+    var green = this.rgbToHex(event);
+    green = "#00" + green + "00";
+    document.getElementById("green-amount").style.backgroundImage = `linear-gradient(to right, ${green} ${(event/255)*100}%, #8395a7 ${100-(event/255)*100}%)`;
+    // document.getElementById("green-amount").style.background = green;
+
     this.greenColor = event;
     // console.log("%cGreen amount :" + this.greenColor, "color:green");
     this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
     return this.greenColor;
   }
   newBlueValue(event) {
+    // Change range slider blue color dynamically
+    var blue = this.rgbToHex(event);
+    blue = "#0000" + blue;
+    document.getElementById("blue-amount").style.backgroundImage = `linear-gradient(to right, ${blue} ${(event/255)*100}%, #8395a7 ${100-(event/255)*100}%)`;;
+    // document.documentElement.style.setProperty('--range-blue-background', blue);
+
     this.blueColor = event;
     // console.log("%cBlue amount :" + this.blueColor, "color:blue");
     this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
@@ -102,7 +123,7 @@ export class SettingsComponent implements OnInit {
     var red = this.rgbToHex(redColor)
     var green = this.rgbToHex(greenColor);
     var blue = this.rgbToHex(blueColor);
-    this.colorHex = "#"+red+green+blue;
+    this.colorHex = "#" + red + green + blue;
     return this.colorHex;
   };
 
@@ -110,7 +131,6 @@ export class SettingsComponent implements OnInit {
     return this.colorHex;
   }
   
-
   changeColor(color) {
     this.currentColor = color;
     console.log(`%cNew brush color : ${this.currentColor}`, `color: ${this.currentColor}`);

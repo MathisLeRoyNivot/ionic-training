@@ -1,0 +1,145 @@
+.brush-size-range {
+    background: #0071a9;
+    width: 50%;
+}
+
+.table-color {
+    border-collapse:separate;
+    border-spacing:0 15px; 
+    width: 100%;
+
+    tr:nth-child(n+2) {
+        border-radius: 10px;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .20);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .20);
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .20);
+        width: 100%;
+    }
+
+    td {
+        border-style: none;
+    }
+    td:first-child {
+        border-left-style: none;
+        border-top-left-radius: 10px; 
+        border-bottom-left-radius: 10px;
+        min-width: 100%;
+    }
+
+    td:last-child {
+        border-right-style: none;
+        border-bottom-right-radius: 10px; 
+        border-top-right-radius: 10px; 
+        min-width: 100%;
+    }
+}
+
+th,
+td {
+    padding: 10px 1px;
+    margin-bottom: 10px;
+}
+
+.color,
+.color-rgb-value {
+    text-align: center;
+}
+
+#red-amount,
+#green-amount,
+#blue-amount {
+    background: #8395a7;
+    transition: background-image 0.25s;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    border-radius: 25px;    
+    width: 100%;
+    margin: 7.5px 0;
+}
+
+input[type=range]:focus {
+    border-radius: 25px;
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4), 0px 0px 0px rgba(13, 13, 13, 0.4);
+    // background: #0071a9;
+    border-radius: 25px;
+    border: 0px solid #000101;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 0px rgba(13, 13, 13, 0.2);
+    border: 0px solid #4affff;
+    height: 20px;
+    width: 20px;
+    border-radius: 50px;
+    background: #ffffff;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8px;
+}
+
+// input[type=range]:focus::-webkit-slider-runnable-track {
+//     // background: #0071a9;
+// }
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4), 0px 0px 0px rgba(13, 13, 13, 0.4);
+    // background: #0071a9;
+    border-radius: 25px;
+    border: 0px solid #000101;
+}
+
+input[type=range]::-moz-range-thumb {
+    background: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 0px rgba(13, 13, 13, 0.2);
+    border: 0px solid #4affff;
+    border-radius: 50px;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+    // background: #0071a9;
+    border: 0px solid #000101;
+    border-radius: 50px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4), 0px 0px 0px rgba(13, 13, 13, 0.4);
+}
+
+input[type=range]::-ms-fill-upper {
+    // background: #0071a9;
+    border: 0px solid #000101;
+    border-radius: 50px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4), 0px 0px 0px rgba(13, 13, 13, 0.4);
+}
+
+input[type=range]::-ms-thumb {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 0px rgba(13, 13, 13, 0.2);
+    border: 0px solid #4affff;
+    height: 20px;
+    width: 20px;
+    border-radius: 50px;
+    background: #ffffff;
+    cursor: pointer;
+    height: 5px;
+}

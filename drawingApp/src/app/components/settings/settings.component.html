@@ -8,14 +8,14 @@
       <tr>
         <td>
           <!-- If it's an Android Device -->
-          <input type="range" name="brushSize" [(ngModel)]="brushSize" (ngModelChange)="newBrushValue($event)" min="1" max="30" *ngIf="isAndroid">
+          <input class="brush-size-range" type="range" name="brushSize" [(ngModel)]="brushSize" (ngModelChange)="newBrushValue($event)" min="1" max="30" *ngIf="isAndroid">
           <!-- If it's an other type of device but not an Android -->
           <ion-range min="1" max="30" pin="true" [(ngModel)]="brushSize" (ngModelChange)="newBrushValue($event)" color="primary" *ngIf="isIosDesktop">
             <ion-icon size="small" slot="start" name="brush"></ion-icon>
             <ion-icon slot="end" name="brush"></ion-icon>
           </ion-range>
         </td>
-        <td>{{ getBrushSize() }}px</td>
+        <td style="text-align: center">{{ getBrushSize() }}px</td>
       </tr>
     </table>
   </ion-item>
@@ -28,58 +28,58 @@
   </button> -->
 
   <ion-item lines="none">
-    <h4>Brush color : <button [style.background-color]="getBrushColorHex()" disabled>{{ getBrushColorHex() }}</button></h4>
+    <h4>Brush color : <button [style.background-color]="getBrushColorHex()" style="padding:5px;" disabled>{{ getBrushColorHex() }}</button></h4>
   </ion-item>
 
   <!-- If it's an Android Device -->
-  <ion-item lines="full">
+  <ion-item>
     <div class="range" *ngIf="isAndroid">
-      <table style="width:100%">
+      <table class="table-color">
         <tr>
           <th>Color</th>
           <th>Range</th> 
           <th>Value</th>
         </tr>
-        <tr>
-          <td>R</td>
-          <td><input type="range" name="redColor" [(ngModel)]="redColor" (ngModelChange)="newRedValue($event)" min="0" max="255"></td> 
-          <td>{{ redColor }}</td>
+        <tr class="row">
+          <td class="color">R</td>
+          <td><input id="red-amount" type="range" name="redColor" [(ngModel)]="redColor" (ngModelChange)="newRedValue($event)" min="0" max="255"></td> 
+          <td class="color-rgb-value">{{ redColor }}</td>
         </tr>
-        <tr>
-          <td>G</td>
-          <td><input type="range" name="greenColor" [(ngModel)]="greenColor" (ngModelChange)="newGreenValue($event)" min="0" max="255"></td> 
-          <td>{{ greenColor }}</td>
+        <tr class="row">
+          <td class="color">G</td>
+          <td><input id="green-amount" type="range" name="greenColor" [(ngModel)]="greenColor" (ngModelChange)="newGreenValue($event)" min="0" max="255"></td> 
+          <td class="color-rgb-value">{{ greenColor }}</td>
         </tr>
-        <tr>
-          <td>B</td>
-          <td><input type="range" name="blueColor" [(ngModel)]="blueColor" (ngModelChange)="newBlueValue($event)" min="0" max="255"></td> 
-          <td>{{ blueColor }}</td>
+        <tr class="row">
+          <td class="color">B</td>
+          <td><input id="blue-amount" type="range" name="blueColor" [(ngModel)]="blueColor" (ngModelChange)="newBlueValue($event)" min="0" max="255"></td> 
+          <td class="color-rgb-value">{{ blueColor }}</td>
         </tr>
       </table>
     </div>
 
     <!-- If it's an other type of device but not an Android -->
     <div class="range" *ngIf="isIosDesktop">
-      <table style="width:100%">
+      <table class="table-color">
         <tr>
           <th>Color</th>
           <th>Range</th> 
           <th>Value</th>
         </tr>
-        <tr>
-          <td>R</td>
-          <td><ion-range min="0" max="255" pin="true" [(ngModel)]="redColor" (ngModelChange)="newRedValue($event)" color="primary"></ion-range></td> 
-          <td>{{ redColor }}</td>
+        <tr class="row">
+          <td class="color">R</td>
+          <td><ion-range id="red-amount" min="0" max="255" pin="true" [(ngModel)]="redColor" (ngModelChange)="newRedValue($event)" color="primary"></ion-range></td> 
+          <td class="color-rgb-value">{{ redColor }}</td>
         </tr>
-        <tr>
-          <td>G</td>
-          <td><ion-range min="0" max="255" pin="true" [(ngModel)]="greenColor" (ngModelChange)="newGreenValue($event)" color="primary"></ion-range></td> 
-          <td>{{ greenColor }}</td>
+        <tr class="row">
+          <td class="color">G</td>
+          <td><ion-range id="green-amount" min="0" max="255" pin="true" [(ngModel)]="greenColor" (ngModelChange)="newGreenValue($event)" color="primary"></ion-range></td> 
+          <td class="color-rgb-value">{{ greenColor }}</td>
         </tr>
-        <tr>
-          <td>B</td>
-          <td><ion-range min="0" max="255" pin="true" [(ngModel)]="blueColor" (ngModelChange)="newBlueValue($event)" color="primary"></ion-range></td> 
-          <td>{{ blueColor }}</td>
+        <tr class="row">
+          <td class="color">B</td>
+          <td><ion-range id="blue-amount" min="0" max="255" pin="true" [(ngModel)]="blueColor" (ngModelChange)="newBlueValue($event)" color="primary"></ion-range></td> 
+          <td class="color-rgb-value">{{ blueColor }}</td>
         </tr>
       </table>
     </div>
@@ -87,7 +87,7 @@
 
   <ion-item style="text-align: center;" (click)="close()" lines="none"> 
     <ion-icon name="close"></ion-icon>
-    Close & Save
+    Save & Close
   </ion-item>
 
 </ion-list>
