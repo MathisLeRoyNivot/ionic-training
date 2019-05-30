@@ -29,6 +29,9 @@ export class TestPage {
   // private brushSize = 5;
   
   currentColor: string = '#000';
+  redHexColor: Number = 0;
+  greenHexColor: Number = 0;
+  blueHexColor: Number = 0;
 
   constructor(
     public platform: Platform, 
@@ -61,7 +64,10 @@ export class TestPage {
       component: SettingsComponent,
       componentProps: {
         brushSize : this.brushSize,
-        currentColor : this.currentColor 
+        currentColor : this.currentColor,
+        redHexColor: this.redHexColor,
+        greenHexColor: this.greenHexColor,
+        blueHexColor: this.blueHexColor
       },
       event
     });
@@ -71,6 +77,9 @@ export class TestPage {
         this.brushSize = brushData.data['brushSize'];
         // this.currentColor = brushData.data['brushColor'];
         this.currentColor = brushData.data['brushColorHex'];
+        this.redHexColor = brushData.data['redHex'];
+        this.greenHexColor = brushData.data['greenHex'];
+        this.blueHexColor = brushData.data['blueHex'];
       }
     });
     
@@ -106,6 +115,7 @@ export class TestPage {
     let currentX = ev.touches[0].pageX;
     let currentY = ev.touches[0].pageY - this.canvasElement.getBoundingClientRect().top;
 
+    console.log(this.redHexColor + " " + this.greenHexColor + " " + this.blueHexColor);
     // Display new point added to the line
     console.log("%cNew point added", "color: green", "\nX position : " + currentX + "\nY position : " + currentY);
 

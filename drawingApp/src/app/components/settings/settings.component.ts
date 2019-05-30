@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Platform, PopoverController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { ColorPickerService, Cmyk } from 'ngx-color-picker';
 
 @Component({
   selector: 'app-settings',
@@ -10,8 +9,6 @@ import { ColorPickerService, Cmyk } from 'ngx-color-picker';
   styleUrls: ['./settings.component.scss'],
 })
 export class SettingsComponent implements OnInit {
-
-  public cmykColor: Cmyk = new Cmyk(0, 0, 0, 0);
 
   public brushSize: Number = 5;
   public currentColor: string = "#000";
@@ -32,19 +29,22 @@ export class SettingsComponent implements OnInit {
     public popoverCtrl: PopoverController) {
     
     this.initializeApp();
-    this.brushSize = 5;
-    this.availableColors = [
-      '#000000', // Black
-      '#1e3799', // Blue 1
-      '#5f27cd', // Purple 1
-      '#009432', // Green 1
-      '#e74c3c', // Red
-      '#576574', // Grey
-      '#54a0ff', // Blue 2
-      '#D980FA', // Pink
-      '#78e08f', // Green 2
-      '#ff9f43' // Orange
-    ];
+    // this.brushSize = 5;
+    // this.redColor = 0;
+    // this.greenColor = 0;
+    // this.blueColor = 0;
+    // this.availableColors = [
+    //   '#000000', // Black
+    //   '#1e3799', // Blue 1
+    //   '#5f27cd', // Purple 1
+    //   '#009432', // Green 1
+    //   '#e74c3c', // Red
+    //   '#576574', // Grey
+    //   '#54a0ff', // Blue 2
+    //   '#D980FA', // Pink
+    //   '#78e08f', // Green 2
+    //   '#ff9f43' // Orange
+    // ];
   }
 
   ngOnInit() {}
@@ -60,9 +60,15 @@ export class SettingsComponent implements OnInit {
   async close() {
     const brushSizeData: Number = this.brushSize; 
     // const brushColorData: String = this.currentColor;
+    const redHex: Number = this.redColor;
+    const greenHex: Number = this.greenColor;
+    const blueHex: Number = this.blueColor;
     const brushColorHex: String = this.colorHex;
     let brushData = {
       "brushSize": brushSizeData,
+      "redHex": redHex,
+      "greenHex": greenHex,
+      "blueHex": blueHex,
       // "brushColor": brushColorData,
       "brushColorHex": brushColorHex
     }
@@ -70,7 +76,10 @@ export class SettingsComponent implements OnInit {
     console.log("Settings Component Closed" +
               "\n[*] Brush size : " + brushSizeData + 
               // "\n[*] Brush color : " + brushColorData + 
-              "\n[*] Brush color hex : " + brushColorHex);
+              "\n[*] Brush color hex : " + brushColorHex +
+              "\n[*] Red hex : " + redHex +
+              "\n[*] Green hex : " + greenHex +
+              "\n[*] Blue hex : " + blueHex);
   }
 
   // convert RGB value to hex 

@@ -3,6 +3,14 @@
     width: 50%;
 }
 
+.color-choice {
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, .15);
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, .15);
+    padding: 6px;
+}
+
 .table-color {
     border-collapse:separate;
     border-spacing:0 15px; 
