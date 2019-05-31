@@ -34,9 +34,52 @@ td {
     margin-bottom: 10px;
 }
 
-.color,
-.color-rgb-value {
-    text-align: center;
+.color-range-container {
+    padding: 6px;
+    width: 100%;
+
+    .heading-color {
+        display: flex;
+        justify-content: space-between;
+
+        .head {
+            font-size: $font-size-heading-color;
+        }
+    }
+
+    .color {
+        align-items: center;
+        border-radius: $radius-color-element;
+        box-shadow: $boxshadow-color-element;
+        display: flex;
+        margin: 15px 0px;
+        padding: 10px 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .part-1,
+    .part-3 {
+        font-weight: bold;
+        vertical-align: middle;
+        width: 16%;
+    }
+
+    .part-2 {
+        width: 68%;
+    }
+
+    .red-color {
+        background-image: linear-gradient(90deg, $red-color-1, $red-color-2);
+    }
+
+    .green-color {
+        background-image: linear-gradient(90deg, $green-color-1, $green-color-2);
+    }
+
+    .blue-color {
+        background-image: linear-gradient(90deg, $blue-color-1, $blue-color-2);
+    }
 }
 
 #red-amount,
@@ -136,52 +179,4 @@ input[type=range]::-ms-thumb {
     background: #ffffff;
     cursor: pointer;
     height: 5px;
-}
-
-.color-range-container {
-    padding: 6px;
-    width: 100%;
-
-    .heading-color {
-        display: flex;
-        justify-content: space-between;
-
-        .head {
-            font-size: $font-size-heading-color;
-        }
-    }
-
-    .color {
-        align-items: center;
-        border-radius: $radius-color-element;
-        box-shadow: $boxshadow-color-element;
-        display: flex;
-        margin: 15px 0px;
-        padding: 10px 0;
-        text-align: center;
-        width: 100%;
-    }
-
-    .part-1,
-    .part-3 {
-        font-weight: bold;
-        vertical-align: middle;
-        width: 16%;
-    }
-
-    .part-2 {
-        width: 68%;
-    }
-
-    .red-color {
-        background-image: linear-gradient(90deg, $red-color-1, $red-color-2);
-    }
-
-    .green-color {
-        background-image: linear-gradient(90deg, $green-color-1, $green-color-2);
-    }
-
-    .blue-color {
-        background-image: linear-gradient(90deg, $blue-color-1, $blue-color-2);
-    }
 }

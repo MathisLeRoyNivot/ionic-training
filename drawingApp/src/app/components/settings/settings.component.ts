@@ -109,7 +109,7 @@ export class SettingsComponent implements OnInit {
     // Change range slider red color dynamically
     var red = this.rgbToHex(event);
     red = "#" + red + "0000";
-    document.getElementById("red-amount").style.backgroundImage = `-webkit-linear-gradient(0deg, ${red} ${(event/255)*100}%, #d1d8e0 ${100-(event/255)*100}%)`;
+    document.getElementById("red-amount").style.backgroundImage = `-webkit-linear-gradient(0deg, ${red} 0%,${red} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
     // document.getElementById("red-amount").style.background = red;
     
     this.redColor = event;
@@ -121,7 +121,7 @@ export class SettingsComponent implements OnInit {
     // Change range slider green color dynamically
     var green = this.rgbToHex(event);
     green = "#00" + green + "00";
-    document.getElementById("green-amount").style.backgroundImage = `linear-gradient(to right, ${green} ${(event/255)*100}%, #d1d8e0 ${100-(event/255)*100}%)`;
+    document.getElementById("green-amount").style.backgroundImage = `linear-gradient(90deg, ${green} 0%, ${green} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
     // document.getElementById("green-amount").style.background = green;
 
     this.greenColor = event;
@@ -133,7 +133,7 @@ export class SettingsComponent implements OnInit {
     // Change range slider blue color dynamically
     var blue = this.rgbToHex(event);
     blue = "#0000" + blue;
-    document.getElementById("blue-amount").style.backgroundImage = `linear-gradient(to right, ${blue} ${(event/255)*100}%, #d1d8e0 ${100-(event/255)*100}%)`;;
+    document.getElementById("blue-amount").style.backgroundImage = `linear-gradient(90deg, ${blue} 0%, ${blue} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
     // document.documentElement.style.setProperty('--range-blue-background', blue);
 
     this.blueColor = event;
