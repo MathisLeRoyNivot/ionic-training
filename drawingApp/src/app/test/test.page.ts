@@ -107,6 +107,7 @@ export class TestPage {
     // Display starting point position
     console.log("%cStarting", "color:green");
     console.log("X : " + this.lastX + "\nY : " + this.lastY);
+    console.log("Red : " + this.redHexColor + "\nGreen : " + this.greenHexColor + "\nBlue : " + this.blueHexColor);
   }
   
   // When the user hold and move his finger accross the screen
@@ -115,7 +116,6 @@ export class TestPage {
     let currentX = ev.touches[0].pageX;
     let currentY = ev.touches[0].pageY - this.canvasElement.getBoundingClientRect().top;
 
-    console.log(this.redHexColor + " " + this.greenHexColor + " " + this.blueHexColor);
     // Display new point added to the line
     console.log("%cNew point added", "color: green", "\nX position : " + currentX + "\nY position : " + currentY);
 

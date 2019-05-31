@@ -82,12 +82,34 @@ export class SettingsComponent implements OnInit {
               "\n[*] Blue hex : " + blueHex);
   }
 
+  newBrushValue(event) {
+    this.brushSize = event
+    console.log("%cNew brush size : ", "color: green", + this.brushSize);
+    return this.brushSize; // mymodel has the value before the change
+  }
+
+  getBrushSize() {
+    return this.brushSize;
+  }
+
+  changeColor() {
+    // this.currentColor = color;
+    console.log(`%cNew brush color : ${this.colorHex}`, `color: ${this.colorHex}`);
+    return this.colorHex;
+    // return this.currentColor;
+  }
+  
+  getBrushColor() {
+    return this.colorHex;
+    // return this.currentColor;
+  }
+  
   // convert RGB value to hex 
   newRedValue(event) {
     // Change range slider red color dynamically
     var red = this.rgbToHex(event);
     red = "#" + red + "0000";
-    document.getElementById("red-amount").style.backgroundImage = `-webkit-linear-gradient(0deg, ${red} ${(event/255)*100}%, #8395a7 ${100-(event/255)*100}%)`;
+    document.getElementById("red-amount").style.backgroundImage = `-webkit-linear-gradient(0deg, ${red} ${(event/255)*100}%, #d1d8e0 ${100-(event/255)*100}%)`;
     // document.getElementById("red-amount").style.background = red;
     
     this.redColor = event;
@@ -99,7 +121,7 @@ export class SettingsComponent implements OnInit {
     // Change range slider green color dynamically
     var green = this.rgbToHex(event);
     green = "#00" + green + "00";
-    document.getElementById("green-amount").style.backgroundImage = `linear-gradient(to right, ${green} ${(event/255)*100}%, #8395a7 ${100-(event/255)*100}%)`;
+    document.getElementById("green-amount").style.backgroundImage = `linear-gradient(to right, ${green} ${(event/255)*100}%, #d1d8e0 ${100-(event/255)*100}%)`;
     // document.getElementById("green-amount").style.background = green;
 
     this.greenColor = event;
@@ -111,7 +133,7 @@ export class SettingsComponent implements OnInit {
     // Change range slider blue color dynamically
     var blue = this.rgbToHex(event);
     blue = "#0000" + blue;
-    document.getElementById("blue-amount").style.backgroundImage = `linear-gradient(to right, ${blue} ${(event/255)*100}%, #8395a7 ${100-(event/255)*100}%)`;;
+    document.getElementById("blue-amount").style.backgroundImage = `linear-gradient(to right, ${blue} ${(event/255)*100}%, #d1d8e0 ${100-(event/255)*100}%)`;;
     // document.documentElement.style.setProperty('--range-blue-background', blue);
 
     this.blueColor = event;
@@ -138,26 +160,6 @@ export class SettingsComponent implements OnInit {
 
   getBrushColorHex() {
     return this.colorHex;
-  }
-  
-  changeColor(color) {
-    this.currentColor = color;
-    console.log(`%cNew brush color : ${this.currentColor}`, `color: ${this.currentColor}`);
-    return this.currentColor;
-  }
-  
-  getBrushSize() {
-    return this.brushSize;
-  }
-  
-  getBrushColor() {
-    return this.currentColor;
-  }
-  
-  newBrushValue(event) {
-    this.brushSize = event
-    console.log("%cNew brush size : ", "color: green", + this.brushSize);
-    return this.brushSize; // mymodel has the value before the change
   }
     
   initializeApp() {
