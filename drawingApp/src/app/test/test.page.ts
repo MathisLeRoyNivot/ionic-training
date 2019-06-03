@@ -1,4 +1,5 @@
 import { ViewChild, Component, OnInit, Renderer } from '@angular/core';
+import { Router } from '@angular/router';
 import { Platform, MenuController, PopoverController, ToastController, LoadingController  } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
@@ -36,6 +37,7 @@ export class TestPage {
   constructor(
     public platform: Platform, 
     public renderer: Renderer,
+    public router: Router,
     public menuCtrl: MenuController,
     public popoverCtrl: PopoverController,
     public location: Location,
@@ -84,6 +86,10 @@ export class TestPage {
     });
     
     return await popover.present();
+  }
+
+  newPageCanvas() {
+    this.router.navigate(['/drag']);
   }
   
   // Back button function

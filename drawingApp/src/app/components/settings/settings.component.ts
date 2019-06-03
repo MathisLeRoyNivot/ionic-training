@@ -3,6 +3,7 @@ import { Platform, PopoverController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -59,11 +60,11 @@ export class SettingsComponent implements OnInit {
 
   async close() {
     const brushSizeData: Number = this.brushSize; 
-    // const brushColorData: String = this.currentColor;
     const redHex: Number = this.redColor;
     const greenHex: Number = this.greenColor;
     const blueHex: Number = this.blueColor;
     const brushColorHex: String = this.colorHex;
+    // const brushColorData: String = this.currentColor;
     let brushData = {
       "brushSize": brushSizeData,
       "redHex": redHex,
@@ -77,9 +78,9 @@ export class SettingsComponent implements OnInit {
               "\n[*] Brush size : " + brushSizeData + 
               // "\n[*] Brush color : " + brushColorData + 
               "\n[*] Brush color hex : " + brushColorHex +
-              "\n[*] Red hex : " + redHex +
-              "\n[*] Green hex : " + greenHex +
-              "\n[*] Blue hex : " + blueHex);
+              "\n[*] Red amount : " + redHex +
+              "\n[*] Green amount : " + greenHex +
+              "\n[*] Blue amount : " + blueHex);
   }
 
   newBrushValue(event) {
@@ -110,7 +111,6 @@ export class SettingsComponent implements OnInit {
     var red = this.rgbToHex(event);
     red = "#" + red + "0000";
     document.getElementById("red-amount").style.backgroundImage = `-webkit-linear-gradient(0deg, ${red} 0%,${red} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
-    // document.getElementById("red-amount").style.background = red;
     
     this.redColor = event;
     // console.log("%cRed amount :" + this.redColor, "color:red");
@@ -122,7 +122,6 @@ export class SettingsComponent implements OnInit {
     var green = this.rgbToHex(event);
     green = "#00" + green + "00";
     document.getElementById("green-amount").style.backgroundImage = `linear-gradient(90deg, ${green} 0%, ${green} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
-    // document.getElementById("green-amount").style.background = green;
 
     this.greenColor = event;
     // console.log("%cGreen amount :" + this.greenColor, "color:green");
@@ -134,7 +133,6 @@ export class SettingsComponent implements OnInit {
     var blue = this.rgbToHex(event);
     blue = "#0000" + blue;
     document.getElementById("blue-amount").style.backgroundImage = `linear-gradient(90deg, ${blue} 0%, ${blue} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
-    // document.documentElement.style.setProperty('--range-blue-background', blue);
 
     this.blueColor = event;
     // console.log("%cBlue amount :" + this.blueColor, "color:blue");
