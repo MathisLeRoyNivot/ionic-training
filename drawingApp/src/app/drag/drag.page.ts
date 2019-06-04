@@ -31,13 +31,6 @@ export class DragPage implements OnInit {
     this.canvasElement = this.canvasDragable.nativeElement;
     let ctx = this.canvasElement.getContext('2d');
 
-    for (var i = 0; i < 6; i++){
-      for (var j = 0; j < 6; j++){
-        ctx.fillStyle = 'rgb(' + Math.floor(255 - 42.5 * i) + ',' +
-                         Math.floor(255 - 42.5 * j) + ',0)';
-        ctx.fillRect(j * 25, i * 25, 25, 25);
-      }
-    }
   }
 
   handlePan(ev) {
@@ -47,7 +40,7 @@ export class DragPage implements OnInit {
 
     let xyPos = ev.center;
     let xPos = ev.center.x;
-    let yPos = ev.center.y - 50;
+    let yPos = ev.center.y - 40;
 
     // let viewHeight = deviceHeight - topNavHeight;
     let viewRatio = yPos/deviceHeight;
@@ -63,8 +56,6 @@ export class DragPage implements OnInit {
     } else if(viewHeight < minScroll) {
       document.getElementById("top-container").style.height= minScroll + "vh";
     }
-
-    
   }
 
 }
