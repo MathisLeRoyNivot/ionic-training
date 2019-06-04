@@ -18,7 +18,7 @@ export class DragPage implements OnInit {
 
   constructor(
     public platform: Platform,
-    public location: Location) { }
+    public location: Location) {}
 
   ngOnInit() {
   }
@@ -34,6 +34,7 @@ export class DragPage implements OnInit {
   }
 
   handlePan(ev) {
+
     this.textElement = this.topContainer.nativeElement;
     let topNavHeight = this.textElement.getBoundingClientRect().top;
     let deviceHeight = this.platform.height();
@@ -42,19 +43,25 @@ export class DragPage implements OnInit {
     let xPos = ev.center.x;
     let yPos = ev.center.y - 40;
 
-    // let viewHeight = deviceHeight - topNavHeight;
-    let viewRatio = yPos/deviceHeight;
+    let contentHeight = document.getElementById("text-content").offsetHeight;
+    let contentRatio = (contentHeight + 60) / deviceHeight * 100;
+
+    let viewRatio = yPos / deviceHeight;
     let viewHeight = viewRatio * 100;
-    let minScroll = topNavHeight/deviceHeight * 100;
+    let minScroll = topNavHeight / deviceHeight * 100;
 
     if(viewHeight >= minScroll && viewHeight <= 92) {
-      console.log(yPos);
-      console.log("View Height :" + viewHeight + "%");
-      document.getElementById("top-container").style.height= viewHeight + "vh";
+      if(contentRatio <= 40) {
+        document.getElementById("top-container").style.height = viewHeight + "vh";
+        document.getElementById("top-container").style.maxHeight = "40vh";
+      } else if(contentRatio > 40) {
+        document.getElementById("top-container").style.height= viewHeight + "vh";
+        document.getElementById("top-container").style.maxHeight = contentRatio + "vh";
+      }
     } else if(viewHeight > 92) {
-      document.getElementById("top-container").style.height= "92vh";      
+      document.getElementById("top-container").style.height = "92vh";  
     } else if(viewHeight < minScroll) {
-      document.getElementById("top-container").style.height= minScroll + "vh";
+      document.getElementById("top-container").style.height = minScroll + "vh";
     }
   }
 

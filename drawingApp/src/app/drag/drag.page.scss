@@ -1,7 +1,10 @@
-$boxshadow-element: 0px 0px 10px 0px rgba(0, 0, 0, .25);
+$boxshadow-element: 0px 0px 10px 2px rgba(0, 0, 0, .25);
+$radius-box: 0 0 15px 15px;
+$radius-btn: 15px 0 15px 0;
 
 .text-container {
     box-shadow: $boxshadow-element;
+    border-radius: $radius-box;
     // min-height: 5vh;
     height: 40vh;
     overflow: hidden;
@@ -14,20 +17,20 @@ $boxshadow-element: 0px 0px 10px 0px rgba(0, 0, 0, .25);
 
     .drag {
         background-image: linear-gradient(90deg, #4776E6, #8E54E9);
-        border-radius: 10px 0 0 0;
-        bottom: 0px;
+        border-radius: $radius-btn;
+        bottom: 5px;
         box-shadow: $boxshadow-element;
         height: 30px;
         line-height: 30px;
         padding: 4px;
         position: absolute;
-        right: 0;
+        right: 5px;
         text-align: center;
         width: 25%;
 
         .drag-icon {
             color: #ffffff;
-            transform: rotate(90deg); 
+            font-size: 1.4em;
         }
     }
 }
