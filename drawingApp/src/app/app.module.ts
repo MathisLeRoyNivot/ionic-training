@@ -27,6 +27,9 @@ export class CustomHammerConfig extends HammerGestureConfig {
   overrides = {
     'pan': {
       direction: Hammer.DIRECTION_VERTICAL
+    },
+    'doubletap': {
+      direction: Hammer.DIRECTION_VERTICAL
     }
   }
 }

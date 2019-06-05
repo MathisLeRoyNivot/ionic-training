@@ -1,32 +1,51 @@
 $boxshadow-element: 0px 0px 10px 2px rgba(0, 0, 0, .25);
 $radius-box: 0 0 15px 15px;
 $radius-btn: 15px 0 15px 0;
+$margin-drag-btn: 5px;
 
-.text-container {
+.top-container {
     box-shadow: $boxshadow-element;
     border-radius: $radius-box;
-    // min-height: 5vh;
     height: 40vh;
     overflow: hidden;
-    padding: 10px 15px;
+    padding: 5px 15px;
     position: relative;
+    // pointer-events: none;
 
-    p {
+    .text-content-wrapper {
+        border: 1px solid black;
+        display: block;
+        height: 100%;
+        overflow-y: scroll;
         text-align: justify;
+        width: 100%;
+
+        .text-content {
+            border: 1px solid red;
+            
+            p {
+                text-align: justify;
+            }
+        }
     }
 
+    .text-content-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+    
     .drag {
         background-image: linear-gradient(90deg, #4776E6, #8E54E9);
         border-radius: $radius-btn;
-        bottom: 5px;
+        bottom: $margin-drag-btn;
         box-shadow: $boxshadow-element;
         height: 30px;
         line-height: 30px;
         padding: 4px;
         position: absolute;
-        right: 5px;
+        right: $margin-drag-btn;
         text-align: center;
         width: 25%;
+        z-index: 10;
 
         .drag-icon {
             color: #ffffff;
