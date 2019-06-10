@@ -50,7 +50,7 @@ export class DragPage implements OnInit {
 
     // Size of the text content
     let contentHeight = document.getElementById("text-content").offsetHeight;
-    let contentRatio = (contentHeight + 60) / deviceHeight * 100;
+    let contentRatio = (contentHeight + 70) / deviceHeight * 100;
 
     // Total device view size
     let viewRatio = yPos / deviceHeight;
@@ -63,7 +63,6 @@ export class DragPage implements OnInit {
       //   document.getElementById("top-container").style.maxHeight = "40vh";
       // } else if(contentRatio > 40) {
         document.getElementById("top-container").style.height= viewHeight + "vh";
-        document.getElementById("top-container").style.maxHeight = viewHeight + "vh";
       // }
     } else if(viewHeight > 92) {
       document.getElementById("top-container").style.height = "92vh";  
@@ -73,18 +72,25 @@ export class DragPage implements OnInit {
   }
 
   handleDoubleTap(ev) {
+    // ev.preventDefault();
     this.count++;
     setTimeout(() => {
       if (this.count == 1) {
         this.count = 0;
         console.log('Single Tap');
-      } if(this.count > 1){
+
+      } else if(this.count > 1){
         // If user double tap then it reset to the default value, the height
         this.count = 0;
         console.log('Double Tap : Top-container height has been reset.');
         document.getElementById("top-container").style.height = "40vh";
-      }
+
+      } 
     }, 250);
+  }
+
+  onScroll(ev) {
+    console.log("%cPage scrolled", "color: #00BEBE");
   }
 
 }

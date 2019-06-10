@@ -8,20 +8,21 @@ $margin-drag-btn: 5px;
     border-radius: $radius-box;
     height: 40vh;
     overflow: hidden;
-    padding: 5px 15px;
+    padding: 5px 15px 10px 15px;
     position: relative;
     // pointer-events: none;
 
     .text-content-wrapper {
-        border: 1px solid black;
+        // border: 1px solid black;
         display: block;
         height: 100%;
         overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
         text-align: justify;
         width: 100%;
-
+        
         .text-content {
-            border: 1px solid red;
+            // border: 1px solid red;
             
             p {
                 text-align: justify;
@@ -38,9 +39,8 @@ $margin-drag-btn: 5px;
         border-radius: $radius-btn;
         bottom: $margin-drag-btn;
         box-shadow: $boxshadow-element;
-        height: 30px;
-        line-height: 30px;
-        padding: 4px;
+        height: 35px;
+        padding: 6px;
         position: absolute;
         right: $margin-drag-btn;
         text-align: center;
