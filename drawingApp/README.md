@@ -14,7 +14,7 @@ Canvas Drawing Page              |  Save Page
 
 Drage Page             |  Drag to see more
 :-------------------------:|:-------------------------:
-![Drag](docs/img/drag.PNG)  |  ![Drag more](docs/img/drag-more.png)
+![Drag](docs/img/drag.png)  |  ![Drag more](docs/img/drag-more.png)
 
 </center>
 
