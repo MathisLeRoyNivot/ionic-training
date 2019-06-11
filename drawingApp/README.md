@@ -20,7 +20,7 @@ Drage Page             |  Drag to see more
 
 ## Setting up the project :gear:
 
-Clone the project & install the project depedencies by taping this command in your CLI :
+Clone the project & install the project depedencies by taping these commands in your CLI :
 ```bash
 git clone https://github.com/MathisLeRoyNivot/ionic-training
 cd /ionic-training/drawingApp

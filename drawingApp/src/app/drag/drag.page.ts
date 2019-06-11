@@ -58,10 +58,6 @@ export class DragPage implements OnInit {
     let viewHeight = viewRatio * 100;
     let minScroll = topNavHeight / deviceHeight * 100;
 
-    if(contentRatio <= viewHeight) {
-      console.log("Salut")
-    }
-
     if(viewHeight >= minScroll && viewHeight <= 92) {
       document.getElementById("top-container").style.height= viewHeight + "vh";
       console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
