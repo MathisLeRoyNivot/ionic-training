@@ -4,13 +4,17 @@
 
 <center>
  
-Form Page             |  Canvas Drawing Page
+Form Page             |  Settings popover
 :-------------------------:|:-------------------------:
-![Form](docs/img/form.png)  |  ![Canvas](docs/img/canvas.png)
+![Form](docs/img/form.png)  |  ![Settings](docs/img/settings.png)
 
-Settings popover             |  Save Page
+Canvas Drawing Page              |  Save Page
 :-------------------------:|:-------------------------:
-![Settings](docs/img/settings.png)  |  ![Save](docs/img/save.png)
+![Canvas](docs/img/canvas.png)  |  ![Save](docs/img/saving.png)
+
+Drage Page             |  Drag to see more
+:-------------------------:|:-------------------------:
+![Drag](docs/img/drag.PNG)  |  ![Drag more](docs/img/drag-more.png)
 
 </center>
 

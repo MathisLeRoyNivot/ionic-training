@@ -1,4 +1,4 @@
-import { ViewChild, Component, OnInit } from '@angular/core';
+import { ViewChild, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Location } from '@angular/common';
 import { Hammer } from 'hammerjs';
@@ -12,6 +12,8 @@ export class DragPage implements OnInit {
 
   @ViewChild('topContainer') topContainer: any;
   @ViewChild('canvasDragable') canvasDragable: any;
+
+  @Output() event_name: EventEmitter<any> = new EventEmitter();
 
   textElement: any;
   canvasElement: any;
@@ -32,7 +34,6 @@ export class DragPage implements OnInit {
   ngAfterViewInit(){
     this.canvasElement = this.canvasDragable.nativeElement;
     let ctx = this.canvasElement.getContext('2d');
-
   }
 
   handlePan(ev) {
@@ -57,13 +58,13 @@ export class DragPage implements OnInit {
     let viewHeight = viewRatio * 100;
     let minScroll = topNavHeight / deviceHeight * 100;
 
+    if(contentRatio <= viewHeight) {
+      console.log("Salut")
+    }
+
     if(viewHeight >= minScroll && viewHeight <= 92) {
-      // if(contentRatio <= 40) {
-      //   document.getElementById("top-container").style.height = viewHeight + "vh";
-      //   document.getElementById("top-container").style.maxHeight = "40vh";
-      // } else if(contentRatio > 40) {
-        document.getElementById("top-container").style.height= viewHeight + "vh";
-      // }
+      document.getElementById("top-container").style.height= viewHeight + "vh";
+      console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
     } else if(viewHeight > 92) {
       document.getElementById("top-container").style.height = "92vh";  
     } else if(viewHeight < minScroll) {
@@ -72,12 +73,13 @@ export class DragPage implements OnInit {
   }
 
   handleDoubleTap(ev) {
-    // ev.preventDefault();
+    ev.preventDefault();
     this.count++;
     setTimeout(() => {
       if (this.count == 1) {
         this.count = 0;
         console.log('Single Tap');
+        document.getElementById("top-container").style.height = "40vh";
 
       } else if(this.count > 1){
         // If user double tap then it reset to the default value, the height
@@ -89,7 +91,7 @@ export class DragPage implements OnInit {
     }, 250);
   }
 
-  onScroll(ev) {
+  swipeEvent(ev) {
     console.log("%cPage scrolled", "color: #00BEBE");
   }
 

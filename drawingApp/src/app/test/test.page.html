@@ -6,11 +6,7 @@
     </ion-buttons>
      
     <ion-title>Draw</ion-title>
-      
-    <ion-button (click)="newPageCanvas()">
-      <ion-label>Drag page</ion-label>
-    </ion-button>
-
+    
     <ion-buttons slot="end" (click)="openPopover($event)">
       <ion-icon style="font-size: 2em" name="settings"></ion-icon>
     </ion-buttons>
@@ -31,6 +27,9 @@
       </ion-col>
       <ion-col>
         <ion-button style="width:100%" (click)="clearCanvas()" color="danger">Reset</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button style="width:100%" (click)="newPageCanvas()" color="primary">Drag Page</ion-button>
       </ion-col>
     </ion-row>
       
