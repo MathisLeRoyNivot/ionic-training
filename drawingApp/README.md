@@ -20,24 +20,16 @@ Drage Page             |  Drag to see more
 
 ## Setting up the project :gear:
 
-Clone the project by taping this command in your CLI :
+Clone the project & install the project depedencies by taping this command in your CLI :
 ```bash
 git clone https://github.com/MathisLeRoyNivot/ionic-training
-```
-Or download the project.<br>
-
-Then go to the drawingApp folder :
-```bash
 cd /ionic-training/drawingApp
-```
-And install the depedencies of this drawing application by taping the following command :
-```bash
 npm install
 ```
 
 ## Try it on Browser &nbsp;<img src="https://cdn.pixabay.com/photo/2016/08/31/00/44/www-1632431_960_720.png" height="35px" alt="Browser Logo">
 
-Launch the ionic server to test the project on your browser
+Launch the ionic server to test the project on your browser with the embedded emulator
 ```bash
 ionic serve
 ```
