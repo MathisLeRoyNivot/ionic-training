@@ -13,11 +13,10 @@
 <ion-content [scrollY]="false" [scrollX]="false" overflow-scroll="false">
 
   <div #topContainer id="top-container" class="top-container">
-
+    
     <div class="text-content-wrapper">
-      <!-- <ion-content id="text-content" class="text-content" overflow-scroll="true"> -->
+
       <div id="text-content" class="text-content" overflow-scroll="true">
-        <!-- ([scrollEvents])="true" (ionScroll)="onScroll($event)" -->
         <h2>Title</h2>
         <h4>Subtitle</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui vel felis accumsan aliquet nec id ex. Etiam porta efficitur efficitur. 
@@ -31,15 +30,16 @@
           dignissim ante.
         </p>
       </div>
-      <!-- </ion-content> -->
+
     </div>
 
-    <div id="drag-div" class="drag" (pan)=handlePan($event) (tap)=handleDoubleTap($event)>
+    <div id="drag-div" class="drag" (click)="onClick()" (pan)=handlePan($event) (tap)=handleDoubleTap($event)>
       <ion-icon class="drag-icon" name="menu"></ion-icon>
     </div>
 
     </div>
 
-  <canvas class="context-canavas-dragable" #canvasDragable></canvas>
-  
+    <!-- Import canvas from ../components/canvas -->
+    <app-canvas></app-canvas>
+
 </ion-content>

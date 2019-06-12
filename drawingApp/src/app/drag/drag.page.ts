@@ -13,7 +13,7 @@ export class DragPage implements OnInit {
   @ViewChild('topContainer') topContainer: any;
   @ViewChild('canvasDragable') canvasDragable: any;
 
-  @Output() event_name: EventEmitter<any> = new EventEmitter();
+  @Output() drag: EventEmitter<any> = new EventEmitter<any>();
 
   textElement: any;
   canvasElement: any;
@@ -24,7 +24,10 @@ export class DragPage implements OnInit {
     public platform: Platform,
     public location: Location) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ngOnDestroy(): void {
+    
   }
 
   backClicked() {
@@ -36,7 +39,15 @@ export class DragPage implements OnInit {
     let ctx = this.canvasElement.getContext('2d');
   }
 
+  onClick() {
+    this.drag.emit(5);
+  }
+
   handlePan(ev) {
+    
+    document.getElementById("text-content").addEventListener("scroll", () => {
+      console.log("Scrolling");
+    });
 
     ev.preventDefault();
 
@@ -70,20 +81,18 @@ export class DragPage implements OnInit {
 
   handleDoubleTap(ev) {
     ev.preventDefault();
+
     this.count++;
     setTimeout(() => {
       if (this.count == 1) {
         this.count = 0;
-        console.log('Single Tap');
-        document.getElementById("top-container").style.height = "40vh";
 
-      } else if(this.count > 1){
-        // If user double tap then it reset to the default value, the height
+      } else if(this.count == 2){
+        // If user double tap then it reset the height to the default value
         this.count = 0;
         console.log('Double Tap : Top-container height has been reset.');
         document.getElementById("top-container").style.height = "40vh";
-
-      } 
+      }
     }, 250);
   }
 
