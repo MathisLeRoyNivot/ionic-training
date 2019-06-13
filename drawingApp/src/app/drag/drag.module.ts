@@ -6,7 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { DragPage } from './drag.page';
-import { CanvasComponent } from '../components/canvas/canvas.component';
+// Import file that contain all the components that we can import in other pages
+import { ComponentsModule } from '../components/components.module';
 
 const routes: Routes = [
   {
@@ -20,8 +21,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DragPage, CanvasComponent]
+  declarations: [DragPage]
 })
 export class DragPageModule {}
