@@ -102,33 +102,13 @@ export class DragPage implements OnInit {
 
   newScrollValue(ev) {
     let percent = ev / 100;
-    // console.log(percent);
 
-    let containerSize = document.getElementById("top-container").offsetHeight;
-    // console.log("Container size : " + containerSize);
-
-    let textContentWrapperSize = document.getElementById("text-content-wrapper").offsetHeight;
-    let textContainerSize = document.getElementById("text-content").offsetHeight;
-    // console.log("Text container size : " + textContainerSize);
-    // let diffSize = containerSize - textContainerSize;
-
-    let deviceHeight = this.platform.height();
-    let textContainerSizeRatio = textContainerSize / deviceHeight;
-    // console.log(textContainerSizeRatio);
-    let newTest = textContainerSizeRatio;
-    let newTest1 = percent * newTest;
-    console.log(newTest1);
-    // let scrollValue = textContainerSizeRatio * percent;
     let scrollableDiv = document.getElementById("text-content");
-    let scrollableDiv1 = scrollableDiv.scrollHeight * percent;
-    // console.log(scrollableDiv1);
-    document.getElementById("text-content-wrapper").scrollTop = scrollableDiv1;    
-
-
-    // scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
-    // console.log(scrollableDiv.scrollHeight)
-    // document.getElementById("text-content-wrapper").scrollTop = newTest1;    
-    // console.log(scrollValue);
+    let topContainerSize = document.getElementById("top-container").offsetHeight;
+    
+    let diffSize = scrollableDiv.scrollHeight - topContainerSize;
+    let diffSizeRatio = diffSize * percent + percent * 65;
+    document.getElementById("text-content-wrapper").scrollTop = diffSizeRatio;    
 
   }
   
