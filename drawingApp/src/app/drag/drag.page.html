@@ -16,7 +16,7 @@
     
     <div id="text-content-wrapper" class="text-content-wrapper">
 
-      <div id="text-content" class="text-content" overflow-scroll="true">
+      <div #textContent id="text-content" class="text-content" overflow-scroll="true">
         <h2>Title</h2>
         <h4>Subtitle</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui vel felis accumsan aliquet nec id ex. Etiam porta efficitur efficitur. 
@@ -30,17 +30,17 @@
           dignissim ante.
         </p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui vel felis accumsan aliquet nec id ex. Etiam porta efficitur efficitur. 
-            Cras ultrices tellus tellus. Fusce vel sapien id sem elementum egestas eu at risus. Praesent imperdiet, neque ac sollicitudin gravida, lacus eros 
-            consectetur odio, venenatis sagittis velit magna sit amet nulla. Suspendisse dignissim tortor erat. Praesent in urna fringilla, porttitor dolor sed, 
-            dignissim ante.
-          </p>
+          Cras ultrices tellus tellus. Fusce vel sapien id sem elementum egestas eu at risus. Praesent imperdiet, neque ac sollicitudin gravida, lacus eros 
+          consectetur odio, venenatis sagittis velit magna sit amet nulla. Suspendisse dignissim tortor erat. Praesent in urna fringilla, porttitor dolor sed, 
+          dignissim ante.
+        </p>
       </div>
 
     </div>
     
-    <div *ngIf="isContentBigger" class="slider-scroll">
-      <input id="scroll-range" class="slider-range" type="range" name="sliderRange" [(ngModel)]="sliderRangeScroll" (ngModelChange)="newScrollValue($event)" min="0" max="100" orient="vertical">
-    </div>
+    <!-- <div *ngIf="isContentBigger" class="slider-scroll">
+      <input id="scroll-range" class="slider-range" type="range" name="sliderRange" [(ngModel)]="sliderRangeScroll" (ngModelChange)="newScrollValue($event)" min="0" max="100">
+    </div> -->
 
     <div id="drag-div" class="drag" (click)="onClick()" (pan)=handlePan($event) (tap)=handleDoubleTap($event)>
       <ion-icon class="drag-icon" name="menu"></ion-icon>

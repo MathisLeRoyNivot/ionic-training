@@ -22,6 +22,10 @@ export class DragPage implements OnInit {
   isContentBigger: Boolean = false;
   sliderRangeScroll: number = 0;
 
+  textContainer: any;
+  textContentWrapper: any;
+  textContent: any;
+
   constructor(
     public platform: Platform,
     public location: Location) {}
@@ -36,7 +40,11 @@ export class DragPage implements OnInit {
     this.location.back();
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.textContainer = document.getElementById("top-container");
+    this.textContentWrapper = document.getElementById("text-content-wrapper");
+    this.textContent = document.getElementById("text-content");
+  }
 
   onClick() {
     this.drag.emit(5);
@@ -56,7 +64,7 @@ export class DragPage implements OnInit {
     let yPos = ev.center.y - 40;
 
     // Size of the text content
-    let contentHeight = document.getElementById("text-content").offsetHeight;
+    let contentHeight = this.textContent.offsetHeight;
     let contentRatio = (contentHeight + 70) / deviceHeight * 100;
 
     // Total device view size
@@ -72,12 +80,17 @@ export class DragPage implements OnInit {
     }
 
     if(viewHeight >= minScroll && viewHeight <= 92) {
-      document.getElementById("top-container").style.height= viewHeight + "vh";
+      this.textContainer.style.height = viewHeight + "vh";
+      // this.textContentWrapper.style.height= "calc("+ viewHeight + "vh - 2em)";
+      this.textContentWrapper.style.height = viewHeight + "vh";
+
+      // this.textContent.style.height = viewHeight + "vh";
+
       console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
     } else if(viewHeight > 92) {
-      document.getElementById("top-container").style.height = "92vh";  
+      this.textContainer.style.height = "92vh";  
     } else if(viewHeight < minScroll) {
-      document.getElementById("top-container").style.height = minScroll + "vh";
+      this.textContainer.style.height = minScroll + "vh";
     }
   }
 
@@ -90,26 +103,30 @@ export class DragPage implements OnInit {
         this.count = 0;
 
       } else if(this.count == 2){
-        // If user double tap then it reset the height to the default value
+        // If user double tap then it reset the height to the default value of $0vh
         this.count = 0;
         this.isContentBigger = true;
         this.sliderRangeScroll = 0;
         console.log('Double Tap : Top-container height has been reset.');
-        document.getElementById("top-container").style.height = "40vh";
+        this.textContainer.style.height = "40vh";
+        this.textContentWrapper.style.height = "40vh";
+        this.textContent.style.height = "40vh";
       }
     }, 250);
   }
 
-  newScrollValue(ev) {
-    let percent = ev / 100;
-
-    let scrollableDiv = document.getElementById("text-content");
-    let topContainerSize = document.getElementById("top-container").offsetHeight;
+  // newScrollValue(ev) {
     
-    let diffSize = scrollableDiv.scrollHeight - topContainerSize;
-    let diffSizeRatio = diffSize * percent + percent * 65;
-    document.getElementById("text-content-wrapper").scrollTop = diffSizeRatio;    
+  //   let percent = ev / 100;
 
-  }
+  //   let scrollableDiv = this.textContent
+  //   let topContainerSize = this.textContainer.offsetHeight;
+    
+  //   let diffSize = scrollableDiv.scrollHeight - topContainerSize;
+  //   let diffSizeRatio = diffSize * percent + percent * 65;
+  //   console.log(diffSizeRatio);
+  //   document.getElementById("text-content-wrapper").scrollTop = diffSizeRatio;   
+
+  // }
   
 }
