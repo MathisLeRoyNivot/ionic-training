@@ -10,22 +10,16 @@ $margin-drag-btn: 5px;
     overflow: hidden;
     padding: 5px 15px 10px 15px;
     position: relative;
-    // pointer-events: none;
 
     .text-content-wrapper {
         display: block;
         height: 40vh;
         overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
         text-align: justify;
         width: 100%;
 
         .text-content {
-            padding-bottom: 2em;
-
-            p {
-                text-align: justify;
-            }
+            padding-bottom: 4em;
         }
     }
 
@@ -51,110 +45,6 @@ $margin-drag-btn: 5px;
             font-size: 1.4em;
         }
     }
-
-    // .slider-scroll {
-    //     background: transparent;
-    //     height: calc(100% - 60px);
-    //     position: absolute;
-    //     width: 15px;
-    //     top: 10px;
-    //     right: 5px;
-    // }
-
-    // input[type=range] {
-    //     /* IE */
-    //     writing-mode: bt-lr;
-    //     /* WebKit */
-    //     -webkit-appearance: slider-vertical;
-    //     width: 8px;
-    //     height: 100%;
-    //     padding: 0 5px;
-    // }
-
-    // input[type=range] {
-    //     width: 100%;
-    //     margin: 5.5px 0;
-    // }
-
-    // input[type=range]:focus {
-    //     outline: none;
-    // }
-
-    // input[type=range]::-webkit-slider-runnable-track {
-    //     width: 100%;
-    //     height: 4px;
-    //     cursor: pointer;
-    //     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-    //     background: #0071a9;
-    //     border-radius: 25px;
-    //     border: 0px solid #010100;
-    // }
-
-    // input[type=range]::-webkit-slider-thumb {
-    //     box-shadow: 1.5px 1.5px 4.5px rgba(0, 0, 0, 0.6), 0px 0px 1.5px rgba(13, 13, 13, 0.6);
-    //     border: 0px solid #000000;
-    //     height: 15px;
-    //     width: 15px;
-    //     border-radius: 50px;
-    //     background: #ffffff;
-    //     cursor: pointer;
-    //     -webkit-appearance: none;
-    //     margin-top: -5.5px;
-    // }
-
-    // input[type=range]::-moz-range-track {
-    //     width: 100%;
-    //     height: 4px;
-    //     cursor: pointer;
-    //     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-    //     background: #0071a9;
-    //     border-radius: 25px;
-    //     border: 0px solid #010100;
-    // }
-
-    // input[type=range]::-moz-range-thumb {
-    //     box-shadow: 1.5px 1.5px 4.5px rgba(0, 0, 0, 0.6), 0px 0px 1.5px rgba(13, 13, 13, 0.6);
-    //     border: 0px solid #000000;
-    //     height: 15px;
-    //     width: 15px;
-    //     border-radius: 50px;
-    //     background: #ffffff;
-    //     cursor: pointer;
-    // }
-
-    // input[type=range]::-ms-track {
-    //     width: 100%;
-    //     height: 4px;
-    //     cursor: pointer;
-    //     background: transparent;
-    //     border-color: transparent;
-    //     color: transparent;
-    // }
-
-    // input[type=range]::-ms-fill-lower {
-    //     background: #000b10;
-    //     border: 0px solid #010100;
-    //     border-radius: 50px;
-    //     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-    // }
-
-    // input[type=range]::-ms-fill-upper {
-    //     background: #0071a9;
-    //     border: 0px solid #010100;
-    //     border-radius: 50px;
-    //     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
-    // }
-
-    // input[type=range]::-ms-thumb {
-    //     box-shadow: 1.5px 1.5px 4.5px rgba(0, 0, 0, 0.6), 0px 0px 1.5px rgba(13, 13, 13, 0.6);
-    //     border: 0px solid #000000;
-    //     height: 15px;
-    //     width: 15px;
-    //     border-radius: 50px;
-    //     background: #ffffff;
-    //     cursor: pointer;
-    //     height: 4px;
-    // }
 }
 
 .context-canavas-dragable {

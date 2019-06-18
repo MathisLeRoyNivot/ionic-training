@@ -37,18 +37,13 @@
       </div>
 
     </div>
-    
-    <!-- <div *ngIf="isContentBigger" class="slider-scroll">
-      <input id="scroll-range" class="slider-range" type="range" name="sliderRange" [(ngModel)]="sliderRangeScroll" (ngModelChange)="newScrollValue($event)" min="0" max="100">
-    </div> -->
-
-    <div id="drag-div" class="drag" (click)="onClick()" (pan)=handlePan($event) (tap)=handleDoubleTap($event)>
+  
+    <div id="drag-div" class="drag" (panStart)="startPan($event)" (pan)=handlePan($event) (panEnd)="endPan($event)" (tap)=handleDoubleTap($event)>
       <ion-icon class="drag-icon" name="menu"></ion-icon>
     </div>
 
   </div>
 
-    <!-- Import canvas from ../components/canvas -->
-    <app-canvas></app-canvas>
+  <app-canvas></app-canvas>
 
 </ion-content>
