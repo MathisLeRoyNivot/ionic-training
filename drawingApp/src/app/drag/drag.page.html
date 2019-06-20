@@ -1,49 +1,58 @@
 <ion-header>
-  <ion-toolbar>
+    <ion-toolbar>
 
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
 
-    <ion-title>Drag</ion-title>
+        <ion-title>Drag</ion-title>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [scrollY]="false" [scrollX]="false" overflow-scroll="false">
 
-  <div #topContainer id="top-container" class="top-container">
-    
-    <div id="text-content-wrapper" class="text-content-wrapper">
+    <div #topContainer id="top-container" class="top-container">
 
-      <div #textContent id="text-content" class="text-content" overflow-scroll="true">
-        <h2>Title</h2>
-        <h4>Subtitle</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui vel felis accumsan aliquet nec id ex. Etiam porta efficitur efficitur. 
-          Cras ultrices tellus tellus. Fusce vel sapien id sem elementum egestas eu at risus. Praesent imperdiet, neque ac sollicitudin gravida, lacus eros 
-          consectetur odio, venenatis sagittis velit magna sit amet nulla. Suspendisse dignissim tortor erat. Praesent in urna fringilla, porttitor dolor sed, 
-          dignissim ante.
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui vel felis accumsan aliquet nec id ex. Etiam porta efficitur efficitur. 
-          Cras ultrices tellus tellus. Fusce vel sapien id sem elementum egestas eu at risus. Praesent imperdiet, neque ac sollicitudin gravida, lacus eros 
-          consectetur odio, venenatis sagittis velit magna sit amet nulla. Suspendisse dignissim tortor erat. Praesent in urna fringilla, porttitor dolor sed, 
-          dignissim ante.
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui vel felis accumsan aliquet nec id ex. Etiam porta efficitur efficitur. 
-          Cras ultrices tellus tellus. Fusce vel sapien id sem elementum egestas eu at risus. Praesent imperdiet, neque ac sollicitudin gravida, lacus eros 
-          consectetur odio, venenatis sagittis velit magna sit amet nulla. Suspendisse dignissim tortor erat. Praesent in urna fringilla, porttitor dolor sed, 
-          dignissim ante.
-        </p>
-      </div>
+        <div id="text-content-wrapper" class="text-content-wrapper">
+
+            <div #textContent id="text-content" class="text-content" overflow-scroll="true">
+                <h2>Title</h2>
+                <h4>Subtitle</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui vel felis accumsan aliquet nec
+                    id ex. Etiam porta efficitur efficitur.
+                    Cras ultrices tellus tellus. Fusce vel sapien id sem elementum egestas eu at risus. Praesent
+                    imperdiet, neque ac sollicitudin gravida, lacus eros
+                    consectetur odio, venenatis sagittis velit magna sit amet nulla. Suspendisse dignissim tortor erat.
+                    Praesent in urna fringilla, porttitor dolor sed,
+                    dignissim ante.
+                </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui vel felis accumsan aliquet nec
+                    id ex. Etiam porta efficitur efficitur.
+                    Cras ultrices tellus tellus. Fusce vel sapien id sem elementum egestas eu at risus. Praesent
+                    imperdiet, neque ac sollicitudin gravida, lacus eros
+                    consectetur odio, venenatis sagittis velit magna sit amet nulla. Suspendisse dignissim tortor erat.
+                    Praesent in urna fringilla, porttitor dolor sed,
+                    dignissim ante.
+                </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed dui vel felis accumsan aliquet nec
+                    id ex. Etiam porta efficitur efficitur.
+                    Cras ultrices tellus tellus. Fusce vel sapien id sem elementum egestas eu at risus. Praesent
+                    imperdiet, neque ac sollicitudin gravida, lacus eros
+                    consectetur odio, venenatis sagittis velit magna sit amet nulla. Suspendisse dignissim tortor erat.
+                    Praesent in urna fringilla, porttitor dolor sed,
+                    dignissim ante.
+                </p>
+            </div>
+
+        </div>
+
+        <div id="drag-div" class="drag" (panStart)="startPan($event)" (pan)=handlePan($event) (panEnd)="endPan($event)" (tap)=handleDoubleTap($event)>
+            <ion-icon class="drag-icon" name="menu"></ion-icon>
+        </div>
 
     </div>
-  
-    <div id="drag-div" class="drag" (panStart)="startPan($event)" (pan)=handlePan($event) (panEnd)="endPan($event)" (tap)=handleDoubleTap($event)>
-      <ion-icon class="drag-icon" name="menu"></ion-icon>
-    </div>
 
-  </div>
-
-  <app-canvas></app-canvas>
+    <app-canvas></app-canvas>
 
 </ion-content>

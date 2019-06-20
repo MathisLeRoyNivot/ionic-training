@@ -1,11 +1,13 @@
 $boxshadow-element: 0px 0px 10px 2px rgba(0, 0, 0, .25);
+$boxshadow-drag-element: 0px 0px 7px 2px rgba(0, 0, 0, .25);
 $radius-box: 0 0 15px 15px;
 $radius-btn: 15px 0 15px 0;
 $margin-drag-btn: 5px;
 
 .top-container {
-    box-shadow: $boxshadow-element;
+    border-bottom: 3px solid #ffffff;
     border-radius: $radius-box;
+    box-shadow: $boxshadow-element;
     height: 40vh;
     overflow: hidden;
     padding: 5px 15px 10px 15px;
@@ -31,7 +33,7 @@ $margin-drag-btn: 5px;
         background-image: linear-gradient(90deg, #4776E6, #8E54E9);
         border-radius: $radius-btn;
         bottom: $margin-drag-btn;
-        box-shadow: $boxshadow-element;
+        box-shadow: $boxshadow-drag-element ;
         height: 35px;
         padding: 6px;
         position: absolute;
