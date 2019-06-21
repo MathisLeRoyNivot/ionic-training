@@ -88,7 +88,7 @@ export class DragPage implements OnInit {
 
         
         if (viewHeight >= minScroll && viewHeight <= 92) {
-            // this.topTextContainer.style.height = viewHeight + "vh";
+            this.topTextContainer.style.height = viewHeight + "vh";
             // this.textContentWrapper.style.height = viewHeight + "vh";
             // console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
         } else if (viewHeight > 92) {
