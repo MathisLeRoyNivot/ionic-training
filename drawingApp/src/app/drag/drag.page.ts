@@ -41,6 +41,17 @@ export class DragPage implements OnInit {
     }
 
     endPan(ev) {
+
+        // this.dragStart = false;
+        if(this.drag) {
+            let i = 0;
+            for(i; i <= this.drag; i++) {
+                clearInterval(i);
+            }
+        }
+        console.log("%cDrag interval ID : " + this.drag, "color: #bebe00");
+        console.log("%cDrag ended !\nY : " + ev.center.y, "color: #eb2f06");
+
         let deviceHeight = this.platform.height();
         let topNavHeight = this.textElement.getBoundingClientRect().top;
         let minScroll = (topNavHeight / deviceHeight) * 100;
@@ -56,12 +67,6 @@ export class DragPage implements OnInit {
             this.topTextContainer.style.height = "92vh";
         } else if (viewHeight < minScroll) {
             this.topTextContainer.style.height = minScroll + "vh";
-        }
-
-        console.log("%cDrag ended !\nY : " + ev.center.y, "color: #eb2f06");
-        if (this.dragStart) {
-            this.dragStart = false;
-            clearInterval(this.drag);
         }
     }
 
@@ -81,24 +86,24 @@ export class DragPage implements OnInit {
         let viewHeight = viewRatio * 100;
         let minScroll = (topNavHeight / deviceHeight) * 100;
 
+        
         if (viewHeight >= minScroll && viewHeight <= 92) {
-            this.topTextContainer.style.height = viewHeight + "vh";
-            this.textContentWrapper.style.height = viewHeight + "vh";
-            console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
+            // this.topTextContainer.style.height = viewHeight + "vh";
+            // this.textContentWrapper.style.height = viewHeight + "vh";
+            // console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
         } else if (viewHeight > 92) {
             this.topTextContainer.style.height = "92vh";
         } else if (viewHeight < minScroll) {
             this.topTextContainer.style.height = minScroll + "vh";
         }
 
-        // if(this.dragStart) {
-        //   this.drag = setInterval(() => {
-        //     // this.topTextContainer.style.height = viewHeight + "vh";
-        //     this.textContentWrapper.style.height = viewHeight.toFixed(1) + "vh";
-        //     console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
-        //   }, 20);
-        //   clearInterval(this.drag);
-        // }
+        this.drag = setInterval(() => {
+            // this.topTextContainer.style.height = viewHeight + "vh";
+            this.textContentWrapper.style.height = viewHeight + "vh";
+            console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
+            console.log(this.drag);
+        }, 5);
+
     }
 
     handleDoubleTap(ev) {
