@@ -28,24 +28,7 @@ export class SettingsComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public popoverCtrl: PopoverController) {
-    
     this.initializeApp();
-    // this.brushSize = 5;
-    // this.redColor = 0;
-    // this.greenColor = 0;
-    // this.blueColor = 0;
-    // this.availableColors = [
-    //   '#000000', // Black
-    //   '#1e3799', // Blue 1
-    //   '#5f27cd', // Purple 1
-    //   '#009432', // Green 1
-    //   '#e74c3c', // Red
-    //   '#576574', // Grey
-    //   '#54a0ff', // Blue 2
-    //   '#D980FA', // Pink
-    //   '#78e08f', // Green 2
-    //   '#ff9f43' // Orange
-    // ];
   }
 
   ngOnInit() {}
@@ -64,19 +47,16 @@ export class SettingsComponent implements OnInit {
     const greenHex: Number = this.greenColor;
     const blueHex: Number = this.blueColor;
     const brushColorHex: String = this.colorHex;
-    // const brushColorData: String = this.currentColor;
     let brushData = {
       "brushSize": brushSizeData,
       "redHex": redHex,
       "greenHex": greenHex,
       "blueHex": blueHex,
-      // "brushColor": brushColorData,
       "brushColorHex": brushColorHex
     }
     await this.popoverCtrl.dismiss(brushData);
     console.log("Settings Component Closed" +
-              "\n[*] Brush size : " + brushSizeData + 
-              // "\n[*] Brush color : " + brushColorData + 
+              "\n[*] Brush size : " + brushSizeData +
               "\n[*] Brush color hex : " + brushColorHex +
               "\n[*] Red amount : " + redHex +
               "\n[*] Green amount : " + greenHex +
@@ -94,48 +74,38 @@ export class SettingsComponent implements OnInit {
   }
 
   changeColor() {
-    // this.currentColor = color;
     console.log(`%cNew brush color : ${this.colorHex}`, `color: ${this.colorHex}`);
     return this.colorHex;
-    // return this.currentColor;
   }
   
   getBrushColor() {
     return this.colorHex;
-    // return this.currentColor;
   }
   
-  // convert RGB value to hex 
   newRedValue(event) {
-    // Change range slider red color dynamically
     var red = this.rgbToHex(event);
     red = "#" + red + "0000";
     document.getElementById("red-amount").style.backgroundImage = `-webkit-linear-gradient(0deg, ${red} 0%,${red} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
     
     this.redColor = event;
-    // console.log("%cRed amount :" + this.redColor, "color:red");
     this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
     return this.redColor;
   }
   newGreenValue(event) {
-    // Change range slider green color dynamically
     var green = this.rgbToHex(event);
     green = "#00" + green + "00";
     document.getElementById("green-amount").style.backgroundImage = `linear-gradient(90deg, ${green} 0%, ${green} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
 
     this.greenColor = event;
-    // console.log("%cGreen amount :" + this.greenColor, "color:green");
     this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
     return this.greenColor;
   }
   newBlueValue(event) {
-    // Change range slider blue color dynamically
     var blue = this.rgbToHex(event);
     blue = "#0000" + blue;
     document.getElementById("blue-amount").style.backgroundImage = `linear-gradient(90deg, ${blue} 0%, ${blue} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
 
     this.blueColor = event;
-    // console.log("%cBlue amount :" + this.blueColor, "color:blue");
     this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
     return this.blueColor;
   }

@@ -19,15 +19,8 @@
     </table>
   </ion-item>
 
-  <!-- <ion-item lines="none">
-    <p>Brush color : <ion-icon style="font-size:2em" [style.color]="getBrushColor()" style="font-size: 2em; line-height:-10px" name="square"></ion-icon></p><br>
-  </ion-item>
-  <button *ngFor="let color of availableColors" icon-only ion-button (click)="changeColor(color)">
-    <ion-icon style="font-size:2em" [style.color]="color" name="square"></ion-icon><br>
-  </button> -->
-
   <ion-item lines="none">
-    <h4>Brush color : <button [style.background-color]="getBrushColorHex()" class="color-choice" value="" disabled>{{ getBrushColorHex() }}</button></h4>
+    <h4>Brush color : <button [style.background-color]="getBrushColorHex()" id="color-choice" class="color-choice" disabled>{{ getBrushColorHex() }}</button></h4>
   </ion-item>
 
   <!-- If it's an Android Device -->
@@ -92,7 +85,7 @@
     </div>
   </ion-item>
 
-  <ion-item style="text-align: center;" (click)="close()" lines="none"> 
+  <ion-item (click)="close()" lines="none"> 
     <ion-icon name="close"></ion-icon>
     Save & Close
   </ion-item>

@@ -150,10 +150,6 @@ export class TestPage {
     ctx.fillText(this.name, (this.canvasElement.width - 70), (this.canvasElement.height - 50));
     ctx.getImageData(0, this.canvasElement.getBoundingClientRect().top, this.canvasElement.width, this.canvasElement.height-this.canvasElement.getBoundingClientRect().top);
     ctx.save();
-    // this.displayName = true;
-    // // this.name = localStorage.getItem('name');
-    // console.log("Name : " + this.name);
-    // return this.name;
   }
 
   saveCanvas() {

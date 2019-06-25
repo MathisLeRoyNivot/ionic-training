@@ -10,7 +10,7 @@ import { Location } from "@angular/common";
 export class DragPage implements OnInit {
     @ViewChild("topContainer") topContainer: any;
 
-    textElement: any;
+    topContainerElement: any;
 
     count: number = 0;
 
@@ -21,7 +21,13 @@ export class DragPage implements OnInit {
     textContentWrapper: any;
     textContent: any;
 
-    constructor(public platform: Platform, public location: Location) { }
+    // topNavHeight: number;
+    // deviceHeight: number;
+    // minScroll: number;
+
+    constructor(
+        public platform: Platform, 
+        public location: Location) { }
 
     ngOnInit() { }
 
@@ -30,9 +36,13 @@ export class DragPage implements OnInit {
     }
 
     ngAfterViewInit() {
+
         this.topTextContainer = document.getElementById("top-container");
         this.textContentWrapper = document.getElementById("text-content-wrapper");
         this.textContent = document.getElementById("text-content");
+
+        // this.deviceHeight = this.platform.height();
+        // this.minScroll = (this.topNavHeight / this.deviceHeight) * 100;
     }
 
     startPan(ev) {
@@ -42,19 +52,20 @@ export class DragPage implements OnInit {
 
     endPan(ev) {
 
-        // this.dragStart = false;
-        if(this.drag) {
-            let i = 0;
-            for(i; i <= this.drag; i++) {
-                clearInterval(i);
-            }
-        }
-        console.log("%cDrag interval ID : " + this.drag, "color: #bebe00");
-        console.log("%cDrag ended !\nY : " + ev.center.y, "color: #eb2f06");
-
+        this.topContainerElement = this.topContainer.nativeElement;
+        let topNavHeight = this.topContainerElement.getBoundingClientRect().top;
         let deviceHeight = this.platform.height();
-        let topNavHeight = this.textElement.getBoundingClientRect().top;
         let minScroll = (topNavHeight / deviceHeight) * 100;
+
+        // this.dragStart = false;
+        // if(this.drag) {
+        //     let i = 0;
+        //     for(i; i <= this.drag; i++) {
+        //         clearInterval(i);
+        //     }
+        // }
+        // console.log("%cDrag interval ID : " + this.drag, "color: #bebe00");
+        console.log("%cDrag ended !\nY : " + ev.center.y, "color: #eb2f06");
 
         let yPos = ev.center.y - 40;
         let viewRatio = yPos / deviceHeight;
@@ -71,38 +82,34 @@ export class DragPage implements OnInit {
     }
 
     handlePan(ev) {
+        
         ev.preventDefault();
 
-        this.textElement = this.topContainer.nativeElement;
-        let topNavHeight = this.textElement.getBoundingClientRect().top;
+        this.topContainerElement = this.topContainer.nativeElement;
+        let topNavHeight = this.topContainerElement.getBoundingClientRect().top;
         let deviceHeight = this.platform.height();
-
-        let yPos = ev.center.y - 40;
-
-        let contentHeight = this.textContent.offsetHeight;
-        let contentRatio = ((contentHeight + 70) / deviceHeight) * 100;
-
-        let viewRatio = yPos / deviceHeight;
-        let viewHeight = viewRatio * 100;
         let minScroll = (topNavHeight / deviceHeight) * 100;
 
-        
+        let yPos = ev.center.y - 40;
+        let viewRatio = yPos / deviceHeight;
+        let viewHeight = viewRatio * 100;
+
         if (viewHeight >= minScroll && viewHeight <= 92) {
             this.topTextContainer.style.height = viewHeight + "vh";
-            // this.textContentWrapper.style.height = viewHeight + "vh";
-            // console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
+            this.textContentWrapper.style.height = viewHeight + "vh";
+            console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
         } else if (viewHeight > 92) {
             this.topTextContainer.style.height = "92vh";
         } else if (viewHeight < minScroll) {
             this.topTextContainer.style.height = minScroll + "vh";
         }
 
-        this.drag = setInterval(() => {
-            // this.topTextContainer.style.height = viewHeight + "vh";
-            this.textContentWrapper.style.height = viewHeight + "vh";
-            console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
-            console.log(this.drag);
-        }, 5);
+        // this.drag = setInterval(() => {
+        //     // this.topTextContainer.style.height = viewHeight + "vh";
+        //     this.textContentWrapper.style.height = viewHeight + "vh";
+        //     console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
+        //     console.log(this.drag);
+        // }, 10);
 
     }
 
