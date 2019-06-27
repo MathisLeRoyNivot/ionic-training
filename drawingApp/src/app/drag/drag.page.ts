@@ -67,9 +67,13 @@ export class DragPage implements OnInit {
         // console.log("%cDrag interval ID : " + this.drag, "color: #bebe00");
         console.log("%cDrag ended !\nY : " + ev.center.y, "color: #eb2f06");
 
-        let yPos = ev.center.y - 40;
-        let viewRatio = yPos / deviceHeight;
-        let viewHeight = viewRatio * 100;
+        // let yPos = ev.center.y - 40;
+        // let viewRatio = yPos / deviceHeight;
+        // let viewHeight = viewRatio * 100;
+
+        // let yPos = ev.center.y - 40;
+        // let viewRatio = (ev.center.y - 40) / deviceHeight;
+        let viewHeight = ((ev.center.y - 40) / deviceHeight) * 100;
 
         if (viewHeight >= minScroll && viewHeight <= 92) {
             this.topTextContainer.style.height = viewHeight + "vh";
