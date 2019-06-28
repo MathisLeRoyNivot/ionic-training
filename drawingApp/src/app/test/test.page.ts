@@ -76,8 +76,8 @@ export class TestPage {
     
     popover.onDidDismiss().then((brushData) => {
       if(brushData !== null) {
+        // Recover and attributes the data from the settings component
         this.brushSize = brushData.data['brushSize'];
-        // this.currentColor = brushData.data['brushColor'];
         this.currentColor = brushData.data['brushColorHex'];
         this.redHexColor = brushData.data['redHex'];
         this.greenHexColor = brushData.data['greenHex'];
@@ -104,6 +104,7 @@ export class TestPage {
     this.lastX = ev.touches[0].pageX;
     this.lastY = ev.touches[0].pageY - this.canvasElement.getBoundingClientRect().top;
 
+    // Draw a point at the position of user finger
     let ctx = this.canvasElement.getContext('2d');
     ctx.fillStyle = this.currentColor;
     ctx.beginPath();
@@ -147,19 +148,20 @@ export class TestPage {
     let ctx = this.canvasElement.getContext('2d');
     ctx.fillStyle = "Black";
     ctx.font = "bold 16px Arial";
+    // Set the text and its position on the canvas (x & y)
     ctx.fillText(this.name, (this.canvasElement.width - 70), (this.canvasElement.height - 50));
     ctx.getImageData(0, this.canvasElement.getBoundingClientRect().top, this.canvasElement.width, this.canvasElement.height-this.canvasElement.getBoundingClientRect().top);
     ctx.save();
   }
 
   saveCanvas() {
-
+    // Loading message 
     this.loadingCtrl.create({ 
       message: "Saving, please wait...",
       duration: 2000
     }).then(loading => {
       loading.present();
-      
+      // Call function that show the name entered on the form previously
       this.showSaveHide();
 
       let dataUrl = this.canvasElement.toDataURL();
@@ -167,28 +169,25 @@ export class TestPage {
       let data = dataUrl.split(',')[1];
       let dataUrlJpg = 'data:image/jpeg;base64,'+data;
       console.log(dataUrlJpg);
-
-      // Photo file name
-      let date = new Date().toISOString();
       
-      this.b64toGallery.base64ToGallery(dataUrl).then(
-        res => {
-          setTimeout(() => {
-            console.log("Image saved into your gallery : ", res);
-            this.clearCanvas();
-            loading.dismiss();
-          }, 1000)
-        },
-        err => console.error("Error while saving image : ", err),
-      )
+      this.b64toGallery.base64ToGallery(dataUrl).then(res => {
+        setTimeout(() => {
+          console.log("Image saved into your gallery : ", res);
+          this.clearCanvas();
+          loading.dismiss();
+        }, 1000)
+      }, err => console.error("Error while saving image : ", err))
     });
   }
 
   // Reset the canvas view for the user
   clearCanvas() {
+    // Remove the name on the canvas
     this.displayName = false
     let ctx = this.canvasElement.getContext('2d');
+    // Clear the canvas
     ctx.clearRect(0, 0, this.canvasElement.width, this.canvasElement.height);
+    // Fill the canvas with white
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, this.canvasElement.width, this.canvasElement.height);
     console.log("%cCanvas has been reset !", "color:red")

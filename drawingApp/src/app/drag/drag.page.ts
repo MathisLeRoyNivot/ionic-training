@@ -9,7 +9,6 @@ import { Location } from "@angular/common";
 })
 export class DragPage implements OnInit {
     @ViewChild("topContainer") topContainer: any;
-
     topContainerElement: any;
 
     count: number = 0;
@@ -21,10 +20,6 @@ export class DragPage implements OnInit {
     textContentWrapper: any;
     textContent: any;
 
-    // topNavHeight: number;
-    // deviceHeight: number;
-    // minScroll: number;
-
     constructor(
         public platform: Platform, 
         public location: Location) { }
@@ -32,17 +27,14 @@ export class DragPage implements OnInit {
     ngOnInit() { }
 
     backClicked() {
+        // Return in the previous page
         this.location.back();
     }
 
     ngAfterViewInit() {
-
         this.topTextContainer = document.getElementById("top-container");
         this.textContentWrapper = document.getElementById("text-content-wrapper");
         this.textContent = document.getElementById("text-content");
-
-        // this.deviceHeight = this.platform.height();
-        // this.minScroll = (this.topNavHeight / this.deviceHeight) * 100;
     }
 
     startPan(ev) {
@@ -51,80 +43,50 @@ export class DragPage implements OnInit {
     }
 
     endPan(ev) {
-
-        this.topContainerElement = this.topContainer.nativeElement;
-        let topNavHeight = this.topContainerElement.getBoundingClientRect().top;
-        let deviceHeight = this.platform.height();
-        let minScroll = (topNavHeight / deviceHeight) * 100;
-
-        // this.dragStart = false;
-        // if(this.drag) {
-        //     let i = 0;
-        //     for(i; i <= this.drag; i++) {
-        //         clearInterval(i);
-        //     }
-        // }
-        // console.log("%cDrag interval ID : " + this.drag, "color: #bebe00");
+        this.dragStart = false;
         console.log("%cDrag ended !\nY : " + ev.center.y, "color: #eb2f06");
-
-        // let yPos = ev.center.y - 40;
-        // let viewRatio = yPos / deviceHeight;
-        // let viewHeight = viewRatio * 100;
-
-        // let yPos = ev.center.y - 40;
-        // let viewRatio = (ev.center.y - 40) / deviceHeight;
-        let viewHeight = ((ev.center.y - 40) / deviceHeight) * 100;
-
-        if (viewHeight >= minScroll && viewHeight <= 92) {
-            this.topTextContainer.style.height = viewHeight + "vh";
-            this.textContentWrapper.style.height = viewHeight + "vh";
-        } else if (viewHeight > 92) {
-            this.topTextContainer.style.height = "92vh";
-        } else if (viewHeight < minScroll) {
-            this.topTextContainer.style.height = minScroll + "vh";
-        }
+        this.heightChecker(ev);
     }
 
     handlePan(ev) {
-        
         ev.preventDefault();
+        this.heightChecker(ev);
+    }
 
+    heightChecker(ev) {
         this.topContainerElement = this.topContainer.nativeElement;
+        // Get the height of the top header nav (in px)
         let topNavHeight = this.topContainerElement.getBoundingClientRect().top;
+        // Get the total height of the device (in px)
         let deviceHeight = this.platform.height();
+        // Calculation of top header nav proportion of total height (in percentage %) to define the limit the height of the dragable div
         let minScroll = (topNavHeight / deviceHeight) * 100;
+        // viewHeight define the proportion of the dragable container height
+        let viewHeight = ((ev.center.y - 40) / deviceHeight) * 100;
 
-        let yPos = ev.center.y - 40;
-        let viewRatio = yPos / deviceHeight;
-        let viewHeight = viewRatio * 100;
-
+        // If the dragable container height is between the minscroll and the max value fixed to 92 (92vh)
         if (viewHeight >= minScroll && viewHeight <= 92) {
             this.topTextContainer.style.height = viewHeight + "vh";
             this.textContentWrapper.style.height = viewHeight + "vh";
             console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
         } else if (viewHeight > 92) {
+            // If the viewHeight exceed 92vh, the viewHeight value is defined to a fixed value : 92vh 
             this.topTextContainer.style.height = "92vh";
         } else if (viewHeight < minScroll) {
+            // If the view height 
             this.topTextContainer.style.height = minScroll + "vh";
         }
-
-        // this.drag = setInterval(() => {
-        //     // this.topTextContainer.style.height = viewHeight + "vh";
-        //     this.textContentWrapper.style.height = viewHeight + "vh";
-        //     console.log("Dragable container : " + viewHeight.toFixed(3) + "%");
-        //     console.log(this.drag);
-        // }, 10);
-
     }
 
     handleDoubleTap(ev) {
         ev.preventDefault();
-
+        // Eeach click, count variable increase by 1
         this.count++;
         setTimeout(() => {
             if (this.count == 1) {
                 this.count = 0;
             } else if (this.count == 2) {
+                // If the user made a double click, then reset the height of the dragable container (here reset to 40vh)
                 this.count = 0;
                 console.log("Double Tap : Top-container height has been reset.");
                 this.topTextContainer.style.height = "40vh";

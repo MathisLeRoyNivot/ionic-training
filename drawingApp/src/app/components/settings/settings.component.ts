@@ -20,9 +20,6 @@ export class SettingsComponent implements OnInit {
   public blueColor: Number = 0;
   public colorHex: string = "#000000";
 
-  isAndroid = false;
-  isIosDesktop = false;
-
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -32,14 +29,6 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {}
-
-  checkDevice() {
-    if (this.platform.is('android')) {
-      this.isAndroid = true;
-    } else if (this.platform.is('ios') || this.platform.is('desktop')) {
-      this.isIosDesktop = true;
-    }
-  }
 
   async close() {
     const brushSizeData: Number = this.brushSize; 
@@ -56,20 +45,22 @@ export class SettingsComponent implements OnInit {
     }
     await this.popoverCtrl.dismiss(brushData);
     console.log("Settings Component Closed" +
-              "\n[*] Brush size : " + brushSizeData +
-              "\n[*] Brush color hex : " + brushColorHex +
-              "\n[*] Red amount : " + redHex +
-              "\n[*] Green amount : " + greenHex +
-              "\n[*] Blue amount : " + blueHex);
+      "\n[*] Brush size : " + brushSizeData +
+      "\n[*] Brush color hex : " + brushColorHex +
+      "\n[*] Red amount : " + redHex +
+      "\n[*] Green amount : " + greenHex +
+      "\n[*] Blue amount : " + blueHex);
   }
 
   newBrushValue(event) {
+    // Define the brushSize value to the event 
     this.brushSize = event
     console.log("%cNew brush size : ", "color: green", + this.brushSize);
-    return this.brushSize; // mymodel has the value before the change
+    return this.brushSize;
   }
 
   getBrushSize() {
+    // Simple function that return the brush size (in px)
     return this.brushSize;
   }
 
@@ -83,33 +74,44 @@ export class SettingsComponent implements OnInit {
   }
   
   newRedValue(event) {
+    // red variable take the result of the rgbToHex function with the even parameter
     var red = this.rgbToHex(event);
     red = "#" + red + "0000";
+    // Define slider background color with the result of the 'red' variable
     document.getElementById("red-amount").style.backgroundImage = `-webkit-linear-gradient(0deg, ${red} 0%,${red} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
-    
+    // Actualize the full hex color when a new red value is received
     this.redColor = event;
     this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
     return this.redColor;
   }
+
   newGreenValue(event) {
+    // green variable take the result of the rgbToHex function with the even parameter
     var green = this.rgbToHex(event);
     green = "#00" + green + "00";
+    // Define slider background color with the result of the 'green' variable
     document.getElementById("green-amount").style.backgroundImage = `linear-gradient(90deg, ${green} 0%, ${green} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
 
+    // Actualize the full hex color when a new green value is received
     this.greenColor = event;
     this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
     return this.greenColor;
   }
+
   newBlueValue(event) {
+    // blue variable take the result of the rgbToHex function with the even parameter
     var blue = this.rgbToHex(event);
     blue = "#0000" + blue;
+    // Define slider background color with the result of the 'blue' variable
     document.getElementById("blue-amount").style.backgroundImage = `linear-gradient(90deg, ${blue} 0%, ${blue} ${(event/255)*100}%, #d1d8e0 ${(event/255)*100}%)`;
 
+    // Actualize the full hex color when a new blue value is received
     this.blueColor = event;
     this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
     return this.blueColor;
   }
 
+  // Function that convert, 0 to 255 numbers into string to allow hex convertion 
   rgbToHex(colorValue) {
     let hex = Number(colorValue).toString(16);
     if (hex.length < 2) {
@@ -118,10 +120,12 @@ export class SettingsComponent implements OnInit {
     return hex;
   };
 
+  // Function that take redColor, greenColor & blueColor in parameters to render the full hex color wanted
   fullColorHex(redColor, greenColor, blueColor) {   
     var red = this.rgbToHex(redColor)
     var green = this.rgbToHex(greenColor);
     var blue = this.rgbToHex(blueColor);
+    // Generate the hex string that refer to the new color chosen
     this.colorHex = "#" + red + green + blue;
     return this.colorHex;
   };
@@ -134,7 +138,6 @@ export class SettingsComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.checkDevice();
     });
   }
 
