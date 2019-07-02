@@ -22,7 +22,9 @@ export class DragPage implements OnInit {
 
     constructor(
         public platform: Platform, 
-        public location: Location) { }
+        public location: Location) {
+            
+        }
 
     ngOnInit() { }
 
@@ -44,8 +46,8 @@ export class DragPage implements OnInit {
 
     endPan(ev) {
         this.dragStart = false;
-        console.log("%cDrag ended !\nY : " + ev.center.y, "color: #eb2f06");
         this.heightChecker(ev);
+        console.log("%cDrag ended !\nY : " + ev.center.y, "color: #eb2f06");
     }
 
     handlePan(ev) {
@@ -62,6 +64,7 @@ export class DragPage implements OnInit {
         // Calculation of top header nav proportion of total height (in percentage %) to define the limit the height of the dragable div
         let minScroll = (topNavHeight / deviceHeight) * 100;
         // viewHeight define the proportion of the dragable container height
+
         let viewHeight = ((ev.center.y - 40) / deviceHeight) * 100;
 
         // If the dragable container height is between the minscroll and the max value fixed to 92 (92vh)
@@ -73,7 +76,7 @@ export class DragPage implements OnInit {
             // If the viewHeight exceed 92vh, the viewHeight value is defined to a fixed value : 92vh 
             this.topTextContainer.style.height = "92vh";
         } else if (viewHeight < minScroll) {
-            // If the view height 
+            // If the viewHieght is inferior of the minScroll variable, the viewHeight value is defined to a fixed minScroll variable value
             this.topTextContainer.style.height = minScroll + "vh";
         }
     }

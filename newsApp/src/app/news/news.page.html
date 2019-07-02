@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Lastest News
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="articles">
+
+    <div class="article" *ngFor="let article of articles.slice(0, 10)">
+      <div class="left-side-content">
+        <img class="article-img" src="{{ article.urlToImage }}" alt="img">
+        <p class="published-date">{{ article.publishedAt }}</p>
+      </div>
+      <div class="right-side-content">
+        <h1 class="title">{{ article.title }}</h1>
+        <h4 class="description">{{ (article.description.length>50) ? (article.description | slice:0:50)+'...' : (article.description) }}</h4>
+        <button class="read-more" (click)="showArticleDetails(article)">Read More <ion-icon name="arrow-forward"></ion-icon></button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    <p class="">API from <a href="#" target="_blank">News API</a></p>
+  </div>
+</ion-content>

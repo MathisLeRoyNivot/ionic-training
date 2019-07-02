@@ -18,7 +18,7 @@ export class SettingsComponent implements OnInit {
   public redColor: Number = 0;
   public greenColor: Number = 0;
   public blueColor: Number = 0;
-  public colorHex: string = "#000000";
+  public colorHex: string;
 
   constructor(
     private platform: Platform,
@@ -138,6 +138,7 @@ export class SettingsComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.fullColorHex(this.redColor, this.greenColor, this.blueColor);
     });
   }
 

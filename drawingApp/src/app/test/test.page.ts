@@ -97,7 +97,6 @@ export class TestPage {
     this.location.back();
   }
 
-
   // First position of the line that the user draw
   handleStart(ev) {
     ev.preventDefault();
@@ -180,7 +179,7 @@ export class TestPage {
     });
   }
 
-  // Reset the canvas view for the user
+  // Reset the canvas view
   clearCanvas() {
     // Remove the name on the canvas
     this.displayName = false
