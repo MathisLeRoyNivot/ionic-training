@@ -1,0 +1,41 @@
+.article {
+    padding: 6px;
+    text-align: justify;
+
+    .article-img {
+        height: auto;
+        width: 100%;
+    }
+
+    .published-date {
+        color: #7f8fa6;
+        font-size: 0.6em;
+        font-weight: bold;
+    }
+
+    .author {
+        color: #7f8fa6;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+
+    .title {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 3px;
+    }
+
+    .description {
+        font-size: 1.15em;
+        margin-bottom: 5px;
+    }
+
+    hr {
+        
+        width: 50%;
+    }
+
+    .content {
+        font-size: 1em;
+    }
+}

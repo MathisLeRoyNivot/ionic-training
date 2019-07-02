@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsPage } from '../news/news.page';
+import { NewsService } from '../news.service';
 
 @Component({
   selector: 'app-news-details',
@@ -11,11 +11,12 @@ export class NewsDetailsPage implements OnInit {
   articleDetails: any;
 
   constructor(
-    public newsPage: NewsPage
+    private newsService: NewsService
   ) {}
 
   ngOnInit() {
-    this.articleDetails = this.newsPage.currentArticle;
+    this.articleDetails = this.newsService.currentArticle;
+    console.log(this.newsService.currentArticle);
   }
 
 }
