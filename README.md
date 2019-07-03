@@ -8,6 +8,7 @@
 ## Documentation :open_file_folder:
 
 - **App #1** : [Drawing Application](https://github.com/MathisLeRoyNivot/ionic-training/tree/master/drawingApp "Go to the Drawing Application Documentation")
+- **App #2** : [News Application](https://github.com/MathisLeRoyNivot/ionic-training/tree/master/newsApp "Go to the News Application Documentation")
 
 
 ## Contributor :computer:
