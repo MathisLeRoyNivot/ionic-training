@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { NewsService } from '../news.service';
+// import { NewsDetailsPage } from '../news-details/news-details.page';
 
 @Component({
   selector: 'app-news',
@@ -13,13 +14,14 @@ export class NewsPage implements OnInit {
   data: Observable<any>;
   articles = [];
 
-  isClicked: Boolean = false;
+  isArticleHistory: Boolean;
   
   url: String = 'top-headlines?country=us';
 
   constructor(
     public router: Router,
-    private newsService: NewsService
+    private newsService: NewsService,
+    // private newsDetailsPage: NewsDetailsPage
   ) {}
   
   ngOnInit(): void {
@@ -27,6 +29,9 @@ export class NewsPage implements OnInit {
       console.log(data);
       this.articles = data['articles'];
     });
+
+    this.newsService.loadHistory();
+    this.isArticleHistory = this.newsService.isHistory;
   }
   
   showArticleDetails(article) {
@@ -38,10 +43,14 @@ export class NewsPage implements OnInit {
     console.log("Refreshing");  
 
     setTimeout(() => {
-      this.ngOnInit();
       console.log('Refresh operation has ended');
+      this.ngOnInit();
       event.target.complete();
     }, 2000);
+  }
+
+  openArticleHistory() {
+    this.router.navigate(['/article-history']);
   }
 
 }

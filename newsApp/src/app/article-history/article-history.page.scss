@@ -1,13 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-ion-title {
-    text-align: center;
-}
-
 .articles {
     height: 95%;
     overflow: scroll;
@@ -71,25 +61,4 @@ ion-title {
 
 
     }
-}
-
-.copyright {
-    background: #ffffff;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,.30);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,.30);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.30);
-    bottom: 0px;
-    height: 5%;
-    position: fixed;
-    text-align: center;
-    width: 100vw;
-    z-index: 10;
-
-    p {
-
-        a {
-            text-decoration: none;
-        }
-    }
-
 }

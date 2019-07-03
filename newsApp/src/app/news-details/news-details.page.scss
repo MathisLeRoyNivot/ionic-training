@@ -1,41 +1,73 @@
 .article {
-    padding: 6px;
+    padding: 0px;
     text-align: justify;
 
-    .article-img {
-        height: auto;
-        width: 100%;
+    .top-container {
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,.30);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,.30);
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,.30);
+        border-radius: 0px 0px 10px 10px;
+        padding: 5px;
+
+        .article-img {
+            height: auto;
+            width: 100%;
+        }
+    
+        .article-infos {
+            display: flex;
+            width: 100%;
+    
+    
+            .published-date {
+                color: #000000;
+                font-size: 0.9em;
+                font-weight: bold;
+                margin-right: 5px;
+                text-align: right;
+                width: 50%;
+            }
+    
+            .author {
+                color: #7f8fa6;
+                font-size: 0.9em;
+                margin-left: 5px;
+                text-align: justify;
+                width: 50%;
+
+                .author-name {
+                    color: #000000;
+                    font-weight: bold;
+                }
+            }
+        }
     }
 
-    .published-date {
-        color: #7f8fa6;
-        font-size: 0.6em;
-        font-weight: bold;
-    }
-
-    .author {
-        color: #7f8fa6;
-        font-size: 0.8em;
-        font-weight: bold;
-    }
-
-    .title {
-        font-size: 1.5em;
-        font-weight: bold;
-        margin-bottom: 3px;
-    }
-
-    .description {
-        font-size: 1.15em;
-        margin-bottom: 5px;
-    }
-
-    hr {
+    .main-content {
+        padding: 0px 15px 15px 15px;
         
-        width: 50%;
+        hr.content-separation {
+            background: rgba(87, 101, 116, .6);
+            border-radius: 5px;
+            width: 60%;
+        }
+    
+        .title {
+            font-size: 1.45em;
+            font-style: normal;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+    
+        .description {
+            font-size: 1.15em;
+            margin-bottom: 5px;
+        }
+    
+        .content {
+            font-size: 1em;
+        }
     }
 
-    .content {
-        font-size: 1em;
-    }
+
 }
