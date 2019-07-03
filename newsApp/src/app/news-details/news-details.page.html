@@ -10,7 +10,7 @@
 
 <ion-content>
   <div class="article">
-    <img class="article-img" src="{{ articleDetails.urlToImage }}" alt="img">
+    <img class="article-img" src="{{ articleDetails.urlToImage }}" alt="img" *ngIf="articleDetails.urlToImage">
     <p class="published-date">{{ articleDetails.publishedAt }}</p>
     <p class="author" *ngIf="articleDetails.author">Author : {{ articleDetails.author }}</p>
     <h1 class="title">{{ articleDetails.title }}</h1>

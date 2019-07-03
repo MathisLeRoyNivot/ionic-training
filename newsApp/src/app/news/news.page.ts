@@ -34,4 +34,14 @@ export class NewsPage implements OnInit {
     this.router.navigate(['/news-details']);
   }
 
+  pageRefresh(event) {
+    console.log("Refreshing");  
+
+    setTimeout(() => {
+      this.ngOnInit();
+      console.log('Refresh operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
 }
