@@ -14,8 +14,7 @@ export class NewsDetailsPage implements OnInit {
   historyArticlesObj = { articles: [] };
 
   constructor(
-    private newsService: NewsService,
-    // private newsPage: NewsPage
+    private newsService: NewsService
   ) {}
 
   ngOnInit() {
@@ -24,19 +23,17 @@ export class NewsDetailsPage implements OnInit {
     this.addHistory();   
   }
   
-  // loadHistory() {
-  //   if(localStorage.getItem('history') != '') {
-  //     console.log("True");
-  //     // localStorage.setItem('history', JSON.stringify(this.historyArticlesObj));
-  //   } else {
-  //     console.log("false");
-  //   }
-  // }
-  
   addHistory() {
-    this.historyArticlesObj.articles.push(this.articleDetails);
-    localStorage.setItem('history', JSON.stringify(this.historyArticlesObj));
+    
+    if(!localStorage.getItem("history")) {
+      this.historyArticlesObj.articles.push(this.articleDetails);
+      localStorage.setItem('history', JSON.stringify(this.historyArticlesObj));
+    } else {
+      var retrievedObject = localStorage.getItem("history");
+      var stored = JSON.parse(retrievedObject);
+      stored.articles.push(this.articleDetails);    
+      localStorage.setItem("history", JSON.stringify(stored));
+    }
   }
-
 
 }
