@@ -1,4 +1,4 @@
-# Drawing Application - Documentation
+# News Application - Documentation
 
 ## Setting up the project :gear:
 
