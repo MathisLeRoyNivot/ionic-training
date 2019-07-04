@@ -1,0 +1,44 @@
+<ion-list>
+
+  <h2 class="filters-popover-title">Filters</h2>
+
+  <ion-item lines="full">
+
+    <div class="filters filters-name">
+
+      <h4>By name :</h4>
+      <div class="filter filter-asc">
+        <ion-label>Ascending : </ion-label>
+        <ion-toggle [(ngModel)]="nameAsc" (ionChange)="filterByNameAsc($event)"></ion-toggle>
+      </div>
+
+      <div class="filter filter-desc">
+        <ion-label>Descending : </ion-label>
+        <ion-toggle [(ngModel)]="nameDesc" (ionChange)="filterByNameDesc($event)"></ion-toggle>
+      </div>
+
+    </div>
+  </ion-item>
+
+  <ion-item lines="full">
+    <div class="filters filters-date">
+
+      <h4>By date :</h4>
+      <div class="filter filter-asc">
+        <ion-label>Ascending : </ion-label>
+        <ion-toggle [(ngModel)]="dateAsc" (ionChange)="filterByDateAsc($event)"></ion-toggle>
+      </div>
+
+      <div class="filter filter-desc">
+        <ion-label>Descending : </ion-label>
+        <ion-toggle [(ngModel)]="dateDesc" (ionChange)="filterByDateDesc($event)"></ion-toggle>
+      </div>
+    </div>
+  </ion-item>
+
+  <ion-item (click)="close()" lines="none">
+    <ion-icon name="close"></ion-icon>
+    Save & Close
+  </ion-item>
+
+</ion-list>

@@ -1,0 +1,26 @@
+.filters-popover-title {
+    text-align: center;
+}
+
+.filters {
+    width: 100%;
+
+    h4 {
+        font-weight: bold;
+    }
+    
+    .filter {
+        display: flex;
+        height: 40px;
+        line-height: 40px;
+        width: 100%;
+
+        ion-label {
+            width: 70%;
+        }
+
+        ion-toggle {
+            text-align: right;
+        }
+    }
+}
