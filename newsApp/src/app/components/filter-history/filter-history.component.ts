@@ -8,7 +8,7 @@ import { PopoverController } from '@ionic/angular';
 })
 export class FilterHistoryComponent implements OnInit {
 
-  nameAsc: Boolean = true;
+  nameAsc: Boolean = false;
   nameDesc: Boolean = false;
 
   dateAsc: Boolean = false;
@@ -78,6 +78,5 @@ export class FilterHistoryComponent implements OnInit {
       "\n[*] Filter date ASC : " + isFilterDateAsc +
       "\n[*] Filter date DESC : " + isFilterDateDesc);
   }
-
 
 }

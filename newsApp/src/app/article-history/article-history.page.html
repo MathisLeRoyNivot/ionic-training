@@ -21,7 +21,7 @@
 <ion-content>
 
   <div class="articles">
-    <div class="article" *ngFor="let article of articlesHistory.slice().reverse()">
+    <div class="article" *ngFor="let article of articlesHistory">
       <div class="left-side-content">
         <img class="article-img" src="{{ article.urlToImage }}" alt="img" *ngIf="article.urlToImage">
         <p class="published-date">{{ article.publishedAt }}</p>

@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, AfterContentChecked} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { NewsService } from '../news.service';
@@ -33,7 +33,13 @@ export class NewsPage implements OnInit {
     this.newsService.loadHistory();
     this.isArticleHistory = this.newsService.isHistory;
   }
-  
+
+  autoRefresh() {
+    setInterval(()=> {
+      this.ngOnInit(); 
+    }, 500); 
+  }
+
   showArticleDetails(article) {
     this.newsService.currentArticle = article;
     this.router.navigate(['/news-details']);
