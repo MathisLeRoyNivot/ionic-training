@@ -17,8 +17,8 @@ export class ArticleHistoryPage implements OnInit {
   isDefault: Boolean = false;
   isFilterNameAsc: Boolean = false;
   isFilterNameDesc: Boolean = false;
-  isFilterDateAsc: Boolean = false;
-  isFilterDateDesc: Boolean = false;
+  // isFilterDateAsc: Boolean = false;
+  // isFilterDateDesc: Boolean = false;
 
   constructor(
     public router: Router, 
@@ -46,8 +46,8 @@ export class ArticleHistoryPage implements OnInit {
         this.isDefault = filterData.data['defaultFilter'];
         this.isFilterNameAsc = filterData.data['nameAscFilter'];
         this.isFilterNameDesc = filterData.data['nameDescFilter'];
-        this.isFilterDateAsc = filterData.data['dateAscFilter'];
-        this.isFilterDateDesc = filterData.data['dateDescFilter'];
+        // this.isFilterDateAsc = filterData.data['dateAscFilter'];
+        // this.isFilterDateDesc = filterData.data['dateDescFilter'];
       }
       this.filter();
     });
@@ -68,11 +68,12 @@ export class ArticleHistoryPage implements OnInit {
       this.sortByName();
     } else if(this.isFilterNameDesc) {
       this.sortByName();
-    } else if(this.isFilterDateAsc) {
-      this.sortByDate();
-    } else if(this.isFilterDateDesc) {
-      this.sortByDate();
-    }
+    } 
+    // else if(this.isFilterDateAsc) {
+    //   this.sortByDate();
+    // } else if(this.isFilterDateDesc) {
+    //   this.sortByDate();
+    // }
   }
 
   sortByName() {
@@ -84,13 +85,13 @@ export class ArticleHistoryPage implements OnInit {
     }
   }
 
-  sortByDate() {
-    if(this.isFilterDateAsc) {
-      console.log("Date ASC");
-    } else if(this.isFilterDateDesc) {
-      console.log("Date DESC");
-    }
-  }
+  // sortByDate() {
+  //   if(this.isFilterDateAsc) {
+  //     console.log("Date ASC");
+  //   } else if(this.isFilterDateDesc) {
+  //     console.log("Date DESC");
+  //   }
+  // }
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({

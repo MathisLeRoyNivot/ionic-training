@@ -94,9 +94,10 @@ export class FilterHistoryComponent implements OnInit {
     console.log("Filters Component Closed" +
       "\n[*] Filter default : " + isDefault +
       "\n[*] Filter name ASC : " + isFilterNameAsc +
-      "\n[*] Filter name DESC : " + isFilterNameDesc +
-      "\n[*] Filter date ASC : " + isFilterDateAsc +
-      "\n[*] Filter date DESC : " + isFilterDateDesc);
+      "\n[*] Filter name DESC : " + isFilterNameDesc
+      // "\n[*] Filter date ASC : " + isFilterDateAsc +
+      // "\n[*] Filter date DESC : " + isFilterDateDesc
+      );
   }
 
 }
