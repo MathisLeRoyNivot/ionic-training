@@ -23,8 +23,8 @@ export class FilterHistoryComponent implements OnInit {
   ngOnInit() {}
 
   filterDefault(event) {
-    let checkBoxValue = event.detail.checked;
-    
+    let checkBoxValue = event.returnValue;
+
     if(checkBoxValue) {
       this.nameAsc = false;
       this.nameDesc = false;
@@ -34,7 +34,7 @@ export class FilterHistoryComponent implements OnInit {
   }
 
   filterByNameAsc(event) {
-    let checkBoxValue = event.detail.checked;
+    let checkBoxValue = event.returnValue;
     
     if(checkBoxValue) {
       this.default = false;
@@ -45,7 +45,7 @@ export class FilterHistoryComponent implements OnInit {
   }
 
   filterByNameDesc(event) {
-    let checkBoxValue = event.detail.checked;
+    let checkBoxValue = event.returnValue;
     
     if(checkBoxValue) {
       this.default = false;
@@ -56,7 +56,7 @@ export class FilterHistoryComponent implements OnInit {
   }
 
   filterByDateAsc(event) {
-    let checkBoxValue = event.detail.checked;
+    let checkBoxValue = event.returnValue;
     
     if(checkBoxValue) {
       this.default = false;
@@ -67,7 +67,7 @@ export class FilterHistoryComponent implements OnInit {
   }
 
   filterByDateDesc(event) {
-    let checkBoxValue = event.detail.checked;
+    let checkBoxValue = event.returnValue;
     
     if(checkBoxValue) {
       this.default = false;

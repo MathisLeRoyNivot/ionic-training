@@ -8,26 +8,31 @@
 
       <div class="filter">
         <ion-label>Default : </ion-label>
-        <ion-toggle [(ngModel)]="default" (ionChange)="filterDefault($event)"></ion-toggle>
+        <!-- <ion-toggle [(ngModel)]="default" (ionChange)="filterDefault($event)"></ion-toggle> -->
+        <ion-radio slot="end" [(ngModel)]="default" (ionSelect)="filterDefault($event)" [checked]="default"></ion-radio>
       </div>
 
     </div>
   </ion-item>
 
-  <ion-item lines="full">
+  <h4>By name :</h4>
+  <ion-item lines="full" class="filters filters-name">
 
-    <div class="filters filters-name">
+    <div class="filter filter-asc">
+      <ion-label>Ascending : </ion-label>
+      <!-- <ion-toggle [(ngModel)]="nameAsc" (ionChange)="filterByNameAsc($event)"></ion-toggle> -->
+      <ion-radio slot="end" [(ngModel)]="nameAsc" (ionSelect)="filterByNameAsc($event)" [checked]="nameAsc"></ion-radio>
+    </div>
 
-      <h4>By name :</h4>
-      <div class="filter filter-asc">
-        <ion-label>Ascending : </ion-label>
-        <ion-toggle [(ngModel)]="nameAsc" (ionChange)="filterByNameAsc($event)"></ion-toggle>
-      </div>
+  </ion-item>
 
-      <div class="filter filter-desc">
-        <ion-label>Descending : </ion-label>
-        <ion-toggle [(ngModel)]="nameDesc" (ionChange)="filterByNameDesc($event)"></ion-toggle>
-      </div>
+  <ion-item lines="full" class="filters filters-name">
+
+    <div class="filter filter-desc">
+      <ion-label>Descending : </ion-label>
+      <!-- <ion-toggle [(ngModel)]="nameDesc" (ionChange)="filterByNameDesc($event)"></ion-toggle> -->
+      <ion-radio slot="end" [(ngModel)]="nameDesc" (ionSelect)="filterByNameDesc($event)" [checked]="nameDesc">
+      </ion-radio>
 
     </div>
   </ion-item>

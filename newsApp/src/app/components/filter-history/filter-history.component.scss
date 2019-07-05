@@ -2,12 +2,14 @@
     text-align: center;
 }
 
+h4 {
+    font-weight: bold;
+    margin-left: 20px;
+}
+
 .filters {
     width: 100%;
-
-    h4 {
-        font-weight: bold;
-    }
+    
     
     .filter {
         display: flex;
@@ -20,6 +22,10 @@
         }
 
         ion-toggle {
+            text-align: right;
+        }
+
+        ion-radio {
             text-align: right;
         }
     }
