@@ -14,6 +14,7 @@ export class ArticleHistoryPage implements OnInit {
 
   articlesHistory: any = [];
 
+  isDefault: Boolean = false;
   isFilterNameAsc: Boolean = false;
   isFilterNameDesc: Boolean = false;
   isFilterDateAsc: Boolean = false;
@@ -42,6 +43,7 @@ export class ArticleHistoryPage implements OnInit {
     popover.onDidDismiss().then((filterData) => {
       if(filterData !== null) {
         // Recover and attributes the data from the filters component
+        this.isDefault = filterData.data['defaultFilter'];
         this.isFilterNameAsc = filterData.data['nameAscFilter'];
         this.isFilterNameDesc = filterData.data['nameDescFilter'];
         this.isFilterDateAsc = filterData.data['dateAscFilter'];
@@ -60,7 +62,9 @@ export class ArticleHistoryPage implements OnInit {
   }
 
   filter() {
-    if(this.isFilterNameAsc) {
+    if(this.isDefault) {
+      this.ngOnInit();
+    } else if(this.isFilterNameAsc) {
       this.sortByName();
     } else if(this.isFilterNameDesc) {
       this.sortByName();
@@ -68,19 +72,15 @@ export class ArticleHistoryPage implements OnInit {
       this.sortByDate();
     } else if(this.isFilterDateDesc) {
       this.sortByDate();
-    } else {
-      // this.articlesHistory = this.articlesHistory.slice().reverse();
     }
   }
 
   sortByName() {
     if(this.isFilterNameAsc) {
-      // this.articlesHistory.slice().sort();
       this.articlesHistory.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
-      // console.log("Name ASC");
+      console.log(this.articlesHistory);
     } else if(this.isFilterNameDesc) {
       this.articlesHistory.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0)).reverse();
-      console.log("Name DESC");
     }
   }
 

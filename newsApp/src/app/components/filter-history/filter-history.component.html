@@ -6,6 +6,18 @@
 
     <div class="filters filters-name">
 
+      <div class="filter">
+        <ion-label>Default : </ion-label>
+        <ion-toggle [(ngModel)]="default" (ionChange)="filterDefault($event)"></ion-toggle>
+      </div>
+
+    </div>
+  </ion-item>
+
+  <ion-item lines="full">
+
+    <div class="filters filters-name">
+
       <h4>By name :</h4>
       <div class="filter filter-asc">
         <ion-label>Ascending : </ion-label>
@@ -20,7 +32,7 @@
     </div>
   </ion-item>
 
-  <ion-item lines="full">
+  <!-- <ion-item lines="full">
     <div class="filters filters-date">
 
       <h4>By date :</h4>
@@ -34,7 +46,7 @@
         <ion-toggle [(ngModel)]="dateDesc" (ionChange)="filterByDateDesc($event)"></ion-toggle>
       </div>
     </div>
-  </ion-item>
+  </ion-item> -->
 
   <ion-item (click)="close()" lines="none">
     <ion-icon name="close"></ion-icon>
