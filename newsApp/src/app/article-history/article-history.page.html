@@ -7,9 +7,9 @@
 
     <ion-title>History</ion-title>
 
-    <ion-buttons slot="end" (click)="openPopover($event)">
+    <!-- <ion-buttons slot="end" (click)="openPopover($event)">
       <ion-icon style="font-size: 2em; transform: rotate(90deg)" name="swap"></ion-icon>
-    </ion-buttons>
+    </ion-buttons> -->
 
     <ion-buttons slot="end" (click)="presentAlertConfirm()">
       <ion-icon style="font-size: 2em" name="trash"></ion-icon>
@@ -19,6 +19,17 @@
 </ion-header>
 
 <ion-content>
+  
+  <div class="filters-select">
+    <ion-item>
+      <ion-label><ion-icon name="funnel"> Filter</ion-icon></ion-label>
+      <ion-select value="default" okText="Apply" cancelText="Dismiss" [(ngModel)]="filters" (ionChange)="change($event)">
+        <ion-select-option value="default" selected>Default</ion-select-option>
+        <ion-select-option value="nameAsc">By name A to Z</ion-select-option>
+        <ion-select-option value="nameDesc">By name Z to A</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
 
   <div class="articles">
     <div class="article" *ngFor="let article of articlesHistory">
@@ -33,5 +44,6 @@
       </div>
     </div>
   </div>
+
 
 </ion-content>

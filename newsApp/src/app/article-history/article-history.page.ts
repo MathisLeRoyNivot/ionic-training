@@ -14,6 +14,8 @@ export class ArticleHistoryPage implements OnInit {
 
   articlesHistory: any = [];
 
+  filters: string = "default";
+
   isDefault: Boolean = false;
   isFilterNameAsc: Boolean = false;
   isFilterNameDesc: Boolean = false;
@@ -53,6 +55,18 @@ export class ArticleHistoryPage implements OnInit {
     });
 
     return await popover.present();
+  }
+
+  change(event) {
+    let filterChoose = event.detail.value;
+
+    if(filterChoose === "default") {
+      this.ngOnInit();
+    } else if(filterChoose === "nameAsc") {
+      this.articlesHistory.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+    } else if(filterChoose === "nameDesc") {
+      this.articlesHistory.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0)).reverse();
+    }
   }
 
   clearHistory() {
