@@ -19,56 +19,62 @@ ion-title {
         -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,.30);
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,.30);
         border-radius: 8px; 
-        clear: both;
-        display: flex;
         margin-bottom: 13px;
         padding: 6px;
 
-        .left-side-content {
-            padding: 3px;
-            width: 30%;
+        .content {
+            display: flex;
+            width: 100%;
             
-            .article-img {
-                height: auto;
-                width: 200px;
+            .left-side-content {
+                padding: 3px;
+                width: 30%;
+                
+                .article-img {
+                    height: auto;
+                    width: 200px;
+                }
+                
+                .published-date {
+                    color: #7f8fa6;
+                    font-size: 0.6em;
+                    font-weight: bold;
+                    text-align: center;
+                }
             }
+    
+            .right-side-content {
+                padding: 3px;
+                width: 70%;
+    
+                .title {
+                    font-size: 1.05em;
+                    font-weight: bold;
+                    font-style: inherit;
+                    margin-bottom: 3px;
+                }
+        
+                .description {
+                    font-size: 0.95em;
+                    margin-bottom: 5px;
+                }
             
-            .published-date {
-                color: #7f8fa6;
-                font-size: 0.6em;
-                font-weight: bold;
-                text-align: center;
             }
         }
 
-        .right-side-content {
-            padding: 3px;
-            width: 70%;
+        .btn {
+            text-align: right;
+            width: 100%;
 
-            .title {
-                font-size: 1.05em;
-                font-weight: bold;
-                font-style: inherit;
-                margin-bottom: 3px;
-            }
-    
-            .description {
-                font-size: 0.95em;
-                margin-bottom: 5px;
-            }
-        
             .read-more {
                 background: #c31432;
                 background: -webkit-linear-gradient(to left, #240b36, #c31432);
                 background: linear-gradient(to left, #240b36, #c31432);
                 border-radius: 5px;
                 color: #ffffff;
-                float: right;
                 padding: 5px 10px;   
             }
         }
-
-
 
     }
 }

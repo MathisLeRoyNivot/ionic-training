@@ -20,13 +20,17 @@
   <div class="articles">
 
     <div class="article" *ngFor="let article of articles.slice(0, 10)">
-      <div class="left-side-content">
-        <img class="article-img" src="{{ article.urlToImage }}" alt="img" *ngIf="article.urlToImage">
-        <p class="published-date">{{ article.publishedAt }}</p>
+      <div class="content">
+        <div class="left-side-content">
+          <img class="article-img" src="{{ article.urlToImage }}" alt="img" *ngIf="article.urlToImage">
+          <p class="published-date">{{ article.publishedAt }}</p>
+        </div>
+        <div class="right-side-content">
+          <h1 class="title">{{ article.title }}</h1>
+          <h4 class="description" *ngIf="article.description">{{ (article.description.length>50) ? (article.description | slice:0:50)+'...' : (article.description) }}</h4>
+        </div>
       </div>
-      <div class="right-side-content">
-        <h1 class="title">{{ article.title }}</h1>
-        <h4 class="description" *ngIf="article.description">{{ (article.description.length>50) ? (article.description | slice:0:50)+'...' : (article.description) }}</h4>
+      <div class="btn">
         <button class="read-more" (click)="showArticleDetails(article)">Read More <ion-icon name="arrow-forward"></ion-icon></button>
       </div>
     </div>
